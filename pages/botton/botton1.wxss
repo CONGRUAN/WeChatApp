@@ -1,0 +1,53 @@
+/** wxss **/
+/** 修改button默认的点击态样式类**/
+.button-hover {
+  background-color: red;
+}
+/** 添加自定义button点击态样式类**/
+.other-button-hover {
+  background-color: blue;
+}
+button {margin: 10px;}
+.btn_joinstyle{
+  
+  
+  display: flex;
+  position: relative;
+   justify-content: center; 
+  margin-top: 20px;
+  
+    align-items: center;  
+   /* align-self: center;  */
+  /* border: 2px solid white; */
+   /* border-radius: 25px; */
+    background: #cf4f41;
+    width: 100px;
+    height: 100px; 
+    border: 1px solid #f0f0f0;
+    border-radius:50%;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    color: white;
+}.joininstyle{
+  width: 100%;
+  position: absolute;
+   /* display: flex;  */
+  background-color: #f0f0f0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+}.contain{
+   /* display: flex;  */
+  width:100% ;
+  height:auto;
+}.socllviewstyle{
+  /* width: 100%; */
+  display: flex;
+    flex-direction: column;  
+  height: auto;
+  white-space: nowrap;
+}

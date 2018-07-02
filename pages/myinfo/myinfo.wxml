@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='element-one'>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <text class='commonText'>收货地址</text>
+  </view>
+  <view class='element-two'>
+    <view class='item1'>
+      <text class='centeredText'>3</text>
+      <text class='centeredText'>全部抽奖</text>
+    </view>
+    <view class='item2'>
+      <text class='centeredText'>1</text>
+      <text class='centeredText'>发起抽奖</text>
+    </view>
+    <view class='item1'>
+      <text class='centeredText'>0</text>
+      <text class='centeredText'>中奖记录</text>
+    </view>
+  </view>
+  <view class='element-three'>
+    <text>余额</text>
+    <text class='commonText'>￥0.00</text>
+  </view>
+  <view class='element-four'>
+    <text>小程序推荐</text>
+  </view>
+  <view class='element-five'>
+    <text>常见问题</text>
+  </view>
+</view>

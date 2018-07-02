@@ -1,0 +1,57 @@
+<scroll-view class='socllviewstyle' scroll-y scroll-into-view='id_bottom_action'>
+
+  <view class='listimageitemcontainer'>
+
+    <image class='imagestyle' mode='scaleToFill' src='../../images/222.png'></image>
+    <view bindtap='changeimage' class='listsupportview'>更换图片</view>
+  </view>
+
+  
+ <view class='jumpappstylegray1'>
+    <view >
+      奖品名称:
+    </view>
+    <input class='nameopenwhite' placeholder='iphonex'> 
+    </input>
+    <!-- <view class='namestyleopen'>个</view> -->
+  </view>
+  <view class='divilerlinebottom1'></view>
+  <view class='jumpappstylegray1'>
+    <view>
+      奖品数量:
+    </view>
+    <view class='nameopenwhite'>
+    <input  placeholder='123'> 
+    </input>
+    </view>
+    <!-- <view class='namestyleopen'>个</view> -->
+  </view>
+  <view class='jumpappstylegray2'>
+    <view >
+     {{lottery_way}}
+    </view>
+    <text bindtap='change_lottery_way' class='nameopengreen' placeholder='123'> 修改开奖条件>
+    </text>
+    
+  </view>
+  <view class='jumpappstylegray1'>
+    <view >
+      开奖时间：
+    </view>
+    <text class='nameopenwhite' placeholder='123'> 三天765432456754635后开321奖手动开
+    </text>
+    <image hid class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
+    </image>
+
+  </view>
+
+
+  <!-- <view class='adtitlestyle'> -->
+
+
+</scroll-view>
+<view id='id_bottom_action' class='bottomactionstyle'>
+
+  <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
+
+</view>

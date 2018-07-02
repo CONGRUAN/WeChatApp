@@ -1,0 +1,101 @@
+<view class='contain'>
+  <scroll-view class='socllviewstyle' scroll-y scroll-into-view='id_bottom_action'>
+
+    <view class='listimageitemcontainer'>
+
+      <image class='imagestyle' mode='scaleToFill' src='../../images/222.png'></image>
+      <view class='listsupportview'>11212123</view>
+    </view>
+    <view class='goods'>
+      奖品 ：iphonex X100
+    </view>
+    <view class='time'>
+      时间:2019-08-09 12:35:00
+    </view>
+    <view class='divilerlinebottom1'></view>
+    <view class='jumpappstyle'>
+      <view>
+        赞助商
+      </view>
+      <view class='namestyle'>
+
+        小企鹅
+      </view>
+      <image class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
+      </image>
+      <image class='gotostyle1' src='../../images/app_icon.png' mode='aspectFill'>
+      </image>
+    </view>
+    <view class='adtitlestyle'>
+      <view class='adtitletextstyle'>
+        一句话广告语，但是现实不下镇北堡大大阿
+      </view>
+
+    </view>
+
+    <!-- <view class='adtitlestyle'> -->
+    <rich-text type='text' class='addetailstyle'>
+      111111活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介11绍
+    </rich-text>
+    <view class='downloadinfostyle'>
+      <text class='downloaddescript'>
+        111111活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介11绍
+      </text>
+      <view class='downloadurlstyle'>
+        https://www.gdmcmc.com
+      </view>
+      <view class='downloadbtnstyle'>
+        下载按钮
+      </view>
+    </view>
+    <!-- </view> -->
+    <view class='joininstyle'>
+      <button class='btn_joinstyle'>
+        参与
+      </button>
+
+      <view class='joindetailstyle'>
+        <view>
+          共12567人参加，
+        </view>
+
+        <view class='gojoinliststyle'>
+          查看详情
+        </view>
+
+      </view>
+
+      <view class='fromstyle'>
+        <text class='graysmalltextstyle'>
+          ---通过\t 
+        </text>
+
+        <text class='graysmallmanetextstyle'>
+          高级 
+        </text>
+        <text class='graysmalltextstyle'>
+          发起---
+        </text>
+
+      </view>
+      <view class='fromstyle'>
+        <view class='divilerlinebottom2'>
+        </view>
+      </view>
+      <view class='adbottom'>
+        <image class='imagestyle1' mode='aspectFit' src='../../images/222.png'>
+        </image>
+      </view>
+    </view>
+
+    <!-- <view class='adbottom'>
+<image class='imagestyle' mode='center' src='../../images/222.png'></image>
+</view> -->
+
+  </scroll-view>
+  <view id='id_bottom_action' class='bottomactionstyle'>
+    <button  open-type='share' bindtap='onShareAppMessage' class='buttonactionstyle'>分享一下</button>
+    <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
+
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<view class="titlecontainer">
+  <view class='titleitem1'> 每日福利</view>
+  <button open-type='share' class='titleitem2'> 分享好友</button>
+</view>
+<view wx:for="{{array}}" bindtap='listitem_click' data-=''>
+  <view class='divilerline'></view>
+  <view class='listimageitemcontainer'>
+
+    <image class='imagestyle' mode='center' src='../../images/111.png'></image>
+    <view class='listsupportview'>11212123</view>
+  </view>
+  <view class='goods'>
+    奖品 ：iphonex X100
+  </view>
+  <view class='time'>
+    时间:2019-08-09 12:35:00
+  </view>
+  <view class='divilerlinebottom'></view>
+</view>
+<view class='adstyle'>
+  <view class='adtextleftstyle'>
+    商务合作
+  </view>
+  <view class='virtualline'></view>
+  <view class='adtextrightstyle'>
+  我的活动
+  </view>
+  
+</view>
+<view class='adbottom'>
+<image class='imagestyle' mode='center' src='../../images/222.png'></image>
+</view>
