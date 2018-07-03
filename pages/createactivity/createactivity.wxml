@@ -38,7 +38,7 @@
     <view >
       开奖时间：
     </view>
-    <text class='nameopenwhite' placeholder='123'> 三天765432456754635后开321奖手动开
+    <text class='nameopenwhite' placeholder='123'> 三天后开321奖手动开
     </text>
     <image hid class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
     </image>

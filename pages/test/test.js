@@ -1,11 +1,11 @@
-// pages/activitydetail/activitydetail.js
+// pages/test/test.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    containclass: 1,
+  
   },
 
   /**
@@ -62,37 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  onTabItemTap(item){
-    console.log(item) 
-     console.log(9999)
-
-  },
-  /**
-   * 发起活动点击事件
-   */
-  createaction(e){
-    console.log(e)
-    console.log(123)
-    wx.switchTab({
-      url: '../createactivity/createactivity',
-    })
-  // wx.navigateTo({
-  //   // url: '../createactivity/createactivity',
-  //   success: function(res) {},
-  //   fail: function(res) { console.log(res)},
-  //   complete: function(res) {},
-  // })
-  },
-  btn_join_click(res){
-    this.setData({
-      containclass:2
-    })
-    // var box = res.currentTarget.id;
-
-    // console.log(res)
-    // box.style.left = 100 + "px";
-    // box.style.top = 0 + "px";
-    // box.style.transitionTimingFunction = "ease";
-  },
+  }
 })

@@ -1,0 +1,13 @@
+<!--pages/test/test.wxml-->
+<view class='btn_contain'>
+        <button class='btn_joinstyle'>
+          参与
+        </button>
+        <view class="btn_dot"></view>
+                <view class="btn_dot1"></view>
+        <view class="btn_dot2"></view>
+        <view class="btn_dot2"></view>
+        <view class="btn_dot1"></view>
+        <view class="btn_dot"></view>
+        <button class='btn_joinstyle'>组队</button>
+      </view>
