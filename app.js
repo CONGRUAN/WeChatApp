@@ -1,17 +1,25 @@
 //app.js
+
 App({
+
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
+
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log("登录")
       }
     })
+
+    this.gettoken()
+
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -33,7 +41,35 @@ App({
       }
     })
   },
+
+  // 获取后台token
+  gettoken :function(){
+    wx.request({
+      header: {
+        // 'content-type': 'application/json'
+        'Content-Type': 'json'
+      },
+      url: this.globalData.commonurl + this.globalData.gettokenurl,
+      method: 'POST',
+      data: '',
+      success: function (res) {
+        var token = res.data
+        console.log("token:"+token)
+        wx.setStorageSync("token",token)
+      }, fail: function (res) {
+        console.log(res)
+
+      }
+    })
+  },
+
   globalData: {
-    userInfo: null
+    userInfo: null,
+    commonurl:'https://91dj8.cn/WeChatApp',
+    actionlisturl:'/CoreRun/GetLuckyDrawList',
+    gettokenurl:'/Token/GetToken',
+    token:wx.getStorageSync("token"),
+
+
   }
 })

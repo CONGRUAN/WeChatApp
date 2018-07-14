@@ -2,18 +2,18 @@
   <view class='titleitem1'> 每日福利</view>
   <button open-type='share' class='titleitem2'> 分享好友</button>
 </view>
-<view wx:for="{{array}}" bindtap='listitem_click' data-=''>
+<view wx:for="{{actionlist}}" bindtap='listitem_click' wx:for-item="item">
   <view class='divilerline'></view>
   <view class='listimageitemcontainer'>
 
-    <image class='imagestyle' mode='center' src='../../images/111.png'></image>
-    <view class='listsupportview'>11212123</view>
+    <image class='imagestyle' mode='scaleToFill' src="{{item.ImageUrl}}"></image>
+    <view class='listsupportview'>{{item.Sponsors}}</view>
   </view>
   <view class='goods'>
-    奖品 ：iphonex X100
+    奖品 ：{{item.PrizeName}} X{{item.PrizeNum}}
   </view>
   <view class='time'>
-    时间:2019-08-09 12:35:00
+    时间:{{item.StartTime}}
   </view>
   <view class='divilerlinebottom'></view>
 </view>

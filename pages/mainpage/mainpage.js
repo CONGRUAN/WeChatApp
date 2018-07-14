@@ -1,5 +1,8 @@
 // pages/mainpage/mainpage.js
+var app = getApp()
+var httputil = require("../../pages/httputils/httputil.js")
 var order = ['red', 'yellow', 'blue', 'green', 'red']
+var falsedata = [{id:1,prizename:'iponeX',prizenum:10,starttime:'2018-09-08 10:00:00',sponsors:'大鸡吧',imageurl:''},{id:2,prizename:'iponeY',prizenum:11,starttime:'2018-09-08 10:00:00',sponsors:'大鸡吧1',imageurl:''}]
 Page({
   onTabItemTap(item) {
     console.log(5432)
@@ -12,15 +15,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+    actionlist:[],
     toView: 'red',
     scrollTop: 100,
 
-    array: [{
-      message: 'foo',
-    }, {
-      message: 'bar'
-    }]
-
+   
   },
   checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
@@ -41,14 +41,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    var body={
+      a:'123'
+    }
+    // httputil.getactionlist(body);
+    this.getactionList();
   },
 
   /**
@@ -109,6 +113,26 @@ Page({
 
   },
 
+getactionList:function(){
+  var that = this;
+  var bodyjson={
+    token: app.globalData.token
+  }
+  
+  httputil.commonrequest(app.globalData.actionlisturl, bodyjson,function(res){
+    console.log("回调成功"+JSON.stringify(res.data))
+    // var jsonO = eval(res.data);
+    var list = res.data
+    console.log("ss" + list[0].PrizeName)
+
+    that.setData({
+      actionlist:list
+    })
+  },function(res){
+    console.log("回调失败"+res)
+
+  })
+},
  
 
 tap: function (e) {
