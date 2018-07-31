@@ -1,19 +1,17 @@
 {
   "pages": [
-        "pages/mainpage/mainpage",
-        
+    "pages/mainpage/mainpage",
     "pages/activitydetail/activitydetail",
-
-        "pages/test/test",
-        
-
+    "pages/test/test",
     "pages/createactivity/createactivity",
     "pages/scrollviewtest/scrollview",
+    "pages/chooseimage/chooseimage",
+            
     "pages/myinfo/myinfo"
   ],
   "tabBar": {
-    "color": "#a9b7b7",
-    "selectedColor": "#1296db",
+    "color": "#000000",
+    "selectedColor": "#db2626",
     "borderStyle": "#f0f0f0",
     "list": [
       {

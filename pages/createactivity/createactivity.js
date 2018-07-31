@@ -1,5 +1,7 @@
 // pages/createactivity/createactivity.js
-var itemlist = new Array('按时间自动开奖','按人数自动开奖','手动开奖','现场开奖')
+const app = getApp()
+var Base64 = require("../../utils/base64.js")
+var itemlist = ['按时间自动开奖', '按人数自动开奖', '手动开奖', '现场开奖']
 
 Page({
   onTabItemTap:function(item) {
@@ -13,19 +15,24 @@ Page({
    */
  
   data: {
+      hasUserInfo:false,
+      canIUse: app.globalData.canIUse,
     lottery_way:[itemlist[0]],
     lottery_flag:0,
-    imagepath:'',
+    imagepath: app.globalData.imageurl,
     prizename:'',
     prizeamount:0,
     lottery_time:'',
+    imageBase64:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    console.log('11'+that.data.imagepath)
+    console.log('11' + app.globalData.imageurl)
   },
 
   /**
@@ -39,6 +46,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var temp
+    var that = this
+    that.setData({
+      imagepath: app.globalData.imageurl,
+     
+    })
+    temp = that.data.imagepath
+    console.log(temp)
+    var reader = Base64.CusBASE64.encoder(temp)
+    console.log("base64:"+reader)
     // wx.hideTabBar({
       
     // })
@@ -111,20 +128,48 @@ Page({
       count: 1,
       sizeType: ['original'],
       success: function (res) {
-        wx.getImageInfo({
-          src: res.tempFilePaths[0],
-          success: function (res) {
-            //console.log(res.width);
-            //console.log(res.height);
-            var str = res.width / res.height;
-            if (str > 1) {//横版图片
+        // wx.getImageInfo({
+        //   src: res.tempFilePaths[0],
+        //   success: function (res) {
+        //     //console.log(res.width);
+        //     //console.log(res.height);
+        //     console.log('选择图片成功')
+        //   
+        //   },fail:function(res){
+        // console.log('选择图片失败')
+        //   }
+        // })
+        console.log('发送路径'+res.tempFilePaths[0])
+        wx.navigateTo({
+          url: '../chooseimage/chooseimage?image='+res.tempFilePaths[0],
+          })
 
-            } else {//竖版图片
-
-            }
-          }
-        })
+      },fail:function(){
+        console.log('选择图片失败')
       }
     })
   }
+,
+//获取开奖方案
+getLottery_way:function(){
+
+},
+  createaction:function(e){
+    if (app.globalData.hasUserInfo){
+      console.log('存在用户信息')
+      this.luncheraction()
+
+    }else{
+      console.log('不存在用户信息')
+      app.getUserInfo(e)
+    }
+  },
+  luncheraction:function(){
+    
+  console.log('发起活动')
+
+  }
+
+
+
 })

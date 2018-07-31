@@ -3,6 +3,13 @@ var app = getApp()
 var httputil = require("../../pages/httputils/httputil.js")
 var order = ['red', 'yellow', 'blue', 'green', 'red']
 var falsedata = [{id:1,prizename:'iponeX',prizenum:10,starttime:'2018-09-08 10:00:00',sponsors:'大鸡吧',imageurl:''},{id:2,prizename:'iponeY',prizenum:11,starttime:'2018-09-08 10:00:00',sponsors:'大鸡吧1',imageurl:''}]
+
+var ResPonse = {
+  Code: '0000',
+  Msg: '',
+  Data: null
+}
+
 Page({
   onTabItemTap(item) {
     console.log(5432)
@@ -15,10 +22,23 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //banner
+    imgUrls: [
+      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 2000,
+    duration: 1000,
+
 
     actionlist:[],
     toView: 'red',
     scrollTop: 100,
+
+
 
    
   },
@@ -41,6 +61,48 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+          console.log("没有拥有userInfo")
+          wx.authorize({
+            scope: 'scope.userInfo' ,
+            success() {
+              // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+              // wx.startRecord()
+              wx.getUserInfo({
+                
+              })
+              console.log("授权成功")
+            },fail(){
+              console.log("授权失败")
+            }
+          })
+        }else{
+          console.log("拥有userInfo")
+        }
+      }
+    })
+
+
+    // 查看是否授权
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function (res) {
+              console.log(res.userInfo)
+              wx.setStorageSync('userinfo', res.userInfo);
+            }
+          })
+        }else{
+            console.log("需要授权")
+        }
+      }
+    })
+
 
   },
 
@@ -116,14 +178,17 @@ Page({
 getactionList:function(){
   var that = this;
   var bodyjson={
-    token: app.globalData.token
+    token: wx.getStorageSync("token"),
+    openId: wx.getStorageSync('openId')
   }
   
   httputil.commonrequest(app.globalData.actionlisturl, bodyjson,function(res){
-    console.log("回调成功"+JSON.stringify(res.data))
+    // console.log("回调成功"+JSON.stringify(res))
     // var jsonO = eval(res.data);
-    var list = res.data
-    console.log("ss" + list[0].PrizeName)
+    ResPonse = res
+    var list = ResPonse.Data
+
+    // console.log("ss" + list[0].PrizeName)
 
     that.setData({
       actionlist:list

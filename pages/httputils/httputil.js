@@ -2,6 +2,12 @@ var app = getApp()
 var commonurl = app.globalData.commonurl
 
 //获取首页活动列表 和 广告信
+var ResPonse={
+  Code:'0000',
+  Msg:'',
+  Data:null
+}
+
 
 function getactionlist(bodyjson){
   wx.request({
@@ -37,12 +43,26 @@ function commonrequest(url,bodyjson,successed,fault){
     data:bodyjson,
   
     success: function (res) {
-      console.log("请求成功"+res.data)
-      successed(res)
+      var code = res.data.Code
+      ResPonse.Code = res.data.Code
+      ResPonse.Msg = res.data.Msg
+      ResPonse.Data = res.data.Data
+      console.log("请求成功:code:" + code + "=Data:" + res.data.Data + "=Msg:" + res.data.Msg)
+
+      if(code==8888){
+        successed(ResPonse)
+      }else{
+        wx.showToast({
+          title: '错误码：'+code,
+        })
+      }
+      
     }, fail: function (res) {
       console.log("请求失败")
-      fault(res)
-
+      fault(ResPonse)
+      wx.showToast({
+        title: '服务器繁忙，请稍候再试',
+      })
     }
   })
 }

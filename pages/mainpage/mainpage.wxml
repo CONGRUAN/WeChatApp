@@ -1,19 +1,48 @@
 <view class="titlecontainer">
-  <view class='titleitem1'> 每日福利</view>
-  <button open-type='share' class='titleitem2'> 分享好友</button>
+  <view class='titleitem1'>
+    <image class='smalliaon' src='../../images/111.png'></image>
+    <view class='smalliaonname'>123</view>
+  </view>
+  <view class='titleitem1'>
+    <button open-type='share' mode='scaleToFill' hover-class='none' class='titleitem2'> 分享好友
+      <image class='btnshare' mode='scaleToFill' src='../../images/share.png'></image>
+    </button>
+
+  </view>
+
 </view>
+<swiper class='imagestyle' indicator-dots="{{indicatorDots}}"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item class="bannrclass">
+      <image src="{{item}}" class="image" />
+    </swiper-item>
+  </block>
+</swiper>
+
+<!-- <image class='bannrclass' mode='scaleToFill' src='../../images/banner.png'></image> -->
 <view wx:for="{{actionlist}}" bindtap='listitem_click' wx:for-item="item">
   <view class='divilerline'></view>
   <view class='listimageitemcontainer'>
 
-    <image class='imagestyle' mode='scaleToFill' src="{{item.ImageUrl}}"></image>
+    <view class='imagestyle'>
+    <image class='image' mode='scaleToFill' src="{{item.ImageUrl}}"></image>
+    </view>
     <view class='listsupportview'>{{item.Sponsors}}</view>
   </view>
   <view class='goods'>
-    奖品 ：{{item.PrizeName}} X{{item.PrizeNum}}
+    奖品 ：{{item.PrizeName}}
   </view>
   <view class='time'>
-    时间:{{item.StartTime}}
+    开奖时间: {{item.StartTime}}
+  </view>
+  <view class='time'>
+  <view>
+     数量: {{item.PrizeNum}}
+    </view>
+    <view hidden='{{!item.IsJoin}}' class='isjoinstyle'>
+    已参与
+    </view>
+   
   </view>
   <view class='divilerlinebottom'></view>
 </view>
@@ -23,10 +52,10 @@
   </view>
   <view class='virtualline'></view>
   <view class='adtextrightstyle'>
-  我的活动
+    我的活动
   </view>
-  
+
 </view>
 <view class='adbottom'>
-<image class='imagestyle' mode='center' src='../../images/222.png'></image>
+  <image class='imagestyle' mode='center' src='../../images/222.png'></image>
 </view>

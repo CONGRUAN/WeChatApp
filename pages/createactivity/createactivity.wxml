@@ -2,7 +2,7 @@
 
   <view class='listimageitemcontainer'>
 
-    <image class='imagestyle' mode='scaleToFill' src='../../images/222.png'></image>
+    <image class='imagestyle' mode='scaleToFill' src='{{imagepath}}'></image>
     <view bindtap='changeimage' class='listsupportview'>更换图片</view>
   </view>
 
@@ -11,7 +11,7 @@
     <view >
       奖品名称:
     </view>
-    <input class='nameopenwhite' placeholder='iphonex'> 
+    <input class='nameopenwhite' placeholder='请输入奖品名称' maxlength='14' > 
     </input>
     <!-- <view class='namestyleopen'>个</view> -->
   </view>
@@ -21,7 +21,7 @@
       奖品数量:
     </view>
     <view class='nameopenwhite'>
-    <input  placeholder='123'> 
+    <input  placeholder='123' maxlength='7' type='number' > 
     </input>
     </view>
     <!-- <view class='namestyleopen'>个</view> -->
@@ -30,7 +30,7 @@
     <view >
      {{lottery_way}}
     </view>
-    <text bindtap='change_lottery_way' class='nameopengreen' placeholder='123'> 修改开奖条件>
+    <text bindtap='change_lottery_way' class='nameopengreen' placeholder='请输入奖品数量'> 修改开奖条件>
     </text>
     
   </view>
@@ -52,6 +52,6 @@
 </scroll-view>
 <view id='id_bottom_action' class='bottomactionstyle'>
 
-  <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
+  <button  wx:if="{{!hasUserInfo && canIUse}}" open-type='getUserInfo'        bindgetuserinfo='createaction' class='buttonactionstyle1'>发起活动</button>
 
 </view>
