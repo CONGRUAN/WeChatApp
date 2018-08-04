@@ -264,6 +264,17 @@ display: flex;
   position: absolute;
   right: 25px;
   text-align: right;
+}
+.nameopenwhite1{
+  /* color: white; */
+  display: flex;
+  width: 200px;
+  height: auto;
+  font-size: 15px;
+  position: absolute;
+  right: 30px;
+  text-align: right;
+  color: gainsboro
 }.jumpappstylegray2{
     padding: 15px 10px;
 display: flex;
@@ -274,7 +285,7 @@ display: flex;
    align-content: center; 
   align-self: center;
   flex-direction: row;
-  font-size: 14px;
+  font-size: 16px;
   
 
 }

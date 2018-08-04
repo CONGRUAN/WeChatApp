@@ -58,7 +58,11 @@ function commonrequest(url,bodyjson,successed,fault){
       }
       
     }, fail: function (res) {
-      console.log("请求失败")
+      // ResPonse.Code = res.data.Code
+      // ResPonse.Msg = res.data.Msg
+      // ResPonse.Data = res.data.Data
+      // console.log("请求失败:code:" + code + "=Data:" + res.data.Data + "=Msg:" + res.data.Msg)
+      console.log(res)
       fault(ResPonse)
       wx.showToast({
         title: '服务器繁忙，请稍候再试',

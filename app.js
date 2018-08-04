@@ -119,6 +119,8 @@ App({
     actionlisturl: '/CoreRun/GetLuckyDrawList',
     gettokenurl: '/Token/GetToken',
     getopenidurl: '/WeChat/GetOpenId',
+    createactivity:'/CoreRun/Launch',
+    getprizeAndlottery:'/CoreRun/GetLuckyDrawDic',
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
 
