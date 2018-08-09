@@ -1,32 +1,52 @@
-<!--index.wxml-->
-<view class="container">
-  <view class='element-one'>
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    <text class='commonText'>收货地址</text>
-  </view>
-  <view class='element-two'>
-    <view class='item1'>
-      <text class='centeredText'>3</text>
-      <text class='centeredText'>全部抽奖</text>
+<view style='width:100%;height:180rpx;background-color:red'
+></view>
+<view class='avatarGroup'>
+  <image class="userinfo-avatar"  src='../../images/avatar.png' mode="cover"></image>
+  <text style='font-size:30rpx;margin-top:15rpx;margin-bottom:25rpx'>用户名</text>
+</view>
+<view class='tContainer'>
+  <view class='viewGroup'>
+    <view class='item' bindtap='tolist'>
+      <text class='itemTextTop'>3</text>
+      <text class='itemTextMid'>全部抽奖</text>
     </view>
-    <view class='item2'>
-      <text class='centeredText'>1</text>
-      <text class='centeredText'>发起抽奖</text>
+    <view class='item' bindtap='tolist'>
+      <text class='itemTextTop'>3</text>
+      <text class='itemTextMid'>发起抽奖</text>
     </view>
-    <view class='item1'>
-      <text class='centeredText'>0</text>
-      <text class='centeredText'>中奖记录</text>
+    <view class='item' bindtap='tolist'>
+      <text class='itemTextTop'>3</text>
+      <text class='itemTextMid'>中奖记录</text>
     </view>
   </view>
-  <view class='element-three'>
-    <text>余额</text>
-    <text class='commonText'>￥0.00</text>
-  </view>
-  <view class='element-four'>
-    <text>小程序推荐</text>
-  </view>
-  <view class='element-five'>
-    <text>常见问题</text>
+  <view class='other'>
+    <view class='otherView'>
+      <image style='width:30rpx;height:30rpx;margin-right:10rpx' src='../../images/itemimage1.png' mode='aspectFit'></image>
+      <text class='otherText'>余额</text>
+      <view class='itemView'>
+        <image class='arrowImage' src='../../images/arrow_right.png' mode='aspectFit'></image>
+      </view>
+    </view>
+    <view class='otherView' bindtap='toRecommendation'>
+      <image style='width:30rpx;height:30rpx;margin-right:10rpx' src='../../images/itemimage2.png' mode='aspectFit'></image>
+      <text class='otherText'>小程序推荐</text>
+      <view class='itemView'>
+        <image class='arrowImage' src='../../images/arrow_right.png' mode='aspectFit'></image>
+      </view>
+    </view>
+    <view class='otherView'>
+      <image style='width:30rpx;height:30rpx;margin-right:10rpx' src='../../images/itemimage1.png' mode='aspectFit'></image>
+      <text class='otherText'>常见问题</text>
+      <view class='itemView'>
+        <image class='arrowImage' src='../../images/arrow_right.png' mode='aspectFit'></image>
+      </view>
+    </view>
+    <view class='otherView' bindtap='address'>
+      <image style='width:30rpx;height:30rpx;margin-right:10rpx' src='../../images/itemimage4.png' mode='aspectFit'></image>
+      <text class='otherText'>收货地址</text>
+      <view class='itemView'>
+        <image class='arrowImage' src='../../images/arrow_right.png' mode='aspectFit'></image>
+      </view>
+    </view>
   </view>
 </view>

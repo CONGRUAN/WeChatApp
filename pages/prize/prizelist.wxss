@@ -1,0 +1,29 @@
+page{
+  background-color: gainsboro
+}
+
+.tContainer{
+  width: 100%;
+  height: 100%;
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: column
+}
+
+.item{
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+  padding-top:20rpx;
+  padding-bottom:20rpx;
+  display: flex;
+  flex-direction: row;
+  font-size:26rpx;
+  background-color:#ffffffff
+}
+
+.itemView{
+  flex: 1;
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: row-reverse
+}

@@ -1,9 +1,9 @@
 // pages/createactivity/createactivity.js
 const app = getApp()
-var Base64 = require("../../utils/base64.js")
+var httputil = require("../../pages/httputils/httputil.js")
 var itemlist = []
 var prizeTypelist = []
-var httputil = require("../../pages/httputils/httputil.js")
+
 var imageBase64 = ''
 var typeindex = 0;
 var connditionIndex = 0;
@@ -267,6 +267,7 @@ Page({
     } else {
       console.log('不存在用户信息')
       app.getUserInfo(e)
+      wx.setStorageSync('userinfo', e.detail.rawData)
     }
   },
   luncheraction: function() {

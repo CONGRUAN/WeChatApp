@@ -3,30 +3,33 @@
 
     <view class='listimageitemcontainer'>
 
-      <image class='imagestyle' mode='scaleToFill' src='../../images/222.png'></image>
-      <view class='listsupportview'>11212123</view>
+      <image class='imagestyle' mode='scaleToFill' src='{{data.ImageUrl}}'></image>
+      <view class='listsupportview'>{{data.Sponsor}}</view>
     </view>
     <view class='goods'>
-      奖品 ：iphonex X100
+      奖品 ：{{data.PrizeName}} X{{data.PrizeNum}}
     </view>
     <view class='time'>
-      时间:2019-08-09 12:35:00
+      时间:{{data.StartTime}}
     </view>
     <view class='divilerlinebottom1'></view>
-    <view class='jumpappstyle'>
-      <view>
+    <view style='display:flex'>
+      <view class='jumpappstyle'>
         赞助商
       </view>
       <view class='namestyle'>
-
         小企鹅
       </view>
-      <image class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
-      </image>
-      <image class='gotostyle1' src='../../images/app_icon.png' mode='aspectFill'>
-      </image>
+      <view class='jumpappstyle1'>
+        <image class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
+        </image>
+        <image class='gotostyle1' src='../../images/app_icon.png' mode='aspectFill'>
+        </image>
+      </view>
     </view>
-    <view class='adtitlestyle'>
+    <view class='divilerlinebottom1'></view>
+
+    <view hidden='true' class='adtitlestyle'>
       <view class='adtitletextstyle'>
         一句话广告语，但是现实不下镇北堡大大阿
       </view>
@@ -35,9 +38,9 @@
 
     <!-- <view class='adtitlestyle'> -->
     <rich-text type='text' class='addetailstyle'>
-      111111活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介11绍
+      {{data.Introduce}}
     </rich-text>
-    <view class='downloadinfostyle'>
+    <view hidden='true' class='downloadinfostyle'>
       <text class='downloaddescript'>
         111111活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介11绍
       </text>
@@ -50,18 +53,23 @@
     </view>
     <!-- </view> -->
     <view class='joininstyle'>
+
       <view id='box' class="{{containclass ==1?'btn_contain':'btn_contain_moveright'}}">
-        <button id='btn_join' bindtap='btn_join_click' class='btn_joinstyle'>
+       
+       <form bindsubmit="submit" report-submit='true' >
+  <button form-type="submit"  open-type='getUserInfo' class='btn_joinstyle' > 参与</button>
+</form>
+        <!-- <button id='btn_join' bindtap='btn_join_click' class='btn_joinstyle'>
           参与
-        </button>
-        <view class='btn_contain1' >
-        <view class="btn_dot"></view>
-                <view class="btn_dot1"></view>
-        <view class="btn_dot2"></view>
-        <view class="btn_dot2"></view>
-        <view class="btn_dot1"></view>
-        <view class="btn_dot"></view>
-        <button class='btn_joinstyle'>组队</button>
+        </button> -->
+        <view hidden='{{data.Condition==001?true:false}}' class='btn_contain1'>
+          <view class="btn_dot"></view>
+          <view class="btn_dot1"></view>
+          <view class="btn_dot2"></view>
+          <view class="btn_dot2"></view>
+          <view class="btn_dot1"></view>
+          <view class="btn_dot"></view>
+          <button class='btn_joinstyle'>组队</button>
         </view>
       </view>
       <view class='joindetailstyle'>
@@ -75,7 +83,7 @@
 
       </view>
 
-      <view class='fromstyle'>
+      <view hidden='true' class='fromstyle'>
         <text class='graysmalltextstyle'>
           ---通过\t 
         </text>
@@ -92,7 +100,7 @@
         <view class='divilerlinebottom2'>
         </view>
       </view>
-      <view class='adbottom'>
+      <view hidden='true' class='adbottom'>
         <image class='imagestyle1' mode='aspectFit' src='../../images/222.png'>
         </image>
       </view>
@@ -106,6 +114,5 @@
   <view id='id_bottom_action' class='bottomactionstyle'>
     <button open-type='share' bindtap='onShareAppMessage' class='buttonactionstyle'>分享一下</button>
     <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
-
   </view>
 </view>

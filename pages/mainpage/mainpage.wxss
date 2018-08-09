@@ -48,15 +48,25 @@ button[class="titleitem2"]::after {
 }
 
 .listsupportview {
+  display: flex;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  align-self: center;
+  align-content: center;
+  align-items: center;
   position: absolute;
   font-size: 15px;
   right: 16rpx;
   top: 30rpx;
-  padding: 6rpx;
-  background-color: black;
+  /* padding: 6rpx; */
+ border-radius:20px 0px;
+/* width:120rpx; */
+/* height:40rpx; */
+background-color:#f9bfbf;
+/* -moz-box-shadow: 10px 10px 5px #888888;// 老的 Firefox */
+box-shadow: 10rpx 10rpx 5rpx #888888;
   color: white;
-  align-items: flex-end;
-  opacity: 0.5;
+  /* align-items: flex-end; */
 }
 
 .time {
@@ -100,12 +110,14 @@ button[class="titleitem2"]::after {
   /* margin-right:8rpx; */
   justify-content: center;
 }.image{
+  width: 100%;
+  height: 450rpx;
   margin-left: 7rpx;
   margin-right: 7rpx;
   
   margin-top: 8rpx;
-  width: 100%;
-height: 350rpx;
+  /* width: 100%; */
+/* height: 350rpx; */
 }
 
 .adstyle {

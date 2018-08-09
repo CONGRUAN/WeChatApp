@@ -121,7 +121,9 @@ App({
     getopenidurl: '/WeChat/GetOpenId',
     createactivity:'/CoreRun/Launch',
     getprizeAndlottery:'/CoreRun/GetLuckyDrawDic',
-    hasUserInfo: false,
+    getactivitydetail:'/CoreRun/GetLuckyDrawById',
+    joinactivity:'/CoreRun/Join',
+    hasUserInfo: wx.getStorageSync('userinfo')==""?false:true,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
 
 

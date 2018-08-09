@@ -48,13 +48,13 @@ Page({
   
   listitem_click:function(e){
     console.log('点了')
-    var $item = e.currentTarget.dataset.item; //打印可以看到，此处已获取到了对应的id 
-    console.log($item)
-    // console.log(item)   
-    var data = JSON.stringify($item)
-
+    var itemId = e.currentTarget.dataset.hi.Id; //打印可以看到，此处已获取到了对应的id 
+    // console.log($item)
+    // // console.log(item)   
+    // var data = JSON.stringify($item)
+    console.log(itemId)
     wx.navigateTo({
-      url: '../activitydetail/activitydetail?data=' + data,
+      url: '../activitydetail/activitydetail?Id=' + itemId,
     })
   },
   /**

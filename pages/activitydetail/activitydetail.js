@@ -1,25 +1,42 @@
 // pages/activitydetail/activitydetail.js
+const app = getApp()
+var httputil = require("../../pages/httputils/httputil.js")
+var bodyjson
+var ResPonse = {
+  Code: '0000',
+  Msg: '',
+  Data: null
+}
 Page({
+
+  
 
   /**
    * 页面的初始数据
    */
   data: {
     containclass: 1,
+    data:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var itemId = options.Id
+    bodyjson = {
+      token:wx.getStorageSync('token'),
+      Id:itemId,
+      openId:wx.getStorageSync('openId')
+    }
+   this.getdata(bodyjson)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
@@ -84,15 +101,50 @@ Page({
   //   complete: function(res) {},
   // })
   },
-  btn_join_click(res){
-    this.setData({
-      containclass:2
-    })
-    // var box = res.currentTarget.id;
+  submit:function(res){
+    var info = wx.getStorageSync('userinfo')
+    var formid = res.detail.formId
+    console.log(res.detail.formId);
+    var bodyjson =  {
+      token:wx.getStorageSync('token'),
+      luckyDrawId:ResPonse.Data.Id,
+      openId:wx.getStorageSync('openId'),
+      formId: formid,
+      headImgUrl: info.avatarUrl,
+      joinType:'join'
+    }
+    // var info = wx.getStorageSync('userinfo')
+    if (app.globalData.hasUserInfo){
+      console.log('存在用户信息')
+      httputil.commonrequest(app.globalData.joinactivity,bodyjson,function(res){
+        ResPonse = res
+        console.log(ResPonse.Data)
+      },function(res){
 
-    // console.log(res)
-    // box.style.left = 100 + "px";
-    // box.style.top = 0 + "px";
-    // box.style.transitionTimingFunction = "ease";
+      })
+
+    }else{
+      
+      app.getUserInfo(res)
+      wx.setStorageSync('userinfo', res.detail.rawData)
+      
+      console.log('不存在用户信息')
+    }
+
+    
   },
+  getdata:function(bodyjson){
+    var that =  this
+    httputil.commonrequest(app.globalData.getactivitydetail,bodyjson,function(res){
+          ResPonse  = res
+          that.setData({
+            data:ResPonse.Data
+          })
+        console.log(JSON.stringify(ResPonse.Data))
+
+     
+    },function(res){
+
+    })
+  }
 })

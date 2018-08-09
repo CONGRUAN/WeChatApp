@@ -1,96 +1,91 @@
-/**index.wxss**/
+page {
+  background-color: #fbfbfb;
+}
 
-.userinfo {
+.tContainer {
+  width: 100%;
+  height: 100%;
+  margin-top: 150rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.avatarGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  margin-top: -60rpx;
+  left: 0;
+  right: 0
 }
 
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
   border-radius: 50%;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-  text-align: center;
-}
-
-.container {
-  width: 100%;
-  height: 100%;
-  background-color: #f0f0f0;
-  align-items: stretch
-}
-
-.element-one {
-  line-height: 150rpx;
-  background: white;
+.viewGroup {
+  width: 90%;
+  height: 150rpx;
+  background-color: red;
   display: flex;
   flex-direction: row;
-  justify-content: conter;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
+  justify-content: center;
+  box-shadow: 0rpx 0rpx 5rpx #888888;
 }
 
-.commonText {
-  position: absolute;
-  right: 20rpx;
-  text-align: center;
+.item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.itemTextTop {
+  color: red;
+  font-size: 30rpx;
+}
+
+.itemTextMid {
+  color: black;
+  font-size: 27rpx;
+}
+
+.other {
+  width: 100%;
+  margin-top: 100rpx;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10rpx;
+}
+
+.otherView {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  padding: 20rpx;
+  border-bottom: #AAAAAA solid 1rpx;
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
-.element-two {
-  background: white;
-  width: 100%;
-  height: 150rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: conter;
-  padding: 20rpx;
+.otherText {
+  font-size: 30rpx;
 }
 
-.item1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.arrowImage {
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.itemView{
   flex: 1;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx
-}
-
-.item2 {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
-}
-
-.centeredText{
-  text-align: center
-}
-
-.element-three{
-  width: 100%;
-  background: white;
-  margin-top: 20rpx;
-  padding: 20rpx;
-}
-
-.element-four{
-  width: 100%;
-  background: white;
-  margin-top: 20rpx;
-  margin-bottom: 5rpx;
-  padding: 20rpx;
-}
-
-.element-five{
-  width: 100%;
-  background: white;
-  padding: 20rpx;
+  flex-direction: row-reverse;
+  align-items: center
 }

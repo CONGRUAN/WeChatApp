@@ -1,0 +1,7 @@
+<view class="container">
+  <view class='item' wx:for="{{array}}" wx:for-item="item">
+    <image class="userinfo-avatar" background-size="cover"></image>
+    <text>{{item.name}}</text>
+    <text class='rightText' style='font-size:9pt'>{{item.introduction}}</text>
+  </view>
+</view>

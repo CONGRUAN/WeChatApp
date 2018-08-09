@@ -6,8 +6,10 @@
     "pages/createactivity/createactivity",
     "pages/scrollviewtest/scrollview",
     "pages/chooseimage/chooseimage",
-            
-    "pages/myinfo/myinfo"
+            "pages/myinfo/myinfo",
+            "pages/recommendation/recommendation",
+            "pages/lottery/lotterylist",
+            "pages/prize/prizelist"
   ],
   "tabBar": {
     "color": "#000000",

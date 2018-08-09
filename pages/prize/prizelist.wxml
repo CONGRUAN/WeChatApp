@@ -1,0 +1,13 @@
+<view class='tContainer'>
+  <text style='font-size:20rpx;margin-left:20rpx'>抽奖状态</text>
+  <view>
+    <view wx:for="{{array}}" class='item'>
+      <text style='margin-left:20rpx'>奖品:</text>
+      <text style='margin-left:20rpx'>{{item.prize_name}}</text>
+      <text style='margin-left:20rpx'>x{{item.prize_amount}}</text>
+      <view class='itemView'>
+        <text>{{item.prize_time}}</text>
+      </view>
+    </view>
+  </view>
+</view>

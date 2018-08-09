@@ -20,14 +20,14 @@
 </swiper>
 
 <!-- <image class='bannrclass' mode='scaleToFill' src='../../images/banner.png'></image> -->
-<view wx:for="{{actionlist}}" bindtap='listitem_click' wx:for-item="item">
+<view wx:for="{{actionlist}}" bindtap='listitem_click' data-hi='{{item}}' wx:for-item="item">
   <view class='divilerline'></view>
   <view class='listimageitemcontainer'>
 
     <view class='imagestyle'>
     <image class='image' mode='scaleToFill' src="{{item.ImageUrl}}"></image>
     </view>
-    <view class='listsupportview'>{{item.Sponsors}}</view>
+    <view class='listsupportview'>{{item.Sponsor}}</view>
   </view>
   <view class='goods'>
     奖品 ：{{item.PrizeName}}
