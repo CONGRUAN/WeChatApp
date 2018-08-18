@@ -46,5 +46,5 @@
       </view>
     </view>
   </view>
-  <view class='jionnumtextclass' bindtap='loadmore' >查看更多></view>
+  <view class='jionnumtextclass' bindtap='loadmore' >{{loadmore}}></view>
 </view>

@@ -21,25 +21,31 @@ Page({
   data: {
     classifiesdata:[],
     wxgrid,
-    size: classifies.length
+    size: classifies.length,
+    loadmore:'查看更多>'
   },
 
   onUnload:function(){
     // classifies.length = 0;
+    index=1
   },
 
   onLoad: function (option) {
     id = option.Id
     console.log('-----------',id)
-   
+    this.getdata(false)
   },
   onShow:function(){
-    this.getdata()
+   
   },
   loadmore: function () {
-    this.getdata()
+    index++
+    this.getdata(true)
+    this.setData({
+      loadmore:'加载中...'
+    })
 
-  }, getdata: function () {
+  }, getdata: function (loadmore) {
     var templist = this.data.classifiesdata
     var _this = this
     var bodyjson={
@@ -72,6 +78,11 @@ Page({
         wxgrid,
         size: templist.length
       })
+      if(loadmore){
+        _this.setData({
+          loadmore:'查看更多>'
+        })
+      }
 
     }, function (res) {
 
