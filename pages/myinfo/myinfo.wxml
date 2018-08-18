@@ -1,21 +1,21 @@
 <view style='width:100%;height:180rpx;background-color:red'
 ></view>
 <view class='avatarGroup'>
-  <image class="userinfo-avatar"  src='../../images/avatar.png' mode="cover"></image>
-  <text style='font-size:30rpx;margin-top:15rpx;margin-bottom:25rpx'>用户名</text>
+  <image class="userinfo-avatar"  src='{{imageurl}}' mode="cover"></image>
+  <text style='font-size:30rpx;margin-top:15rpx;margin-bottom:25rpx'>{{nickName}}</text>
 </view>
 <view class='tContainer'>
   <view class='viewGroup'>
-    <view class='item' bindtap='tolist'>
-      <text class='itemTextTop'>3</text>
+    <view class='item' data-type='all' bindtap='tolist'>
+      <text class='itemTextTop'  >{{data.AllLuckyDrawCount}}</text>
       <text class='itemTextMid'>全部抽奖</text>
     </view>
-    <view class='item' bindtap='tolist'>
-      <text class='itemTextTop'>3</text>
+    <view class='item' data-type='create' bindtap='tolist'>
+      <text class='itemTextTop'>{{data.CreateCount}}</text>
       <text class='itemTextMid'>发起抽奖</text>
     </view>
-    <view class='item' bindtap='tolist'>
-      <text class='itemTextTop'>3</text>
+    <view class='item' data-type='lucky' bindtap='tolist'>
+      <text class='itemTextTop'>{{data.LuckyRecordCount}}</text>
       <text class='itemTextMid'>中奖记录</text>
     </view>
   </view>
@@ -34,7 +34,7 @@
         <image class='arrowImage' src='../../images/arrow_right.png' mode='aspectFit'></image>
       </view>
     </view>
-    <view class='otherView'>
+    <view class='otherView' bindtap='toProblem'>
       <image style='width:30rpx;height:30rpx;margin-right:10rpx' src='../../images/itemimage1.png' mode='aspectFit'></image>
       <text class='otherText'>常见问题</text>
       <view class='itemView'>

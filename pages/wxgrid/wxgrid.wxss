@@ -1,0 +1,27 @@
+.wxgrid{
+    clear:both;
+}
+.wxgrid .wxrow{
+    clear:both;
+    padding: 0px 15px 0px 15px
+}
+.wxgrid .wxcol{
+    float: left;
+    text-align: center;
+}
+/*美团分类-场景样式*/
+/* 图片间距 */
+.wxclassify{
+    padding:0px 0px 5px 0px;
+    display: block;
+    height: 100px;
+}
+.wxclassify1{
+    padding:0px 0px 5px 0px;
+    display: block;
+    height: 40px;
+}
+.wxclassify .wxclassify-img{
+    height:100%;
+    width:100%;
+}

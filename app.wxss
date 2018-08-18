@@ -1,5 +1,7 @@
 /**app.wxss**/
 /* @import '/templatetabbar/templatetabbar.wxss'; */
+/* 导入toast样式 */
+@import "utils/toast/toast.wxss";
 .container {
   display: flex;
   flex-direction: column;

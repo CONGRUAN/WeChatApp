@@ -54,7 +54,7 @@ Page({
     // var data = JSON.stringify($item)
     console.log(itemId)
     wx.navigateTo({
-      url: '../activitydetail/activitydetail?Id=' + itemId,
+      url: '../activitydetail/activitydetail?Id=' + itemId + '&isshare=' + '1',
     })
   },
   /**
@@ -102,7 +102,13 @@ Page({
         }
       }
     })
-
+    console.log('optionID',options.Id)
+    if (options.Id) {
+      //这个pageId的值存在则证明首页的开启来源于用户点击来首页,同时可以通过获取到的pageId的值跳转导航到对应的详情页
+      wx.navigateTo({
+        url: '../mycreatdetail/mycreatdetail?Id=' + options.Id,
+      })
+    }
 
   },
 
@@ -114,7 +120,16 @@ Page({
       a:'123'
     }
     // httputil.getactionlist(body);
-    this.getactionList();
+    if (!app.globalData.callbackflag){
+      app.finishcallback = res => {
+        console.log('finishcallback')
+        this.getactionList();
+      }
+    } else {
+      this.getactionList();
+    }
+    
+    
   },
 
   /**

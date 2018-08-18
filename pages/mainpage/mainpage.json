@@ -1,5 +1,5 @@
 {
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "navigationBarTitleText": "免费抽奖",
   "navigationBarTextStyle": "black"
 }

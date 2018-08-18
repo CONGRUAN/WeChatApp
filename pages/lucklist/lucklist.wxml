@@ -1,0 +1,32 @@
+<!--listtest/listtest.wxml-->
+<!-- <view  class='parent' wx:for="{{array}}">
+<view class='child'>  {{index}}</view>
+</view> -->
+<!-- <view class="wxgrid">
+    <view wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow" style="height:{{item.height}}px;line-height:{{item.height}}px;">
+        <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%">
+            {{wxgrid.data.classifies[i][j].name}}
+        </view>
+    </view>
+</view> -->
+
+<view class='container'>
+
+  <view class="wxgrid">
+    <view class='jionnumtextclass'>
+      <text>标题</text>
+    </view>
+     <view class='jionnumtextclass'>
+      <text>很遗憾，这次没有中奖</text>
+    </view>
+    <view wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
+      <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+        <a class="wxclassify" href="#">
+          <image class="wxclassify-img1" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+          <text class='jionnumtextclass1'>{{wxgrid.data.classifies[i][j].name}}</text>
+        </a>
+      </view>
+    </view>
+  </view>
+  <view class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
+</view>

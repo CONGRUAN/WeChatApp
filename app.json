@@ -1,15 +1,20 @@
 {
   "pages": [
     "pages/mainpage/mainpage",
+    "pages/cutInside/cutInside",
+    "pages/mycreatdetail/mycreatdetail",
     "pages/activitydetail/activitydetail",
-    "pages/test/test",
     "pages/createactivity/createactivity",
     "pages/scrollviewtest/scrollview",
     "pages/chooseimage/chooseimage",
-            "pages/myinfo/myinfo",
-            "pages/recommendation/recommendation",
-            "pages/lottery/lotterylist",
-            "pages/prize/prizelist"
+    "pages/initloading/initloading",
+    "pages/myinfo/myinfo",
+    "pages/recommendation/recommendation",
+    "pages/lottery/lotterylist",
+    "pages/prize/prizelist",
+    "pages/common/problem",
+    "pages/lucklist/lucklist",
+    "pages/joinlist/joinlist"
   ],
   "tabBar": {
     "color": "#000000",

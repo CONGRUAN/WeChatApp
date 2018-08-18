@@ -47,6 +47,7 @@ function commonrequest(url,bodyjson,successed,fault){
       ResPonse.Code = res.data.Code
       ResPonse.Msg = res.data.Msg
       ResPonse.Data = res.data.Data
+      console.log('======',res)
       console.log("请求成功:code:" + code + "=Data:" + res.data.Data + "=Msg:" + res.data.Msg)
 
       if(code==8888){

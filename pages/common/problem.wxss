@@ -1,0 +1,13 @@
+page {
+  background-color: #fbfbfb;
+}
+
+.cContainer {
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.textFont{
+  font-size: 25rpx;
+}

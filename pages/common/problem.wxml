@@ -1,0 +1,4 @@
+<view wx:for="{{array}}" class='cContainer'>
+  <text class='textFont' style='font-weight:bolder'>{{item.question}}</text>
+  <text class='textFont' style='margin-top:20rpx'>{{item.answer}}</text>
+</view>

@@ -1,0 +1,48 @@
+<scroll-view class='socllviewstyle' scroll-y scroll-into-view='id_bottom_action'>
+  <!-- toast 提示框 -->
+  <include src="../../utils/toast/toast.wxml" />
+  <view class='listimageitemcontainer'>
+
+    <image class='imagestyle' mode='scaleToFill' src='{{imagepath}}'></image>
+    <view hidden='true' bindtap='changeimage' class='listsupportview'>更换图片</view>
+  </view>
+
+
+  <view class='jumpappstylegray1'>
+    <view>
+      奖品名称:{{data.PrizeName}} x{{data.PrizeNum}}
+    </view>
+    <input hidden='true' class='nameopenwhite' bindinput='prizeNameInput' placeholder='请输入奖品名称' maxlength='14'>
+    </input>
+    <!-- <view class='namestyleopen'>个</view> -->
+  </view>
+  <view class='divilerlinebottom1'></view>
+  <view class='jumpappstylegray1'>
+    <view>
+      {{data.Condition==001?data.StartTime+'自动开奖':'参与人数达'+data.JoinUserNum+'自动开奖'}}
+    </view>
+    <view hidden='true' class='nameopenwhite'>
+      <input type='number' bindinput='prizeNumInput' placeholder='123' maxlength='7' type='number'>
+      </input>
+    </view>
+    <!-- <view class='namestyleopen'>个</view> -->
+  </view>
+  <view class='joininstyle'>
+    <form bindsubmit="submit" report-submit='true'>
+      <button form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin?'已参加':'参加'}}</button>
+    </form>
+  </view>
+  <view bindtap='joindetail' class='joindetailstyle'>
+    <view>
+      共{{data.JoinCount}}人参加，
+    </view>
+
+    <view  class='gojoinliststyle1'>
+      查看详情>
+    </view>
+  </view>
+</scroll-view>
+<view id='id_bottom_action' class='bottomactionstyle'>
+  <button open-type='share' bindtap='onShareAppMessage' class='buttonactionstyle'>分享一下</button>
+  <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
+</view>

@@ -1,82 +1,116 @@
 // pages/prize/prizelist.js
+
+
+
+var Type1 = 'all'
+var app = getApp()
+var httputil = require("../../pages/httputils/httputil.js")
+var ResPonse = {
+  Code: '0000',
+  Msg: '',
+  Data: null
+}
+
 Page({
 
   /**
    * 页面的初始数据
    */
+
   data: {
-    array: [{
-      prize_name: '坚果蓝牙音箱',
-      prize_amount: '1',
-      prize_time: '7月3日'
-    }, {
-      prize_name: '超声波自动洗衣器',
-      prize_amount: '1',
-      prize_time: '6月19日'
-    }, {
-      prize_name: 'Avene雅漾舒护活泉喷雾',
-      prize_amount: '1',
-      prize_time: '7月2日'
-    }, {
-      prize_name: '抽个人今晚一起散步',
-      prize_amount: '1',
-      prize_time: '7月1日'
-    }]
+    array: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    Type1 = options.type
+    console.log(options)
+    this.getlist()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
+  },
+
+getlist:function(){
+  var bodyjson={
+    token: wx.getStorageSync('token'),
+    openId: wx.getStorageSync('openId'),
+    type:Type1
   }
+  var that = this
+  httputil.commonrequest(app.globalData.mylist, bodyjson, function (res) {
+    console.log("回调成功" + JSON.stringify(res.data))
+    ResPonse = res
+
+
+
+    that.setData({
+      array: ResPonse.Data
+    })
+  }, function (res) {
+    console.log("回调失败" + res)
+
+  })
+},
+itemclick:function(e){
+  var item = e.currentTarget.dataset.hi;
+  if (item.IsClient){
+      wx.navigateTo({
+        url: '../mycreatdetail/mycreatdetail?Id='+item.Id,
+      })
+  }else{
+    wx.navigateTo({
+      url: '../activitydetail/activitydetail?Id=' + item.Id,
+    })
+  }
+}
+
 })

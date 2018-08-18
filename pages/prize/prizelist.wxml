@@ -1,12 +1,11 @@
 <view class='tContainer'>
-  <text style='font-size:20rpx;margin-left:20rpx'>抽奖状态</text>
   <view>
-    <view wx:for="{{array}}" class='item'>
-      <text style='margin-left:20rpx'>奖品:</text>
-      <text style='margin-left:20rpx'>{{item.prize_name}}</text>
-      <text style='margin-left:20rpx'>x{{item.prize_amount}}</text>
-      <view class='itemView'>
-        <text>{{item.prize_time}}</text>
+    <view wx:for="{{array}}" class='item' data-hi='{{item}}' wx:for-item="item" bindtap='itemclick'>
+      <image class='imageStyle'></image>
+      <view class='rightView'>
+        <text style='margin-left:20rpx;font-weight:bolder;font-size:30rpx'>{{"奖品："+item.PrizeName}}</text>
+        <text style='margin-left:20rpx'>{{item.CreateTime}}</text>
+        <text style='margin-left:20rpx'>数量：{{item.PrizeNum}}</text>
       </view>
     </view>
   </view>

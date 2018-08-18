@@ -11,7 +11,7 @@ Page({
         requestResult: ''
     },
 
-
+    
     onLoad: function (options) {
       // Do some initialize when page load.
     },

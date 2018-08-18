@@ -1,7 +1,10 @@
 <view class="container">
   <view class='item' wx:for="{{array}}" wx:for-item="item">
-    <image class="userinfo-avatar" background-size="cover"></image>
-    <text>{{item.name}}</text>
-    <text class='rightText' style='font-size:9pt'>{{item.introduction}}</text>
+    <image class="userinfo-avatar" background-size="cover" src='../../images/program.png'></image>
+    <view class='rightView'>
+      <text style='font-size:35rpx'>{{item.name}}</text>
+      <view class='itemView'></view>
+      <image class='arrowImage' src='../../images/arrow_right.png' background-size="cover" mode='aspectFit'></image>
+    </view>
   </view>
 </view>

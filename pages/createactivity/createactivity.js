@@ -7,26 +7,27 @@ var prizeTypelist = []
 var imageBase64 = ''
 var typeindex = 0;
 var connditionIndex = 0;
-var prizeName=''
-var prizeNum =''
+var prizeName = ''
+var prizeNum = ''
+var prizeMaxPeople = 0
+var prizetime=''
 var ResPonse = {
   Code: '0000',
   Msg: '',
   Data: null
 }
+
+var arraydays
+var arrayhours
+var arrayminutes
 Page({
-  onTabItemTap: function(item) {
-    console.log(5432)
-    console.log(item.index)
-    console.log(item.pagePath)
-    console.log(item.text)
-  },
+
   /**
    * 页面的初始数据
    */
 
   data: {
-    inputdetailenable:true,
+    inputdetailenable: true,
     hasUserInfo: false,
     canIUse: app.globalData.canIUse,
     lottery_way: [itemlist[0]],
@@ -37,7 +38,9 @@ Page({
 
     prizeamount: 0,
     lottery_time: '',
-    lottery_detail_title:'开奖时间',
+    lottery_detail_title: '开奖时间',
+    multiArray: [],
+    multiIndex: [0, 0, 0],
   },
 
   /**
@@ -45,10 +48,15 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-    
-  that.getLottery_way(1)
+    // var tt = this
+    that.initMultiArray(7)
+    var arrays = [arraydays, arrayhours, arrayminutes]
+    that.setData({
+      multiArray: arrays
+    })
+    that.getLottery_way(1)
     that.getLottery_way(0)
-    
+
   },
 
   /**
@@ -69,25 +77,27 @@ Page({
 
     // })
     temp = app.globalData.imageurl
-    console.log(temp)
+    console.log('tempppp',temp)
     // var reader = Base64.CusBASE64.encoder(temp)
     // console.log("base64:" + reader)
     // var base64 = 'data:image/png;base64,' + reader
-
-    wx.request({
-      url: temp,
-      method: 'GET',
-      responseType: 'arraybuffer',
-      success: function(res) {
-        var base64 = 'data:image/jpeg;base64,' + wx.arrayBufferToBase64(res.data);
-        imageBase64 = base64
-        console.log(base64)
-        that.setData({
-          imagepath: base64
-        })
-
-      }
+    that.setData({
+      imagepath: temp
     })
+    // wx.request({
+    //   url: temp,
+    //   method: 'GET',
+    //   responseType: 'arraybuffer',
+    //   success: function(res) {
+    //     var base64 = 'data:image/jpeg;base64,' + wx.arrayBufferToBase64(res.data);
+    //     imageBase64 = base64
+    //     console.log(base64)
+    //     that.setData({
+    //       imagepath: base64
+    //     })
+
+    //   }
+    // })
     // wx.hideTabBar({
 
     // })
@@ -137,41 +147,40 @@ Page({
     var flag = event.target.dataset.hi
     // console.log(123);
     var tt = this;
-    if(flag==1){
+    if (flag == 1) {
       wx.showActionSheet({
 
-        itemList: tt.getArrayFromobj(1,itemlist),
-        success: function (res) {
+        itemList: tt.getArrayFromobj(1, itemlist),
+        success: function(res) {
 
           console.log(itemlist[res.tapIndex]);
           // itemlist[res.tapIndex]
           tt.setData({
-            prize_type:itemlist[res.tapIndex]
+            prize_type: itemlist[res.tapIndex]
           })
           typeindex = res.tapIndex
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log('fail');
 
         }
       })
-    }else{
+    } else {
       wx.showActionSheet({
 
         itemList: tt.getArrayFromobj(2, prizeTypelist),
-        success: function (res) {
+        success: function(res) {
 
           console.log(itemlist[res.tapIndex]);
           // itemlist[res.tapIndex]
           tt.setData({
-            lottery_way
-            : prizeTypelist[res.tapIndex]
+            lottery_way: prizeTypelist[res.tapIndex]
           })
           connditionIndex = res.tapIndex
 
           var title = tt.data.lottery_way.Name
           var isinputenable = title.indexOf('人数') == -1 ? true : false
-          console.log(title+":"+isinputenable)
+          console.log(title + connditionIndex+ ":" + isinputenable)
           tt.setData({
             lottery_detail_title: title,
             inputdetailenable: isinputenable,
@@ -179,45 +188,52 @@ Page({
 
 
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log('fail');
 
         }
       })
     }
 
-    
+
 
   },
   /**
    * 修改奖品图片
    */
   changeimage: function() {
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original'],
-      success: function(res) {
-        // wx.getImageInfo({
-        //   src: res.tempFilePaths[0],
-        //   success: function (res) {
-        //     //console.log(res.width);
-        //     //console.log(res.height);
-        //     console.log('选择图片成功')
-        //   
-        //   },fail:function(res){
-        // console.log('选择图片失败')
-        //   }
-        // })
-        console.log('发送路径' + res.tempFilePaths[0])
-        wx.navigateTo({
-          url: '../chooseimage/chooseimage?image=' + res.tempFilePaths[0],
-        })
 
-      },
-      fail: function() {
-        console.log('选择图片失败')
-      }
+    wx.navigateTo({
+      url: '../cutInside/cutInside?src=' +'' ,//res.tempFilePaths[0]
+      // url: '../chooseimage/chooseimage?image=' + res.tempFilePaths[0]
+
     })
+
+    // wx.chooseImage({
+    //   count: 1,
+    //   sizeType: ['original'],
+    //   success: function(res) {
+    //     wx.getImageInfo({
+    //       src: res.tempFilePaths[0],
+    //       success: function (res) {
+    //         //console.log(res.width);
+    //         //console.log(res.height);
+    //         console.log('选择图片成功')
+          
+    //       },fail:function(res){
+    //     console.log('选择图片失败')
+    //       }
+    //     })
+    //     console.log('发送路径' + res.tempFilePaths[0])
+    //     wx.navigateTo({
+    //       url: '../chooseimage/chooseimage?image=' + res.tempFilePaths[0],
+    //     })
+
+    //   },
+    //   fail: function() {
+    //     console.log('选择图片失败')
+    //   }
+    // })
   },
   //获取开奖方案
   getLottery_way: function(flag) {
@@ -236,41 +252,125 @@ Page({
       }
     }
 
-    httputil.commonrequest(app.globalData.getprizeAndlottery,bodymap,function(res){
-      console.log('getprizeAndlottery:'+res)
+    httputil.commonrequest(app.globalData.getprizeAndlottery, bodymap, function(res) {
+      console.log('getprizeAndlottery:' + res)
       ResPonse = res
       var list = ResPonse.Data
-     if(flag==1){
-       itemlist = list
-       that.setData({
-         prize_type:list[0]
-       })
-     }else{
-       prizeTypelist = list
-       that.setData({
-         lottery_way: list[0]
-       })
-     }
+      if (flag == 1) {
+        itemlist = list
+        that.setData({
+          prize_type: list[0]
+        })
+      } else {
+        prizeTypelist = list
+        that.setData({
+          lottery_way: list[0]
+        })
+      }
 
-    },function(error){
+    }, function(error) {
       console.log('getprizeAndlottery:' + error)
 
     })
 
 
   },
-  createaction: function(e) {
+  submit: function(res) { 
     if (app.globalData.hasUserInfo) {
       console.log('存在用户信息')
-      this.luncheraction()
+      this.luncheraction(res)
 
     } else {
       console.log('不存在用户信息')
       app.getUserInfo(e)
-      wx.setStorageSync('userinfo', e.detail.rawData)
+      wx.setStorageSync('userinfo', res.detail.rawData)
     }
   },
-  luncheraction: function() {
+  luncheraction: function(res) {
+    var tt = this
+    var flag = tt.data.inputdetailenable
+    var indexarray = tt.data.multiIndex
+    console.log('is',flag)
+      if(prizeName==''){
+        wx.showToast({
+          title: '请输入奖品名称',
+        })
+        return
+      }
+    if (prizeNum <=0) {
+      wx.showToast({
+        title: '奖品数量至少1',
+      })
+      return
+    }
+    if (flag){
+      var formid = res.detail.formId
+       var data = new Date()
+       var hour = data.getHours()
+      var minute = data.getMinutes()
+      var day = data.getDay()
+      var index0 = indexarray[0]
+      var index1 = indexarray[1]
+      var index2 = indexarray[2]
+      prizetime = arraydays[index0]+" "+arrayhours[index1]+":"+arrayminutes[index2]
+      if(hour>= index1&&index0==0){
+          if(hour==index1){
+              if(59>minute>=29){
+                wx.showToast({
+                  title: '开奖时间早于当前时间',
+                })
+                return
+              }
+            if (29>=minute >= 0 && index2 == 1) {
+              wx.showToast({
+                title: '开奖时间早于当前时间',
+              })
+              return
+            }
+          }else{
+            wx.showToast({
+              title: '开奖时间早于当前时间',
+            })
+            return
+          }
+       
+      }
+     
+    }else{
+      console.log('prizeMaxPeople',prizeMaxPeople)
+      if(prizeMaxPeople<=0){
+        wx.showToast({
+          title: '请输入参与人数',
+        })
+        return
+      }
+    }
+  
+  
+    wx.showLoading({
+      title: '请稍候',
+      mask: true,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+
+      wx.request({
+      url: app.globalData.imageurl,
+      method: 'GET',
+      responseType: 'arraybuffer',
+      success: function(res) {
+        var base64 = 'data:image/jpeg;base64,' + wx.arrayBufferToBase64(res.data);
+        imageBase64 = base64
+        console.log(base64)
+        // tt.setData({
+        //   imagepath: base64
+        // })
+
+      }
+    })
+
+
     var bodyjson = {
       token: wx.getStorageSync('token'),
       launcher: 'client',
@@ -278,10 +378,11 @@ Page({
       prizeName: prizeName,
       prizeImgBase64Str: imageBase64,
       prizeNum: prizeNum,
-      type: itemlist[connditionIndex].Id,
-      condition: prizeTypelist[typeindex].Id,
-      joinUserNum: '123',
-      startTime: '2018-02-21'
+      type: itemlist[typeindex].Id,
+      condition: prizeTypelist[connditionIndex].Id,
+      joinUserNum: prizeMaxPeople,
+      startTime: prizetime,
+      formId:formid
 
 
     }
@@ -291,15 +392,22 @@ Page({
       // console.log("回调成功"+JSON.stringify(res))
       // var jsonO = eval(res.data);
       ResPonse = res
-      var list = ResPonse.Data
-// 
-      if (ResPonse.Code==8888){
+      var id = ResPonse.Data.Id
+      // 
+
+      if (ResPonse.Code == 8888) {
+        console.log('id:',id)
         wx.showToast({
           title: '发起成功',
           icon: 'success',
           duration: 2000
         })
-      }else{
+        wx.hideLoading()
+      wx.navigateTo({
+        url: '../mycreatdetail/mycreatdetail?Id='+id,
+      })
+     
+      } else {
         wx.showToast({
           title: '发起失败',
           icon: 'success',
@@ -307,42 +415,109 @@ Page({
         })
       }
 
-    
+
     }, function(res) {
-      
+      wx.hideLoading()
       console.log("回调失败" + res)
 
     })
 
     console.log('发起活动')
 
-  },getArrayFromobj:function(flag,obj){
-    
+  },
+  getArrayFromobj: function(flag, obj) {
+
     var res = new Array(obj.length)
-    if(flag==1){
-      for (var i=0; i < obj.length; i++) {
+    if (flag == 1) {
+      for (var i = 0; i < obj.length; i++) {
         res[i] = obj[i].Name
       }
       console.log("itemlist" + res)
       return res
-    }else{
-      for (var i=0; i < obj.length; i++) {
+    } else {
+      for (var i = 0; i < obj.length; i++) {
         res[i] = obj[i].Name
       }
-      console.log("itemlist"+res)
+      console.log("itemlist" + res)
       return res
     }
-    
-  },
-  prizeNameInput:function(e){
-      prizeName = e.detail.value
-  },
-  prizeNumInput:function(e){
-    prizeNum = e.detail.value
-  }, lottery_click:function(){
-    console.log('lottery_click')
-  }
 
+  },
+  prizeNameInput: function(e) {
+    var temp = e.detail.value
+    console.log('temp===111', temp)
+    prizeName = e.detail.value
+  },
+  prizeNumInput: function(e) {
+    prizeNum = e.detail.value
+  },
+  JoinNumInput: function (e) {
+    var temp = e.detail.value
+    console.log('temp===',temp)
+    console.log('temp=type', typeof temp)
+    console.log(typeof temp == 'string')
+   if(typeof temp == 'string'){
+     prizeMaxPeople = temp
+   }
+   
+  },
+   
+  bindMultiPickerColumnChange: function(e) {
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    console.log("data", data)
+    let numbersArray = []
+    for (let i = 0; i < 24; i++) {
+      numbersArray.push(i)
+    }
+    console.log("detail", e.detail.column)
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiIndex[0]) {
+          default: data.multiArray[1] = arrayhours;
+          data.multiArray[2] = arrayminutes
+          break;
+        }
+        data.multiIndex[1] = 0;
+        data.multiIndex[2] = 0;
+        break;
+      case 1:
+        data.multiArray[2] = arrayminutes
+        data.multiIndex[2] = 0;
+        console.log(data.multiIndex);
+        break;
+    }
+    console.log('data', data)
+    this.setData(data);
+  },
+  initMultiArray: function() {
+    var tt = this
+    var array = new Array()
+    arraydays = tt.getweektime(7)
+    arrayhours = new Array()
+    for (var x = 0; x < 24; x++) {
+      arrayhours[x] = x
+    }
+    arrayminutes = ['00', '30']
+  },
+  getweektime: function(days) {
+    var datsarray = new Array()
+    var now = new Date()
+    for (var i = 0; i < days; i++) {
+      var date = new Date(now.getTime() + i * 24 * 3600 * 1000);
+      datsarray[i] = date.getFullYear() +"-"+(date.getMonth() + 1) + "-" + date.getDate()
+      //  + " 周" + (date.getDay() == 0 ? '日':
+      // date.getDay())
+      console.log(date.getFullYear()+date.getMonth() + 1 + "月" + date.getDate() + "日" + " 周" + date.getDay())
+    }
+    arraydays = datsarray
+    return datsarray
+
+  }
 
 
 })

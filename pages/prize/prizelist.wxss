@@ -27,3 +27,14 @@ page{
   display: flex;
   flex-direction: row-reverse
 }
+
+.imageStyle{
+  width: 250rpx;
+  height: 200rpx;
+}
+
+.rightView{
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}

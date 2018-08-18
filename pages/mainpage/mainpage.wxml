@@ -1,5 +1,5 @@
 <view class="titlecontainer">
-  <view class='titleitem1'>
+  <view hidden='true' class='titleitem1'>
     <image class='smalliaon' src='../../images/111.png'></image>
     <view class='smalliaonname'>123</view>
   </view>
@@ -46,7 +46,7 @@
   </view>
   <view class='divilerlinebottom'></view>
 </view>
-<view class='adstyle'>
+<view hidden='true' class='adstyle'>
   <view class='adtextleftstyle'>
     商务合作
   </view>
@@ -56,6 +56,6 @@
   </view>
 
 </view>
-<view class='adbottom'>
+<view hidden='true' class='adbottom'>
   <image class='imagestyle' mode='center' src='../../images/222.png'></image>
 </view>

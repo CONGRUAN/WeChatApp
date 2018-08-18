@@ -128,6 +128,11 @@ Page({
           isShowImg: true
         })
         wx.hideLoading()
+      },fail(res){
+        console.log('chooseimage_fail',res)
+      },complete(res){
+        console.log('chooseimage_complete', res)
+
       }
     })
 

@@ -1,12 +1,20 @@
 //index.js
 //获取应用实例
-const app = getApp()
-const httputil = require("../../pages/httputils/httputil.js")
+var app = getApp()
+var httputil = require("../../pages/httputils/httputil.js")
+var ResPonse = {
+  Code: '0000',
+  Msg: '',
+  Data: null
+}
 
 Page({
   data: {
-    userInfo: {},
+    data:null,
+    userInfo: null,
     hasUserInfo: false,
+    nickName:'',
+    imageurl:'../../images/avatar.png',
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
  
@@ -29,24 +37,44 @@ Page({
     })
   },
 
+onShow :function(){
+  console.log('显示')
+  // tt = this
+  var info = wx.getStorageSync('userinfo')
+  console.log('info',info)
+  if(''!=info){
+    this.setData({
+      imageurl: info.avatarUrl,
+      nickName:info.nickName
+    })
+  }
+  
+},
   toRecommendation:function(e){
     wx.navigateTo({
       url: '../recommendation/recommendation',
     })
   },
 
+  toProblem:function(e){
+    wx.navigateTo({
+      url: '../common/problem',
+    })
+  },
+
   tolist:function(e){
     console.log(11)
+    var type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: '../prize/prizelist',
+      url: '../prize/prizelist?type='+type,
     })
   },
 
   getUserInfo: function(e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    // app.globalData.userInfo = e.detail.userInfo
     this.setData({
-      userInfo: e.detail.userInfo,
+      // userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
   },
@@ -54,17 +82,20 @@ Page({
   getMyInfo:function(){
     var that = this;
     var bodyjson = {
-      token: app.globalData.token,
+      token: wx.getStorageSync('token'),
+      openId:wx.getStorageSync('openId')
     }
 
-    httputil.commonrequest(app.globalData.myInfo, bodyjson, function (res) {
+    httputil.commonrequest(app.globalData.myInfourl, bodyjson, function (res) {
       console.log("回调成功" + JSON.stringify(res.data))
       // var jsonO = eval(res.data);
-      var list = res.data
-      console.log("ss" + list[0].PrizeName)
+      // var list = res.data
+      ResPonse = res
+
+     
 
       that.setData({
-        actionlist: list
+        data: ResPonse.Data
       })
     }, function (res) {
       console.log("回调失败" + res)

@@ -21,21 +21,21 @@
       奖品数量:
     </view>
     <view class='nameopenwhite'>
-      <input bindinput='prizeNumInput' placeholder='123' maxlength='7' type='number'>
+      <input type='number' bindinput='prizeNumInput' placeholder='请输入奖品数量' maxlength='7' type='number'>
       </input>
     </view>
     <!-- <view class='namestyleopen'>个</view> -->
   </view>
-    <view class='divilerlinebottom1'></view>
- <view class='jumpappstylegray2'>
+  <view class='divilerlinebottom1'></view>
+  <view class='jumpappstylegray2'>
     <view>
       {{prize_type.Name}}
     </view>
-    <text bindtap='change_lottery_way' data-hi='1'class='nameopengreen' placeholder='请输入奖品数量'> 修改活动类型>
+    <text bindtap='change_lottery_way' data-hi='1' class='nameopengreen' placeholder='请输入奖品数量'> 修改活动类型>
     </text>
 
   </view>
-    <view class='divilerlinebottom1'></view>
+  <view class='divilerlinebottom1'></view>
 
   <view class='jumpappstylegray2'>
     <view>
@@ -45,17 +45,28 @@
     </text>
 
   </view>
- 
 
-  <view class='jumpappstylegray1'>
-    <view >
+
+  <view class='jumpappstylegray99'>
+    <view>
       {{lottery_detail_title}}
     </view>
-    <input bindtap='lottery_click' disabled='{{inputdetailenable}}' class='nameopenwhite1' placeholder='123'>
-    </input>
-    
-    <image hid class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
-    </image>
+
+    <view hidden='{{inputdetailenable}}' class='jumpappstylegray3'>
+      <input type='number' bindinput='JoinNumInput' class='nameopenwhite1' placeholder='请输入开奖人数'>
+      </input>
+
+      <image hid class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
+      </image>
+    </view>
+    <view hidden='{{!inputdetailenable}}' class='nameopenwhite99'>
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+        <view>
+          {{multiArray[0][multiIndex[0]]}}\t{{multiArray[1][multiIndex[1]]}}:{{multiArray[2][multiIndex[2]]}}
+
+        </view>
+      </picker>
+    </view>
 
   </view>
 
@@ -65,7 +76,7 @@
 
 </scroll-view>
 <view id='id_bottom_action' class='bottomactionstyle'>
-
-  <button wx:if="{{!hasUserInfo && canIUse}}" open-type='getUserInfo' bindgetuserinfo='createaction' class='buttonactionstyle1'>发起活动</button>
-
+ <form bindsubmit="submit" report-submit='true'  >
+  <button form-type='submit' wx:if="{{!hasUserInfo && canIUse}}" open-type='getUserInfo'  class='buttonactionstyle9'>发起活动</button>
+</form>
 </view>

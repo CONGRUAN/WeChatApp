@@ -48,7 +48,18 @@ page{
     /* vertical-align: middle;  */
      /* margin: 0 auto;   */
      /* list-style:none;margin:0;padding:0; */
-}.listimageitemcontainer {
+}
+.buttonactionstyle9{
+  width: 400px;
+  align-items: center;
+  /* margin: 25px; */
+    justify-content: center;  
+  /* display:flex; */
+  background-color: #d15143;
+  color: white;
+   /* border: none solid #575757; */ 
+}
+.listimageitemcontainer {
   margin-top: 3rpx;
   position: relative;
   width: 100%;
@@ -256,7 +267,8 @@ display: flex;
   font-size: 16px;
   
 
-}.nameopenwhite{
+}
+.nameopenwhite{
   /* color: white; */
   width: 200px;
   height: auto;
@@ -274,7 +286,7 @@ display: flex;
   position: absolute;
   right: 30px;
   text-align: right;
-  color: gainsboro
+  /* color: gainsboro */
 }.jumpappstylegray2{
     padding: 15px 10px;
 display: flex;
@@ -287,5 +299,62 @@ display: flex;
   flex-direction: row;
   font-size: 16px;
   
+
+}.section{
+   background:#CABBC7;
+   margin:20rpx;
+   padding:20rpx
+
+}.jumpappstylegray3{
+    padding: 15px 10px;
+display: flex;
+ /* width: 100%;     */
+ height: 100%;
+   align-items: center;
+    background-color: white;
+   align-content: center; 
+  align-self: center;
+  flex-direction: row;
+  font-size: 16px;
+  
+
+}.jumpappstylegray99{
+
+    padding: 15px 10px;
+display: flex;
+ width: 100%;
+ height: 100%;
+ flex-direction: row;
+   align-items: center;
+    background-color: white;
+    justify-content: space-between;
+   align-content: center; 
+  align-self: center;
+  font-size: 16px;
+
+
+}
+.nameopenwhite99{
+  /* color: white; */
+  display: flex;
+  /* width: 70%; */
+  height: auto;
+  font-size: 15px;
+  /* position: relative; */
+  /* margin-left: 10%; */
+  /* left: 30%; */
+  /* right: 20px; */
+  justify-content: right;
+  /* flex-direction: row-reverse; */
+  /* margin-left: 20px; */
+  /* justify-content: flex-end; */
+  /* right: 30px; */
+  /* text-align: right; */
+  /* color: red */
+/* color: #2573b8; */
+  /* font-size: 15px; */
+  position: absolute;
+  right: 20px;
+  text-align: right;
 
 }

@@ -1,7 +1,13 @@
 // pages/activitydetail/activitydetail.js
 const app = getApp()
 var httputil = require("../../pages/httputils/httputil.js")
+/**
+ * toast提示框
+ */
+var toast = require('../../utils/toast/toast.js');
+
 var bodyjson
+var isshare = 0
 var ResPonse = {
   Code: '0000',
   Msg: '',
@@ -15,8 +21,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    IsJoin:false,
     containclass: 1,
-    data:[]
+    data:null
   },
 
   /**
@@ -24,6 +31,9 @@ Page({
    */
   onLoad: function (options) {
     var itemId = options.Id
+    if(options.isshare==1){
+      isshare=1
+    }
     bodyjson = {
       token:wx.getStorageSync('token'),
       Id:itemId,
@@ -102,25 +112,44 @@ Page({
   // })
   },
   submit:function(res){
+    var tt = this
+    if(ResPonse.Data.IsJoin){
+      toast.showToastDefault(tt, '你已参与，分享给好友吧')
+      return
+    }
+    
     var info = wx.getStorageSync('userinfo')
     var formid = res.detail.formId
     console.log(res.detail.formId);
+    var jiontype='join'
+    if (ResPonse.Data.Type=='team'&& isshare==1){
+      jiontype = 'create'
+    }
+
     var bodyjson =  {
       token:wx.getStorageSync('token'),
       luckyDrawId:ResPonse.Data.Id,
       openId:wx.getStorageSync('openId'),
       formId: formid,
+      nickname:info.nickname,
       headImgUrl: info.avatarUrl,
-      joinType:'join'
+      joinType: jiontype//ResPonse.Data.Type
     }
     // var info = wx.getStorageSync('userinfo')
     if (app.globalData.hasUserInfo){
       console.log('存在用户信息')
       httputil.commonrequest(app.globalData.joinactivity,bodyjson,function(res){
         ResPonse = res
-        console.log(ResPonse.Data)
+        if(res.Code==8888){
+            tt.setData({
+              IsJoin:true
+            })
+          toast.showToastDefault(tt, '参与成功')
+        }else{
+          toast.showToastDefault(tt, '参与失败:'+res.Code)
+        }
       },function(res){
-
+        toast.showToastDefault(tt, '参与失败:' + res)
       })
 
     }else{
@@ -137,14 +166,25 @@ Page({
     var that =  this
     httputil.commonrequest(app.globalData.getactivitydetail,bodyjson,function(res){
           ResPonse  = res
+          var isjoin = res.Data.IsJoin
           that.setData({
-            data:ResPonse.Data
+            data:ResPonse.Data,
+            IsJoin: isjoin
           })
         console.log(JSON.stringify(ResPonse.Data))
 
      
     },function(res){
 
+    })
+  },
+  joindetail:function(){
+    // var tt = this
+    // console.log('========', tt.data.data.Id)
+
+    // console.log('========', this.data.Id)
+    wx.navigateTo({
+      url: '../joinlist/joinlist?Id='+this.data.data.Id
     })
   }
 })

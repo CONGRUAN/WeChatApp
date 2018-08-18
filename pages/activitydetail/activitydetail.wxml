@@ -1,6 +1,7 @@
 <view class='contain'>
   <scroll-view class='socllviewstyle' scroll-y scroll-into-view='id_bottom_action'>
-
+ <!-- toast 提示框 -->
+  <include src="../../utils/toast/toast.wxml" />
     <view class='listimageitemcontainer'>
 
       <image class='imagestyle' mode='scaleToFill' src='{{data.ImageUrl}}'></image>
@@ -55,10 +56,10 @@
     <view class='joininstyle'>
 
       <view id='box' class="{{containclass ==1?'btn_contain':'btn_contain_moveright'}}">
-       
-       <form bindsubmit="submit" report-submit='true' >
-  <button form-type="submit"  open-type='getUserInfo' class='btn_joinstyle' > 参与</button>
-</form>
+
+        <form bindsubmit="submit" report-submit='true'>
+          <button form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin?'已参加':'参加'}}</button>
+        </form>
         <!-- <button id='btn_join' bindtap='btn_join_click' class='btn_joinstyle'>
           参与
         </button> -->
@@ -72,13 +73,13 @@
           <button class='btn_joinstyle'>组队</button>
         </view>
       </view>
-      <view class='joindetailstyle'>
+      <view bindtap='joindetail' class='joindetailstyle'>
         <view>
-          共12567人参加，
+          共{{data.JoinCount}}人参加，
         </view>
 
         <view class='gojoinliststyle1'>
-          查看详情
+          查看详情>
         </view>
 
       </view>
