@@ -50,35 +50,36 @@ App({
     console.log(wx.getStorageSync('openId') == '')
     // 登录
     // 获取用户信息
-    // wx.getSetting({
-    //   success: res => {
-    //     if (res.authSetting['scope.userInfo']) {
-    //       console.log('已经授权')
-    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-    //       wx.getUserInfo({
-    //         success: res => {
-    //           // 可以将 res 发送给后台解码出 unionId
-    //           this.globalData.userInfo = res.userInfo
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          console.log('已经授权')
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              this.globalData.userInfo = res.userInfo
+              console.log('用户信息', res.userInfo)
+              wx.setStorageSync('userinfo', res.userInfo)
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+            }
+          })
+        } else {
+          res.authSetting
+          if (!res.authSetting['scope.userInfo']) {
+            console.log("没有拥有userInfo")
 
-    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //           // 所以此处加入 callback 以防止这种情况
-    //           if (this.userInfoReadyCallback) {
-    //             this.userInfoReadyCallback(res)
-    //           }
-    //         }
-    //       })
-    //     } else {
-    //       res.authSetting
-    //       if (!res.authSetting['scope.userInfo']) {
-    //         console.log("没有拥有userInfo")
+          }
 
-    //       }
+          console.log('没有授权')
 
-    //       console.log('没有授权')
-
-    //     }
-    //   }
-    // })
+        }
+      }
+    })
   },
 
   // 获取后台token
@@ -143,6 +144,7 @@ App({
     myInfourl: '/CoreRun/GetStatisticCount',
     mylist: '/CoreRun/GetStatistic',
     getjoinUserHeadImg:'/CoreRun/GetJoinUserHeadImg',
+    getluckuser:'/CoreRun/GetLuckyUser',
     hasUserInfo: wx.getStorageSync('userinfo') == "" ? false : true,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
 
@@ -152,8 +154,9 @@ App({
   getUserInfo: function(e) {
     console.log(e)
     console.log('22')
-
-    this.globalData.userInfo = e.detail.userInfo
+    wx.setStorageSync('userinfo', e.detail.rawData)
+    console.log('个人信息', e.detail.rawData)
+    this.globalData.userInfo = e.detail.rawData
     this.globalData.hasUserInfo = true
   }
 })

@@ -346,6 +346,7 @@ display: flex;
   justify-content: center;
   flex-direction: row;
   font-size: 14px;
+  margin-bottom: 40px;
   align-self: center;
 }
 
@@ -401,4 +402,88 @@ display: flex;
   /* margin-top: 10px; *//* padding-bottom: 10px; *//* justify-content: center; */
   border: none solid #575757;
   /* margin: 0 auto;   *//* text-align: center;    *//* vertical-align: middle;  *//* margin: 0 auto;   *//* list-style:none;margin:0;padding:0; */
+}
+/* listtest/listtest.wxss */
+.parent {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+
+.child {
+  box-sizing: border-box;
+  background-color: white;
+  flex: 0 0 25%;
+  height: 50px;
+  border: 1px solid red;
+}.jionnumtextclass{
+  color: #cc4b3d;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+
+}.jionnumtextclass1{
+  /* color: #cc4b3d; */
+  margin-top: 10px;
+  /* margin-bottom: 50px; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+
+}.containerlist{
+  background-color: white;
+  /* width: 100%; */
+  /* min-height: 50vh; */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+ border: 5px solid #d6c47f;
+ border-style: double;
+border-spacing:110px 150px;
+margin: 10px;
+
+
+
+}.wxgrid{
+    clear:both;
+}
+.wxgrid .wxrow{
+    clear:both;
+    padding: 0px 15px 0px 15px;
+}
+.wxgrid .wxcol{
+    float: left;
+    text-align: center;
+}
+/*美团分类-场景样式*/
+/* 图片间距 */
+.wxclassify{
+    padding:0px 0px 50px 0px;
+    display: block;
+    height: 100px;
+}
+.wxclassify1{
+    padding:0px 0px 5px 0px;
+    display: block;
+    height: 40px;
+}
+.wxclassify .wxclassify-img{
+    height:100%;
+    width:100%;
+    border-radius: 50%
+}
+.wxclassify-img1{
+    height:150rpx;
+    width:150rpx;
+    border-radius: 50%
+}
+.wxclassify-img2{
+    height:40px;
+    width:40px;
+    border-radius: 50%
 }

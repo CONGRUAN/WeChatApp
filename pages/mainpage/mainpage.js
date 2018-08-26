@@ -116,18 +116,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var body={
-      a:'123'
-    }
-    // httputil.getactionlist(body);
-    if (!app.globalData.callbackflag){
-      app.finishcallback = res => {
-        console.log('finishcallback')
-        this.getactionList();
-      }
-    } else {
-      this.getactionList();
-    }
+    
     
     
   },
@@ -136,7 +125,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var body = {
+      a: '123'
+    }
+    // httputil.getactionlist(body);
+    if (!app.globalData.callbackflag) {
+      // console.log('finishcallback')
+      app.finishcallback = res => {
+        console.log('finishcallback')
+        this.getactionList();
+      }
+      console.log('finishcallback1')
+      this.getactionList();
+    } else {
+      console.log('finishcallback_else')
+      this.getactionList();
+    }
   },
 
   /**
@@ -203,14 +207,15 @@ getactionList:function(){
     ResPonse = res
     var list = ResPonse.Data
 
-    // console.log("ss" + list[0].PrizeName)
+    console.log("ss" + list)
 
     that.setData({
       actionlist:list
     })
+    wx.hideLoading()
   },function(res){
     console.log("回调失败"+res)
-
+wx.hideLoading()
   })
 },
  

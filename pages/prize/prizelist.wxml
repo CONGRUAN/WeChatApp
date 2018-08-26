@@ -1,12 +1,44 @@
 <view class='tContainer'>
-  <view>
-    <view wx:for="{{array}}" class='item' data-hi='{{item}}' wx:for-item="item" bindtap='itemclick'>
-      <image class='imageStyle'></image>
+  <view hidden='{{isLuck}}' style='display:flex;flex-direction:row'>
+    <button hidden='{{isLuck}}' class='{{going}}' bindtap='going'>
+      进行中
+    </button>
+    <button hidden='{{isLuck}}' class='{{finish}}' bindtap='finish'>
+      已结束
+    </button>
+  </view>
+  <view hidden='{{!showgoing}}'>
+    <view hidden='{{arraygoing.length>0?true:false}}' class='emptycontain'>
+      <image style='margin-top:60px' src='../../images/111111111.png'></image>
+      <text class='emptytext'>你还没有数据哦~~~</text>
+    </view>
+    <view wx:for="{{arraygoing}}" wx:key="item" class='item' data-hi='{{item}}' wx:for-item="item" bindtap='itemclick'>
+      <image src='{{item.ImgUrl}}' class='imageStyle'></image>
       <view class='rightView'>
         <text style='margin-left:20rpx;font-weight:bolder;font-size:30rpx'>{{"奖品："+item.PrizeName}}</text>
         <text style='margin-left:20rpx'>{{item.CreateTime}}</text>
         <text style='margin-left:20rpx'>数量：{{item.PrizeNum}}</text>
       </view>
     </view>
+    <view hidden='{{arraygoing.length>0?false:true}}' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
+  </view>
+
+  <view hidden='{{showgoing}}'>
+    <view hidden='{{arrayfinish.length>0?true:false}}' class='emptycontain'>
+      <image style='margin-top:60px' src='../../images/111111111.png'></image>
+      <text class='emptytext'>你还没有数据哦~~~</text>
+    </view>
+    <view wx:for="{{arrayfinish}}" wx:key="item" class='item' data-hi='{{item}}' wx:for-item="item" bindtap='itemclick'>
+      <image src='{{item.ImgUrl}}' class='imageStyle'></image>
+      <view class='rightView'>
+        <text style='margin-left:20rpx;font-weight:bolder;font-size:30rpx'>{{"奖品："+item.PrizeName}}</text>
+        <text style='margin-left:20rpx'>{{item.CreateTime}}</text>
+        <text style='margin-left:20rpx'>数量：{{item.PrizeNum}}</text>
+      </view>
+    </view>
+    <view hidden='{{arrayfinish.length0?false:true}}' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
+  </view>
+  <view>
+
   </view>
 </view>

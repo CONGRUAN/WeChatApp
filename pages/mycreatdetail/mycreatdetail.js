@@ -6,10 +6,22 @@ var httputil = require("../../pages/httputils/httputil.js")
  */
 var toast = require('../../utils/toast/toast.js');
 
+var WXGrid = require('../wxgrid/wxgrid.js')
+
+
+// var WXGrid = require('../../js/wxgrid.js')
+var wxgrid = new WXGrid;
+// wxgrid.init(99, 10);
+var img = "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erpwPOvDPjA7Wnc9kUYw0zmt9UIgsWqLnfCg6GWbX42bQlwm904X7ztBz8bEDxAsLyvYu2PKbvqUg/132";
+// var classifies = new Array()
+
+var isShare = false
 var ResPonse = {
   Code: '0000',
   Msg: '',
-  data: null
+  Data: null,
+  name:'',
+  isLuck:'很遗憾，这次没有中奖'
 }
 var bodyjson
 Page({
@@ -21,13 +33,27 @@ Page({
   data: {
     data:null,
     IsJoin:false,
-    imagepath:'../../images/222.png'
+    imagepath:'../../images/222.png',
+    wxgrid,
+    classifies: [],
+     size: 0,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     // id ac89b870 - 59ff - 4417 - 9618 - 3cd3aa173e56
+    console.log('来源，', options.isShare)
+    console.log('options', options)
+
+    console.log('来源，',options.isShare!='')
+    if(options.isShare){
+      console.log('来源，', '分享')
+    isShare = true
+    }else{
+      console.log('来源，', '列表')
+      isShare = false
+    }
     var itemId = options.Id
     // var itemId = 'ac89b870-59ff-4417-9618-3cd3aa173e56'
     bodyjson = {
@@ -93,7 +119,7 @@ Page({
     return {
       title: '惊喜一刻',
       desc: '领福利啦!',
-      path: '/page/mycreatdetail/mycreatdetail?Id='+ResPonse.data.Id
+      path: '/pages/mycreatdetail/mycreatdetail?Id='+this.data.data.Id+'&isShare='+true
     }
   },
 
@@ -113,12 +139,27 @@ Page({
         IsJoin: ResPonse.Data.IsJoin,
       })
       console.log(JSON.stringify(ResPonse.Data))
-
+  if(ResPonse.Data.IsOver){
+    that.getdatalucklist()
+  }else{
+    that.getTenJoinUserImg()
+  }
 
     }, function(res) {
 
     })
-  }, submit: function (res) {
+  }, 
+  submit1:function(res){
+    if (app.globalData.hasUserInfo) {
+      console.log('submit1存在用户信息')
+    } else {
+      console.log('submit1不存在用户信息')
+      app.getUserInfo(res)
+      wx.setStorageSync('userinfo', res.detail.rawData)
+    }
+  },
+  
+  submit: function (res) {
 
     var tt = this
     if (tt.data.IsJoin){
@@ -129,14 +170,18 @@ Page({
     var info = wx.getStorageSync('userinfo')
     var formid = res.detail.formId
     console.log(res.detail.formId);
+    var jiontype='join'
+    if(tt.data.data.Type=='team'&&!isShare){
+      jiontype = 'create'
+    }
     var bodyjson = {
       token: wx.getStorageSync('token'),
-      luckyDrawId: ResPonse.Data.Id,
+      luckyDrawId: tt.data.data.Id,
       openId: wx.getStorageSync('openId'),
       formId: formid,
       nickname: info.nickName,
       headImgUrl: info.avatarUrl,
-      joinType: 'join'
+      joinType: jiontype
     }
     // var info = wx.getStorageSync('userinfo')
     if (app.globalData.hasUserInfo) {
@@ -149,7 +194,7 @@ Page({
           IsJoin:true
         })
       }, function (res) {
-        toast.showToastDefault(tt, '参与失败：'+res.Data.Msg)
+        toast.showToastDefault(tt, '参与失败：'+res.Data.data.Msg)
       })
 
     } else {
@@ -183,5 +228,91 @@ Page({
     wx.navigateTo({
       url: '../joinlist/joinlist?Id=' + this.data.data.Id
     })
+  }, loadmore: function () {
+    this.getdatalucklist()
+
+  }, getdatalucklist: function () {
+    var tt = this
+    var body={
+        token:wx.getStorageSync('token'),
+        openId:wx.getStorageSync('openId'),
+        id:this.data.data.Id
+    }
+  
+    httputil.commonrequest(app.globalData.getluckuser,body,function(res){
+      console.log('中奖人：',res)
+     var  temp = new Array()
+      temp = tt.data.classifies
+      for (var i = 0; i < res.Data.LuckyUsers.length; i++) {
+       var temp1 = {
+          imageurl: res.Data.LuckyUsers[i].HeadImgUrl,
+          name: res.Data.LuckyUsers[i].nickName
+        }
+        temp.push(temp1)
+      }
+      // console.log()
+      tt.setData({
+      classifies:temp,
+        size: temp.length,
+      })
+      wxgrid.init(tt.data.classifies.length / 3, 3)
+      // wxgrid.setRowsHeight(150, 1)
+
+      wxgrid.data.add("classifies", tt.data.classifies);
+      var str = res.Data.IsContainsSelf?"恭喜您中奖了":'很遗憾，你本次没有中奖'
+      if (tt.data.classifies.length == 0) {
+        str = '很遗憾，未达到开奖条件。没有开奖！'
+      }
+      tt.setData({
+        wxgrid,
+        name: tt.data.data.PrizeName,
+        isLuck: str
+      })
+    },function(res){
+
+    })
+    
+  },
+  getTenJoinUserImg: function () {
+    var tt = this
+    var body = {
+      token: wx.getStorageSync('token'),
+      openId: wx.getStorageSync('openId'),
+      id: this.data.data.Id
+    }
+
+    httputil.commonrequest(app.globalData.getjoinUserHeadImg, body, function (res) {
+      console.log('中奖人：', res)
+      var temp = new Array()
+      for (var i = 0; i < res.Data.length; i++) {
+        var temp1 = {
+          imageurl: res.Data[i].HeadImgUrl,
+          name: res.Data[i].Nickname
+        }
+        temp.push(temp1)
+        if(i>=10)break
+      }
+      wxgrid.init(1, 10)
+      // wxgrid.setRowsHeight(150, 1)
+      // console.log()
+      wxgrid.data.add("classifies", temp);
+      tt.setData({
+        wxgrid,
+        // classifies: temp,
+        size: temp.length,
+        
+      })
+     
+      
+      // var str = res.Data.IsContainsSelf ? "恭喜您中奖了" : '很遗憾，你本次没有中奖'
+      // tt.setData({
+        
+      //   name: tt.data.data.PrizeName,
+      //   isLuck: str
+      // })
+    }, function (res) {
+
+    })
+
   }
 })

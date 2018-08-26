@@ -11,7 +11,7 @@
     <view>
       奖品名称:
     </view>
-    <input class='nameopenwhite' bindinput='prizeNameInput' placeholder='请输入奖品名称' maxlength='14'>
+    <input class='nameopenwhite' bindinput='prizeNameInput' placeholder='请输入奖品名称' value='{{remindname}}' maxlength='14'>
     </input>
     <!-- <view class='namestyleopen'>个</view> -->
   </view>
@@ -21,7 +21,7 @@
       奖品数量:
     </view>
     <view class='nameopenwhite'>
-      <input type='number' bindinput='prizeNumInput' placeholder='请输入奖品数量' maxlength='7' type='number'>
+      <input type='number' bindinput='prizeNumInput' value='{{remindNum}}' placeholder='请输入奖品数量' maxlength='7' type='number'>
       </input>
     </view>
     <!-- <view class='namestyleopen'>个</view> -->
@@ -56,7 +56,7 @@
       <input type='number' bindinput='JoinNumInput' class='nameopenwhite1' placeholder='请输入开奖人数'>
       </input>
 
-      <image hid class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
+      <image class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
       </image>
     </view>
     <view hidden='{{!inputdetailenable}}' class='nameopenwhite99'>
@@ -76,7 +76,7 @@
 
 </scroll-view>
 <view id='id_bottom_action' class='bottomactionstyle'>
- <form bindsubmit="submit" report-submit='true'  >
-  <button form-type='submit' wx:if="{{!hasUserInfo && canIUse}}" open-type='getUserInfo'  class='buttonactionstyle9'>发起活动</button>
-</form>
+  <form bindsubmit="submit" report-submit='true'>
+    <button bindgetuserinfo='submit1' form-type='submit' wx:if="{{!hasUserInfo && canIUse}}" open-type='getUserInfo' class='buttonactionstyle9'>发起活动</button>
+  </form>
 </view>

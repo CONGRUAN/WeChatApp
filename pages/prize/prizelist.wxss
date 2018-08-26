@@ -1,40 +1,85 @@
-page{
-  background-color: gainsboro
+page {
+  background-color: #fbfbfb;
 }
 
-.tContainer{
+.tContainer {
   width: 100%;
   height: 100%;
   margin-top: 10rpx;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
-.item{
-  margin-top:20rpx;
+.item {
+  margin-top: 20rpx;
   margin-bottom: 20rpx;
-  padding-top:20rpx;
-  padding-bottom:20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
   display: flex;
   flex-direction: row;
-  font-size:26rpx;
-  background-color:#ffffffff
+  font-size: 26rpx;
+  background: white;
 }
 
-.itemView{
+.itemView {
   flex: 1;
   margin-right: 20rpx;
   display: flex;
-  flex-direction: row-reverse
+  flex-direction: row-reverse;
 }
 
-.imageStyle{
+.imageStyle {
   width: 250rpx;
   height: 200rpx;
 }
 
-.rightView{
+.rightView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.jionnumtextclass {
+  color: #cc4b3d;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.going {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  color: white;
+  background: #fd3d38;
+  border: 0px solid;
+  height: 30px;
+  border-radius: 20px;
+}
+
+.finish {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 30px;
+  background: white;
+  border: 2px solid;
+  border-radius: 20px;
+}
+.emptycontain{
   display: flex;
   flex-direction: column;
   justify-content: center
+  ;
+  align-content: center;
+  align-items: center;
+  align-self: center
+}.emptytext{
+  margin-top: 30px;
+  color: #f5d4c0
 }

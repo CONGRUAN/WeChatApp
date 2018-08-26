@@ -39,12 +39,11 @@
     <view wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
       <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
         <a class="wxclassify1" href="#">
-          <image class="wxclassify-img1" mode="aspectFit" 
-          src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+          <image class="wxclassify-img1" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
 
         </a>
       </view>
     </view>
   </view>
-  <view class='jionnumtextclass' bindtap='loadmore' >{{loadmore}}></view>
+  <view class='jionnumtextclass' bindtap='loadmore'>{{loadmore}}></view>
 </view>

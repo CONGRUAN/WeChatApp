@@ -20,7 +20,7 @@
     </view>
   </view>
   <view class='other'>
-    <view class='otherView'>
+    <view hidden='true' class='otherView'>
       <image style='width:30rpx;height:30rpx;margin-right:10rpx' src='../../images/itemimage1.png' mode='aspectFit'></image>
       <text class='otherText'>余额</text>
       <view class='itemView'>

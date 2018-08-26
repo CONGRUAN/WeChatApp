@@ -12,7 +12,7 @@
 
 </view>
 <swiper class='imagestyle' indicator-dots="{{indicatorDots}}"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-  <block wx:for="{{imgUrls}}">
+  <block wx:for="{{imgUrls}}"wx:key='item' >
     <swiper-item class="bannrclass">
       <image src="{{item}}" class="image" />
     </swiper-item>
@@ -20,7 +20,7 @@
 </swiper>
 
 <!-- <image class='bannrclass' mode='scaleToFill' src='../../images/banner.png'></image> -->
-<view wx:for="{{actionlist}}" bindtap='listitem_click' data-hi='{{item}}' wx:for-item="item">
+<view wx:for="{{actionlist}}" wx:key='item' bindtap='listitem_click' data-hi='{{item}}' wx:for-item="item">
   <view class='divilerline'></view>
   <view class='listimageitemcontainer'>
 

@@ -172,7 +172,9 @@ box-shadow: 10rpx 10rpx 5rpx #888888;
   font-size: 16px;
 }
 .jumpappstyle1 {
+  right: 20px;
   display: flex;
+  position: absolute;
   flex-direction: row-reverse;
   align-content: center;
   margin-left: 10px;
@@ -246,7 +248,7 @@ box-shadow: 10rpx 10rpx 5rpx #888888;
 }
 
 .joininstyle {
-  padding-top: 20px;
+  padding-top: 0px;
   width: 100%;
   /* position: absolute; */
   /* display: flex;  */
@@ -524,5 +526,94 @@ margin-top: 20px;
         transition-timing-function: ease-out;
       
       /* transition:widths 2s; */
+
+}.wxgrid{
+  /* margin-bottom: 80px; */
+    clear:both;
+}
+.wxgrid1{
+  margin-bottom: 180px;
+    clear:both;
+}
+.wxgrid .wxrow{
+    clear:both;
+    padding: 0px 15px 0px 15px;
+}
+.wxgrid .wxcol{
+    float: left;
+    text-align: center;
+}
+/*美团分类-场景样式*/
+/* 图片间距 */
+.wxclassify{
+    padding:0px 0px 50px 0px;
+    display: block;
+    height: 100px;
+}
+.wxclassify1{
+    padding:0px 0px 5px 0px;
+    display: block;
+    height: 40px;
+}
+.wxclassify .wxclassify-img{
+    height:100%;
+    width:100%;
+    border-radius: 50%
+}
+.wxclassify-img1{
+    height:150rpx;
+    width:150rpx;
+    border-radius: 50%
+}
+.wxclassify-img2{
+    height:40px;
+    width:40px;
+    border-radius: 50%
+}
+.parent {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+
+.child {
+  box-sizing: border-box;
+  background-color: white;
+  flex: 0 0 25%;
+  height: 50px;
+  border: 1px solid red;
+}.jionnumtextclass{
+  color: #cc4b3d;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+
+}.jionnumtextclass1{
+  /* color: #cc4b3d; */
+  margin-top: 10px;
+  /* margin-bottom: 50px; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+
+}.containerlist{
+  background-color: white;
+  /* width: 100%; */
+  /* min-height: 50vh; */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+ border: 5px solid #d6c47f;
+ border-style: double;
+border-spacing:110px 150px;
+margin: 10px;
+margin-bottom: 80px;
+
+
 
 }

@@ -1,7 +1,7 @@
-<view class='contain'>
+
   <scroll-view class='socllviewstyle' scroll-y scroll-into-view='id_bottom_action'>
- <!-- toast 提示框 -->
-  <include src="../../utils/toast/toast.wxml" />
+    <!-- toast 提示框 -->
+    <include src="../../utils/toast/toast.wxml" />
     <view class='listimageitemcontainer'>
 
       <image class='imagestyle' mode='scaleToFill' src='{{data.ImageUrl}}'></image>
@@ -19,7 +19,7 @@
         赞助商
       </view>
       <view class='namestyle'>
-        小企鹅
+        {{data.WeChatAppName}}
       </view>
       <view class='jumpappstyle1'>
         <image class='gotostyle' src='../../images/goback.png' mode='aspectFill'>
@@ -53,17 +53,43 @@
       </view>
     </view>
     <!-- </view> -->
-    <view class='joininstyle'>
 
-      <view id='box' class="{{containclass ==1?'btn_contain':'btn_contain_moveright'}}">
+   <view hidden='{{!data.IsOver}}' class='containerlist'>
 
-        <form bindsubmit="submit" report-submit='true'>
-          <button form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin?'已参加':'参加'}}</button>
-        </form>
+    <view class="wxgrid">
+      <view class='jionnumtextclass'>
+        <text>{{name}}</text>
+      </view>
+      <view class='jionnumtextclass'>
+        <text>{{isLuck}}</text>
+      </view>
+      <view wx:for="{{wxgrid.rows}}" wx:key='item' wx:for-index="i" class="wxrow">
+        <view wx:for="{{wxgrid.cols}}" wx:key='item' wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+          <a class="wxclassify" href="#">
+            <image class="wxclassify-img1" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+            <text class='jionnumtextclass1'>{{wxgrid.data.classifies[i][j].name}}</text>
+          </a>
+        </view>
+      </view>
+    </view>
+    <view hidden='true' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
+  </view>
+    <view hidden='{{data.IsOver}}' class='joininstyle'>
+
+      <!-- <view id='box' class="{{containclass ==1?'btn_contain':'btn_contain_moveright'}}"> -->
+      <view id='box' class="btn_contain">
+
+        <view hidden='{{data.IsOver?true:false}}' class='joininstyle'>
+          <form bindsubmit="submit" report-submit='true'>
+            <button bindgetuserinfo='submit1' form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin?'已参加':'参加'}}</button>
+          </form>
+        </view>
         <!-- <button id='btn_join' bindtap='btn_join_click' class='btn_joinstyle'>
           参与
         </button> -->
-        <view hidden='{{data.Condition==001?true:false}}' class='btn_contain1'>
+        <!-- <view hidden='{{data.Condition==001?true:false}}' class='btn_contain1'> -->
+        <view hidden='true' class='btn_contain1'>
+
           <view class="btn_dot"></view>
           <view class="btn_dot1"></view>
           <view class="btn_dot2"></view>
@@ -83,7 +109,17 @@
         </view>
 
       </view>
+      <view class='wxgrid'>
+        <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
+          <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+            <a class="wxclassify1" href="#">
+              <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
 
+            </a>
+          </view>
+        </view>
+
+      </view>
       <view hidden='true' class='fromstyle'>
         <text class='graysmalltextstyle'>
           ---通过\t 
@@ -116,4 +152,3 @@
     <button open-type='share' bindtap='onShareAppMessage' class='buttonactionstyle'>分享一下</button>
     <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
   </view>
-</view>

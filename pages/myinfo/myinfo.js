@@ -19,7 +19,7 @@ Page({
   },
  
   onLoad: function () {
-    this.getMyInfo()
+    
   },
 
   address:function(e){
@@ -38,6 +38,7 @@ Page({
   },
 
 onShow :function(){
+  this.getMyInfo()
   console.log('显示')
   // tt = this
   var info = wx.getStorageSync('userinfo')

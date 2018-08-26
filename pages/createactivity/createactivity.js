@@ -27,6 +27,8 @@ Page({
    */
 
   data: {
+    remindname:'',
+    remindNum:'',
     inputdetailenable: true,
     hasUserInfo: false,
     canIUse: app.globalData.canIUse,
@@ -123,6 +125,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+  
+    
 
   },
 
@@ -275,14 +279,21 @@ Page({
 
 
   },
+  
   submit: function(res) { 
+    console.log('resssssss',res)
     if (app.globalData.hasUserInfo) {
-      console.log('存在用户信息')
+      console.log('submit存在用户信息')
       this.luncheraction(res)
 
+    } 
+  },
+  submit1: function (res) {
+    if (app.globalData.hasUserInfo) {
+      console.log('submit1存在用户信息')
     } else {
-      console.log('不存在用户信息')
-      app.getUserInfo(e)
+      console.log('submit1不存在用户信息')
+      app.getUserInfo(res)
       wx.setStorageSync('userinfo', res.detail.rawData)
     }
   },
@@ -290,6 +301,7 @@ Page({
     var tt = this
     var flag = tt.data.inputdetailenable
     var indexarray = tt.data.multiIndex
+    var formid = res.detail.formId
     console.log('is',flag)
       if(prizeName==''){
         wx.showToast({
@@ -304,37 +316,53 @@ Page({
       return
     }
     if (flag){
-      var formid = res.detail.formId
+     
        var data = new Date()
+      const year = data.getFullYear()
+      const month = data.getMonth() + 1
+      var day = data.getDate()
        var hour = data.getHours()
       var minute = data.getMinutes()
-      var day = data.getDay()
+      // var day = data.getDay()
       var index0 = indexarray[0]
       var index1 = indexarray[1]
       var index2 = indexarray[2]
       prizetime = arraydays[index0]+" "+arrayhours[index1]+":"+arrayminutes[index2]
-      if(hour>= index1&&index0==0){
-          if(hour==index1){
-              if(59>minute>=29){
-                wx.showToast({
-                  title: '开奖时间早于当前时间',
-                })
-                return
-              }
-            if (29>=minute >= 0 && index2 == 1) {
-              wx.showToast({
-                title: '开奖时间早于当前时间',
-              })
-              return
-            }
-          }else{
-            wx.showToast({
-              title: '开奖时间早于当前时间',
-            })
-            return
-          }
+      var begin = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
+      console.log('begin', begin)
+      console.log('prizetime', prizetime)
+
+
+      console.log(begin > prizetime)
+    if(begin>prizetime){
+      wx.showToast({
+        title: '开奖时间早于当前时间',
+      })
+      return
+    }
+
+      // if(hour>= index1&&index0==0){
+      //     if(hour==index1){
+      //         if(minute<=index2){
+      //           wx.showToast({
+      //             title: '开奖时间早于当前时间',
+      //           })
+      //           return
+      //         }
+      //       // if (minute<=30 && index2 == 1) {
+      //       //   wx.showToast({
+      //       //     title: '开奖时间早于当前时间',
+      //       //   })
+      //       //   return
+      //       // }
+      //     }else{
+      //       wx.showToast({
+      //         title: '开奖时间早于当前时间',
+      //       })
+      //       return
+      //     }
        
-      }
+      // }
      
     }else{
       console.log('prizeMaxPeople',prizeMaxPeople)
@@ -403,8 +431,32 @@ Page({
           duration: 2000
         })
         wx.hideLoading()
-      wx.navigateTo({
+        wx.navigateTo({
         url: '../mycreatdetail/mycreatdetail?Id='+id,
+        success(){
+          prizeName=''
+          prizeNum=''
+          console.log('11111111', 'uccess')
+        },fail(){
+          console.log('11111111', 'fail')
+        },complete(){
+
+         
+          // var tt = this
+          tt.initMultiArray(7)
+          var arrays = [arraydays, arrayhours, arrayminutes]
+          tt.setData({
+            multiArray: arrays
+          })
+          tt.getLottery_way(1)
+          tt.getLottery_way(0)
+          tt.setData({
+            remindname:'',
+            remindNum:''
+          })
+
+          console.log('11111111', 'complete')
+        }
       })
      
       } else {
@@ -500,9 +552,22 @@ Page({
     arraydays = tt.getweektime(7)
     arrayhours = new Array()
     for (var x = 0; x < 24; x++) {
-      arrayhours[x] = x
+      if(x<=9){
+        arrayhours[x] = '0'+x
+      }else{
+        arrayhours[x] = x
+      }
+      
     }
-    arrayminutes = ['00', '30']
+    arrayminutes = new Array()
+    for (var x = 0; x < 60; x++) {
+      if (x <= 9) {
+        arrayminutes[x] = '0' + x
+      } else {
+        arrayminutes[x] = x
+      }
+
+    }
   },
   getweektime: function(days) {
     var datsarray = new Array()

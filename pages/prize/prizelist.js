@@ -1,7 +1,4 @@
 // pages/prize/prizelist.js
-
-
-
 var Type1 = 'all'
 var app = getApp()
 var httputil = require("../../pages/httputils/httputil.js")
@@ -10,7 +7,11 @@ var ResPonse = {
   Msg: '',
   Data: null
 }
-
+// var flag = '0'
+// var indexgoing = 1;
+// var indexfinish = 1;
+// var arraygoing = [];
+// var arrayfinish = [];
 Page({
 
   /**
@@ -18,7 +19,15 @@ Page({
    */
 
   data: {
-    array: []
+    flag :'0',
+    indexgoing : 1,
+    indexfinish : 1,
+    arraygoing: [],
+    arrayfinish: [],
+    going: 'going',
+    finish: 'finish',
+    showgoing: true,
+    isLuck: false
   },
 
   /**
@@ -27,6 +36,22 @@ Page({
   onLoad: function(options) {
     Type1 = options.type
     console.log(options)
+    var title = ''
+    if (Type1 == 'all') {
+      title = "全部抽奖"
+    }
+    if (Type1 == 'create') {
+      title = "我发起的"
+    }
+    if (Type1 == 'lucky') {
+      title = "中奖纪录"
+      this.setData({
+        isLuck: true
+      })
+    }
+    wx.setNavigationBarTitle({
+      title: title,
+    })
     this.getlist()
   },
 
@@ -79,38 +104,101 @@ Page({
 
   },
 
-getlist:function(){
-  var bodyjson={
-    token: wx.getStorageSync('token'),
-    openId: wx.getStorageSync('openId'),
-    type:Type1
-  }
-  var that = this
-  httputil.commonrequest(app.globalData.mylist, bodyjson, function (res) {
-    console.log("回调成功" + JSON.stringify(res.data))
-    ResPonse = res
+  getlist: function() {
+    var indexgoing = this.data.indexgoing
+    var indexfinish = this.data.indexfinish
+    var flag = this.data.flag
+    var index = '0' == flag ? indexgoing : indexfinish
+    var bodyjson = {
+      token: wx.getStorageSync('token'),
+      openId: wx.getStorageSync('openId'),
+      type: Type1,
+      flag: flag,
+      index: index
+    }
+    var that = this
+    httputil.commonrequest(app.globalData.mylist, bodyjson, function(res) {
+      console.log("回调成功" + JSON.stringify(res.data))
+      var temp = new Array()
+      
+      ResPonse = res
+      if ('0' == flag) {
+        temp = that.data.arraygoing
+        for (var i = 0; i < res.Data.length; i++) {
+          temp.push(res.Data[i])
+        }
+
+        that.setData({
+          arraygoing: temp
+        })
+      } else {
+        temp = that.data.arrayfinish
+        for (var i = 0; i < res.Data.length; i++) {
+          temp.push(res.Data[i])
+        }
+
+        that.setData({
+          arrayfinish: temp
+        })
+      }
 
 
 
-    that.setData({
-      array: ResPonse.Data
+    }, function(res) {
+      console.log("回调失败" + res)
+
     })
-  }, function (res) {
-    console.log("回调失败" + res)
-
-  })
-},
-itemclick:function(e){
-  var item = e.currentTarget.dataset.hi;
-  if (item.IsClient){
+  },
+  itemclick: function(e) {
+    var item = e.currentTarget.dataset.hi;
+    if (item.IsClient) {
       wx.navigateTo({
-        url: '../mycreatdetail/mycreatdetail?Id='+item.Id,
+        url: '../mycreatdetail/mycreatdetail?Id=' + item.Id,
       })
-  }else{
-    wx.navigateTo({
-      url: '../activitydetail/activitydetail?Id=' + item.Id,
-    })
-  }
-}
+    } else {
+      wx.navigateTo({
+        url: '../activitydetail/activitydetail?Id=' + item.Id,
+      })
+    }
+  },
+  loadmore: function() {
+    if ('0' == this.data.flag) {
+      console.log('indexgoing', this.data.indexgoing)
+      this.data.indexgoing++
+      // indexgoing++
+      console.log('indexgoing', this.data.indexgoing)
 
+      this.getlist()
+    } else {
+      console.log('indexfinish', this.data.indexfinish)
+      this.data.indexfinish++
+      console.log('indexfinish', this.data.indexfinish)
+      this.getlist()
+    }
+
+
+  },
+  going: function() {
+    this.setData({
+      finish: 'finish',
+      going: 'going',
+      showgoing: true
+    })
+    this.data.flag = '0'
+   if(this.data.arraygoing.length==0){
+     this.getlist()
+   }
+  },
+  finish: function() {
+
+    this.setData({
+      finish: 'going',
+      going: 'finish',
+      showgoing: false
+    })
+    this.data.flag = '1'
+    if (this.data.arrayfinish.length == 0) {
+      this.getlist()
+    }
+  }
 })

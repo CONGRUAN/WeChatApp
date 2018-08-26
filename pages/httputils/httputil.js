@@ -1,6 +1,5 @@
 var app = getApp()
 var commonurl = app.globalData.commonurl
-
 //获取首页活动列表 和 广告信
 var ResPonse={
   Code:'0000',
@@ -53,9 +52,43 @@ function commonrequest(url,bodyjson,successed,fault){
       if(code==8888){
         successed(ResPonse)
       }else{
-        wx.showToast({
-          title: '错误码：'+code,
-        })
+        fault(res)
+        if(code==2222){
+          wx.showToast({
+            title: code+"数据处理失败",
+          })
+        }
+        if (code == 3000) {
+          wx.showToast({
+            title: code + "token过期",
+          })
+        }
+        if (code == 3001) {
+          wx.showToast({
+            title: code + "token无效",
+          })
+        }
+        if (code == 3001) {
+          wx.showToast({
+            title: code + "token为空",
+          })
+        }
+        if (code == 4000) {
+          wx.showToast({
+            title: code + "已参与抽奖",
+          })
+        }
+        if (code == 4444) {
+          wx.showToast({
+            title: code + "数据达上限",
+          })
+        }
+        if (code == 5000) {
+          wx.showToast({
+            title: code + "活动结束",
+          })
+        }
+       
       }
       
     }, fail: function (res) {

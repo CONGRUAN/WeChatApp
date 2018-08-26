@@ -27,9 +27,29 @@
     </view>
     <!-- <view class='namestyleopen'>个</view> -->
   </view>
-  <view class='joininstyle'>
+  <view hidden='{{!data.IsOver}}' class='containerlist'>
+
+    <view class="wxgrid">
+      <view class='jionnumtextclass'>
+        <text>{{name}}</text>
+      </view>
+      <view class='jionnumtextclass'>
+        <text>{{isLuck}}</text>
+      </view>
+      <view wx:for="{{wxgrid.rows}}" wx:key='item' wx:for-index="i" class="wxrow">
+        <view wx:for="{{wxgrid.cols}}" wx:key='item' wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+          <a class="wxclassify" href="#">
+            <image class="wxclassify-img1" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+            <text class='jionnumtextclass1'>{{wxgrid.data.classifies[i][j].name}}</text>
+          </a>
+        </view>
+      </view>
+    </view>
+    <view hidden='true' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
+  </view>
+  <view hidden='{{data.IsOver?true:false}}' class='joininstyle'>
     <form bindsubmit="submit" report-submit='true'>
-      <button form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin?'已参加':'参加'}}</button>
+      <button bindgetuserinfo='submit1' form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin?'已参加':'参加'}}</button>
     </form>
   </view>
   <view bindtap='joindetail' class='joindetailstyle'>
@@ -37,9 +57,20 @@
       共{{data.JoinCount}}人参加，
     </view>
 
-    <view  class='gojoinliststyle1'>
+    <view class='gojoinliststyle1'>
       查看详情>
     </view>
+  </view>
+  <view class='wxgrid'>
+    <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
+      <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+        <a class="wxclassify1" href="#">
+          <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+
+        </a>
+      </view>
+    </view>
+
   </view>
 </scroll-view>
 <view id='id_bottom_action' class='bottomactionstyle'>
