@@ -65,13 +65,14 @@ Page({
           imageurl: ResPonse.Data[i].HeadImgUrl
         }
         templist.push(temp)
+        
     
       }
 
       // classifies.push(ResPonse.Data)
       // console.log('headimg', ResPonse.Data)
       // console.log(JSON.stringify(ResPonse.Data))
-      wxgrid.init(templist.length / 10, 10)
+      wxgrid.init(templist.length / 9, 9)
       wxgrid.data.add("classifies", templist);
       _this.setData({
         classifiesdata:templist,

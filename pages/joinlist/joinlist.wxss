@@ -31,10 +31,14 @@
 }
 .wxgrid .wxrow{
     clear:both;
-    padding: 0px 15px 0px 15px
+    padding: 0px 5px 0px 5px
 }
 .wxgrid .wxcol{
     float: left;
+    text-align: center;
+}.wxcol1{
+  margin-left: 3px;
+  float: left;
     text-align: center;
 }
 /*美团分类-场景样式*/
@@ -45,7 +49,9 @@
     height: 100px;
 }
 .wxclassify1{
-    padding:0px 0px 5px 0px;
+  /* margin-left: 5px; */
+  /* margin-right: 5px; */
+    padding:0px 2px 5px 2px;
     display: block;
     height: 40px;
 }
@@ -53,7 +59,9 @@
     height:100%;
     width:100%;
 }.wxclassify-img1{
-    height:40px;
-    width:40px;
-    /* border-radius: 50% */
+  /* margin-left: 5px; */
+  /* margin-right: 5px; */
+    height:38px;
+    width:38px;
+    border-radius: 50%
 }

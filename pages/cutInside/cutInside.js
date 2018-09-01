@@ -10,7 +10,7 @@ var ResPonse = {
 }
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
-const height = device.windowHeight - 50
+const height = device.windowHeight 
 
 Page({
   data: {
@@ -21,10 +21,10 @@ Page({
       scale: 2.5,
       zoom: 8,
       cut: {
-        x: (width - 300) / 2,
-        y: (height - 300) / 2,
-        width: 300,
-        height: 300
+        x: 0,
+        y: (height-200 ) / 2,
+        width: width,
+        height: 200
       }
     }
   },

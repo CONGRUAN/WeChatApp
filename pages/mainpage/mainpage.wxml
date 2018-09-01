@@ -11,8 +11,8 @@
   </view>
 
 </view>
-<swiper class='imagestyle' indicator-dots="{{indicatorDots}}"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-  <block wx:for="{{imgUrls}}"wx:key='item' >
+<swiper class='imagestyle' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:key='item'>
     <swiper-item class="bannrclass">
       <image src="{{item}}" class="image" />
     </swiper-item>
@@ -25,24 +25,25 @@
   <view class='listimageitemcontainer'>
 
     <view class='imagestyle'>
-    <image class='image' mode='scaleToFill' src="{{item.ImageUrl}}"></image>
+      <image class='image' mode='scaleToFill' src="{{item.ImageUrl}}"></image>
     </view>
     <view class='listsupportview'>{{item.Sponsor}}</view>
   </view>
   <view class='goods'>
-    奖品 ：{{item.PrizeName}}
+    奖品 ：{{item.PrizeName}}<text hidden="{{item.Type=='personal'?true:false}}" class='teamclass' >可组队</text>
   </view>
   <view class='time'>
-    开奖时间: {{item.StartTime}}
+    {{item.Condition==001?item.StartTime+'自动开奖':'参与人数达'+item.JoinUserNum+'自动开奖'}}
+
   </view>
   <view class='time'>
-  <view>
-     数量: {{item.PrizeNum}}
+    <view>
+      数量: {{item.PrizeNum}}
     </view>
     <view hidden='{{!item.IsJoin}}' class='isjoinstyle'>
-    已参与
+      已参与
     </view>
-   
+
   </view>
   <view class='divilerlinebottom'></view>
 </view>

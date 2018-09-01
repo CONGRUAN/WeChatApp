@@ -324,11 +324,13 @@ display: flex;
   /* color: red */
 }.btn_joinstyle {
    display: flex;
+   
   /* position: relative; */
-  /* align-self: center; */
+  align-self: center;
    justify-content: center; 
   /* margin-top: 20px; */
    align-items: center;  
+   align-content: center;
   /* align-self: center;  *//* border: 2px solid white; *//* border-radius: 25px; */
   background: #cf4f41;
   /* left: 30%;
@@ -457,6 +459,7 @@ margin: 10px;
     padding: 0px 15px 0px 15px;
 }
 .wxgrid .wxcol{
+  margin-left: 3px;
     float: left;
     text-align: center;
 }
@@ -483,7 +486,14 @@ margin: 10px;
     border-radius: 50%
 }
 .wxclassify-img2{
-    height:40px;
-    width:40px;
+    height:38px;
+    width:38px;
     border-radius: 50%
+}
+.teamclass{
+  background: red;
+  margin-left: 14rpx;
+  color: white
+  ;
+  border-radius: 6px;
 }

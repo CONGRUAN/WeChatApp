@@ -343,10 +343,18 @@ Page({
           imagepath: url
         })
       }
+      var str
+      if (ResPonse.Data.IsJoin) {
+        str = res.Data.Type == "personal" ? "待开奖" : "组队"
+      } else {
+        str = '参与'
+      }
+
       that.setData({
         data: ResPonse.Data,
-        IsJoin: ResPonse.Data.IsJoin,
+        IsJoin: str,
       })
+      
       console.log(JSON.stringify(ResPonse.Data))
       if (ResPonse.Data.IsOver) {
         that.getdatalucklist()
@@ -373,8 +381,14 @@ Page({
     var tt = this
     if (tt.data.IsJoin) {
       //全屏可点击 默认1500ms 类似android toast
-      toast.showToastDefault(tt, '你已参与，分享给好友吧')
-      return
+      if(tt.data.data.Type!='personal'){
+        console.log('组团')
+        toast.showToastDefault(tt, '组团')
+        return
+      }else{
+        toast.showToastDefault(tt, '你已参与，分享给好友吧')
+        return
+      }
     }
     var info = wx.getStorageSync('userinfo')
     var formid = res.detail.formId
@@ -399,11 +413,12 @@ Page({
         ResPonse = res
         console.log(ResPonse.Data)
         toast.showToastDefault(tt, '参与成功')
+        var str = tt.data.data.Type=="personal"?"待开奖":"组队"
         tt.setData({
-          IsJoin: true
+          IsJoin: str
         })
       }, function (res) {
-        toast.showToastDefault(tt, '参与失败：' + res.Data.data.Msg)
+        toast.showToastDefault(tt, '参与失败：' + res.Data.Msg)
       })
 
     } else {
@@ -500,9 +515,9 @@ Page({
           name: res.Data[i].Nickname
         }
         temp.push(temp1)
-        if (i >= 10) break
+        if (i >=8) break
       }
-      wxgrid.init(1, 10)
+      wxgrid.init(1, 9)
       // wxgrid.setRowsHeight(150, 1)
       // console.log()
       wxgrid.data.add("classifies", temp);

@@ -103,6 +103,17 @@ Page({
       }
     })
     console.log('optionID',options.Id)
+    var tt = this
+    this.gettoken(function(res){
+      var token = res.data.Data
+      console.log("token:" + token)
+      wx.setStorageSync("token", token)
+      tt.getactionList()
+      
+    })
+
+    
+
     if (options.Id) {
       //这个pageId的值存在则证明首页的开启来源于用户点击来首页,同时可以通过获取到的pageId的值跳转导航到对应的详情页
       wx.navigateTo({
@@ -233,6 +244,26 @@ tap: function (e) {
   tapMove: function (e) {
     this.setData({
       scrollTop: this.data.scrollTop + 10
+    })
+  },
+  gettoken: function (callback) {
+    wx.request({
+      header: {
+        // 'content-type': 'application/json'
+        'Content-Type': 'json'
+      },
+      url: this.globalData.commonurl + this.globalData.gettokenurl,
+      method: 'POST',
+      data: '',
+      success: function (res) {
+        console.log('isfuncion', typeof callback)
+        if (typeof callback == 'function') {
+          callback(res)
+        }
+      },
+      fail: function (res) {
+        console.log(res)
+      }
     })
   }
 

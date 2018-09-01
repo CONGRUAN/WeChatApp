@@ -59,6 +59,8 @@ function commonrequest(url,bodyjson,successed,fault){
           })
         }
         if (code == 3000) {
+
+          
           wx.showToast({
             title: code + "token过期",
           })

@@ -11,6 +11,7 @@
   <view class='jumpappstylegray1'>
     <view>
       奖品名称:{{data.PrizeName}} x{{data.PrizeNum}}
+      <text hidden="{{data.Type=='personal'?true:false}}" class='teamclass' >可组队</text>
     </view>
     <input hidden='true' class='nameopenwhite' bindinput='prizeNameInput' placeholder='请输入奖品名称' maxlength='14'>
     </input>
@@ -49,7 +50,7 @@
   </view>
   <view hidden='{{data.IsOver?true:false}}' class='joininstyle'>
     <form bindsubmit="submit" report-submit='true'>
-      <button bindgetuserinfo='submit1' form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin?'已参加':'参加'}}</button>
+      <button bindgetuserinfo='submit1' form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin}}</button>
     </form>
   </view>
   <view bindtap='joindetail' class='joindetailstyle'>

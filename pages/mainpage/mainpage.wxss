@@ -212,5 +212,11 @@ box-shadow: 10rpx 10rpx 5rpx #888888;
   height: 330rpx;
   /* margin-left: 10rpx; */
   /* margin-right: 10rpx; */
+}.teamclass{
+  background: red;
+  margin-left: 14rpx;
+  color: white
+  ;
+  border-radius: 6px;
 }
 

@@ -80,6 +80,22 @@ Page({
     // })
     temp = app.globalData.imageurl
     console.log('tempppp',temp)
+
+
+    wx.request({
+      url: app.globalData.imageurl,
+      method: 'GET',
+      responseType: 'arraybuffer',
+      success: function (res) {
+        var base64 = 'data:image/jpeg;base64,' + wx.arrayBufferToBase64(res.data);
+        imageBase64 = base64
+        console.log(base64)
+        // tt.setData({
+        //   imagepath: base64
+        // })
+
+      }
+    })
     // var reader = Base64.CusBASE64.encoder(temp)
     // console.log("base64:" + reader)
     // var base64 = 'data:image/png;base64,' + reader
@@ -383,20 +399,7 @@ Page({
       complete: function(res) {},
     })
 
-      wx.request({
-      url: app.globalData.imageurl,
-      method: 'GET',
-      responseType: 'arraybuffer',
-      success: function(res) {
-        var base64 = 'data:image/jpeg;base64,' + wx.arrayBufferToBase64(res.data);
-        imageBase64 = base64
-        console.log(base64)
-        // tt.setData({
-        //   imagepath: base64
-        // })
-
-      }
-    })
+      
 
 
     var bodyjson = {
@@ -450,9 +453,12 @@ Page({
           })
           tt.getLottery_way(1)
           tt.getLottery_way(0)
+          app.globalData.imageurl = '/images/222.png'
           tt.setData({
             remindname:'',
-            remindNum:''
+            remindNum:'',
+            // imageurl: '/images/222.png'
+
           })
 
           console.log('11111111', 'complete')
