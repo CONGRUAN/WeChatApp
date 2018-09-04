@@ -145,6 +145,7 @@ App({
     mylist: '/CoreRun/GetStatistic',
     getjoinUserHeadImg:'/CoreRun/GetJoinUserHeadImg',
     getluckuser:'/CoreRun/GetLuckyUser',
+    getteamuser:'/CoreRun/GetGroupUser',
     hasUserInfo: wx.getStorageSync('userinfo') == "" ? false : true,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
 

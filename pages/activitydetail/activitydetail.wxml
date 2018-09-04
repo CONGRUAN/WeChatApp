@@ -1,4 +1,4 @@
-<scroll-view class='socllviewstyle' scroll-y scroll-into-view='id_bottom_action'>
+<scroll-view  scroll-y scroll-into-view='id_bottom_action'>
   <!-- toast 提示框 -->
   <include src="../../utils/toast/toast.wxml" />
   <view class='listimageitemcontainer'>
@@ -8,7 +8,7 @@
   </view>
   <view class='goods'>
     奖品 ：{{data.PrizeName}} X{{data.PrizeNum}}
-  <text hidden="{{data.Type=='personal'?true:false}}" class='teamclass' >可组队</text>
+    <text hidden="{{data.Type=='personal'?true:false}}" class='teamclass'>可组队</text>
   </view>
   <view class='time'>
     {{data.Condition==001?data.StartTime+'自动开奖':'参与人数达'+data.JoinUserNum+'自动开奖'}}
@@ -43,6 +43,28 @@
   <rich-text type='text' class='addetailstyle'>
     {{data.Introduce}}
   </rich-text>
+  <view class='divilerlinebottom1'></view>
+
+  <view hidden='{{sizeteam==0?true:false}}' class='jumpappstylegray1'>
+    <!-- <view>
+      {{data.Condition==001?data.StartTime+'自动开奖':'参与人数达'+data.JoinUserNum+'自动开奖'}}
+    </view> -->
+    团内成员
+    <view class='wxgridteam'>
+      <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
+        <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+          <a class="wxclassify1" href="#">
+            <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+
+          </a>
+        </view>
+      </view>
+
+    </view>
+    <!-- <view class='namestyleopen'>个</view> -->
+  </view>
+    <view class='divilerlinebottom1'></view>
+
   <view hidden='true' class='downloadinfostyle'>
     <text class='downloaddescript'>
         111111活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介绍活动商家详细介11绍
@@ -76,15 +98,15 @@
     </view>
     <view hidden='true' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
   </view>
-  <view hidden='{{data.IsOver}}' class='joininstyle'>
-
+  
     <!-- <view id='box' class="{{containclass ==1?'btn_contain':'btn_contain_moveright'}}"> -->
-    <view id='box' class="btn_contain">
 
       <view hidden='{{data.IsOver?true:false}}' class='joininstyle'>
         <form bindsubmit="submit" report-submit='true'>
           <button bindgetuserinfo='submit1' form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin}}</button>
         </form>
+        <view hidden='{{data.Type=="team"?false:true}}' class='teamnumstyle'>{{sizeteam}}/5</view>
+
       </view>
       <!-- <button id='btn_join' bindtap='btn_join_click' class='btn_joinstyle'>
           参与
@@ -100,7 +122,7 @@
         <view class="btn_dot"></view>
         <button class='btn_joinstyle'>组队</button>
       </view>
-    </view>
+    
     <view bindtap='joindetail' class='joindetailstyle'>
       <view>
         共{{data.JoinCount}}人参加，
@@ -143,7 +165,7 @@
       <image class='imagestyle1' mode='aspectFit' src='../../images/222.png'>
       </image>
     </view>
-  </view>
+  
 
   <!-- <view class='adbottom'>
 <image class='imagestyle' mode='center' src='../../images/222.png'></image>

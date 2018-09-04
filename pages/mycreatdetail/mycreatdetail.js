@@ -11,6 +11,8 @@ var WXGrid = require('../wxgrid/wxgrid.js')
 
 // var WXGrid = require('../../js/wxgrid.js')
 var wxgrid = new WXGrid;
+var wxgridteam = new WXGrid;
+
 // wxgrid.init(99, 10);
 var img = "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erpwPOvDPjA7Wnc9kUYw0zmt9UIgsWqLnfCg6GWbX42bQlwm904X7ztBz8bEDxAsLyvYu2PKbvqUg/132";
 // var classifies = new Array()
@@ -21,7 +23,8 @@ var ResPonse = {
   Msg: '',
   Data: null,
   name:'',
-  isLuck:'很遗憾，这次没有中奖'
+  isLuck:'很遗憾，这次没有中奖',
+  teamnum:0
 }
 var bodyjson
 Page({
@@ -36,7 +39,10 @@ Page({
     imagepath:'../../images/222.png',
     wxgrid,
     classifies: [],
+    teamuserarray: [],
+
      size: 0,
+     sizeteam:0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -62,6 +68,8 @@ Page({
       openId: wx.getStorageSync('openId')
     }
     this.getdata(bodyjson)
+
+    
   },
 
   /**
@@ -140,7 +148,7 @@ Page({
       }else{
         str='参与'
       }
-      
+      that.getteamer(res.Data)
       that.setData({
         data: ResPonse.Data,
         IsJoin: str,
@@ -165,7 +173,43 @@ Page({
       wx.setStorageSync('userinfo', res.detail.rawData)
     }
   },
-  
+  getteamer:function(team){
+    var tt = this
+    if('team'==team.Type){
+      var bodyjson1={
+        token:wx.getStorageSync('token'),
+        openId:wx.getStorageSync('openId'),
+        id:team.Id
+      }
+      httputil.commonrequest(app.globalData.getteamuser,bodyjson1,function(res){
+        var temp = new Array()
+        temp = tt.data.teamuserarray
+        for (var i = 0; i < res.Data.length; i++) {
+          var temp1 = {
+            imageurl: res.Data[i],
+          }
+          temp.push(temp1)
+        }
+        // console.log()
+        tt.setData({
+          team: temp,
+          sizeteam: temp.length,
+        })
+        wxgridteam.init(tt.data.teamuserarray.length / 5, 5)
+        // wxgrid.setRowsHeight(150, 1)
+
+        wxgridteam.data.add("classifies", tt.data.teamuserarray);
+
+
+      },function(res){
+
+      })
+    }else{
+
+    }
+  }
+  ,
+
   submit: function (res) {
 
     var tt = this
@@ -204,12 +248,12 @@ Page({
         ResPonse = res
         console.log(ResPonse.Data)
         toast.showToastDefault(tt, '参与成功')
-        var str = tt.data.data.Type == "personal" ? "待开奖" : "组队"
+        var str = tt.data.data.Type == "personal" ? "待开奖" : "去组队"
         tt.setData({
           IsJoin: str
         })
       }, function (res) {
-        toast.showToastDefault(tt, '参与失败：'+res.Data.Msg)
+        toast.showToastDefault(tt, '参与失败：'+res.Msg)
       })
 
     } else {

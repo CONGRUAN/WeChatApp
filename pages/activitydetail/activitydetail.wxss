@@ -152,6 +152,7 @@ box-shadow: 10rpx 10rpx 5rpx #888888;
   margin-left: 10px;
   white-space: pre-line;
   font-size: 32rpx;
+  margin-bottom: 10rpx;
   /* text-overflow: ellipsis; *//* overflow: scroll; *//* display: -webkit-box; *//* -webkit-box-orient: vertical; *//* -webkit-line-break: 2; */
 }
 
@@ -248,13 +249,26 @@ box-shadow: 10rpx 10rpx 5rpx #888888;
 }
 
 .joininstyle {
-  padding-top: 0px;
-  width: 100%;
+  /* padding-top: 0px;
+  width: 100%; */
   /* position: absolute; */
   /* display: flex;  */
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0;
   margin-top: 20px;
   margin-bottom: 20px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center; */
+
+
+   width: 100%;
+  /* position: absolute; */
+   display: flex; 
+  /* background-color: white; */
+  margin-top: 20px;
+  /* margin-bottom: 20px; */
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -622,4 +636,37 @@ margin-bottom: 80px;
   color: white
   ;
   border-radius: 6px;
+}
+
+.teamnumstyle{
+  color: gold;
+  justify-content: center;
+  /* align-content: center; */
+  align-items: center;
+  /* align-self: center; */
+  display: flex;
+  margin-top: -60px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  margin-left: -20px;
+  z-index: 99;
+}.jumpappstylegray1{
+    margin: 5px 10px;
+display: flex;
+ width: 100%;
+ height: 100%;
+   align-items: center;
+    background-color: white;
+   align-content: center; 
+  align-self: center;
+  flex-direction: row;
+  font-size: 16px;
+  
+
+}.wxgridteam{
+  margin-left: 30px;
+  height: 40px;
+   clear:both;
 }

@@ -216,6 +216,7 @@ var httputil = require("../../pages/httputils/httputil.js")
 var toast = require('../../utils/toast/toast.js');
 
 var WXGrid = require('../wxgrid/wxgrid.js')
+var wxgridteam = new WXGrid;
 
 
 // var WXGrid = require('../../js/wxgrid.js')
@@ -246,6 +247,9 @@ Page({
     wxgrid,
     classifies: [],
     size: 0,
+    teamuserarray: [],
+
+    sizeteam: 0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -354,7 +358,8 @@ Page({
         data: ResPonse.Data,
         IsJoin: str,
       })
-      
+      that.getteamer(res.Data)
+
       console.log(JSON.stringify(ResPonse.Data))
       if (ResPonse.Data.IsOver) {
         that.getdatalucklist()
@@ -365,6 +370,41 @@ Page({
     }, function (res) {
 
     })
+  },
+  getteamer: function (team) {
+    var tt = this
+    if ('team' == team.Type) {
+      var bodyjson1 = {
+        token: wx.getStorageSync('token'),
+        openId: wx.getStorageSync('openId'),
+        id: team.Id
+      }
+      httputil.commonrequest(app.globalData.getteamuser, bodyjson1, function (res) {
+        var temp = new Array()
+        temp = tt.data.teamuserarray
+        for (var i = 0; i < res.Data.length; i++) {
+          var temp1 = {
+            imageurl: res.Data[i],
+          }
+          temp.push(temp1)
+        }
+        // console.log()
+        tt.setData({
+          team: temp,
+          sizeteam: temp.length,
+        })
+        wxgridteam.init(tt.data.teamuserarray.length / 5, 5)
+        // wxgrid.setRowsHeight(150, 1)
+
+        wxgridteam.data.add("classifies", tt.data.teamuserarray);
+
+
+      }, function (res) {
+
+      })
+    } else {
+
+    }
   },
   submit1: function (res) {
     if (app.globalData.hasUserInfo) {
@@ -379,7 +419,7 @@ Page({
   submit: function (res) {
 
     var tt = this
-    if (tt.data.IsJoin) {
+    if (tt.data.data.IsJoin) {
       //全屏可点击 默认1500ms 类似android toast
       if(tt.data.data.Type!='personal'){
         console.log('组团')
