@@ -245,6 +245,7 @@ Page({
     IsJoin: false,
     imagepath: '../../images/222.png',
     wxgrid,
+    wxgridteam,
     classifies: [],
     size: 0,
     teamuserarray: [],
@@ -387,17 +388,19 @@ Page({
             imageurl: res.Data[i],
           }
           temp.push(temp1)
+          // temp.push(temp1)
         }
         // console.log()
-        tt.setData({
-          team: temp,
-          sizeteam: temp.length,
-        })
-        wxgridteam.init(tt.data.teamuserarray.length / 5, 5)
+        
+        wxgridteam.init(temp.length / 5, 5)
         // wxgrid.setRowsHeight(150, 1)
 
-        wxgridteam.data.add("classifies", tt.data.teamuserarray);
-
+        wxgridteam.data.add("classifies", temp);
+        tt.setData({
+          teamuserarray: temp,
+          sizeteam: temp.length,
+          wxgridteam
+        })
 
       }, function (res) {
 
@@ -454,6 +457,7 @@ Page({
         console.log(ResPonse.Data)
         toast.showToastDefault(tt, '参与成功')
         var str = tt.data.data.Type=="personal"?"待开奖":"组队"
+        tt.data.data.IsJoin = true
         tt.setData({
           IsJoin: str
         })

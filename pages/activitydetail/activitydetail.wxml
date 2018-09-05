@@ -1,4 +1,4 @@
-<scroll-view  scroll-y scroll-into-view='id_bottom_action'>
+<scroll-view scroll-y scroll-into-view='id_bottom_action'>
   <!-- toast 提示框 -->
   <include src="../../utils/toast/toast.wxml" />
   <view class='listimageitemcontainer'>
@@ -45,25 +45,31 @@
   </rich-text>
   <view class='divilerlinebottom1'></view>
 
-  <view hidden='{{sizeteam==0?true:false}}' class='jumpappstylegray1'>
-    <!-- <view>
-      {{data.Condition==001?data.StartTime+'自动开奖':'参与人数达'+data.JoinUserNum+'自动开奖'}}
-    </view> -->
-    团内成员
-    <view class='wxgridteam'>
-      <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
-        <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
-          <a class="wxclassify1" href="#">
-            <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
-
-          </a>
-        </view>
+  <view hidden='{{sizeteam==0?true:false}}' class='jumpappstylegray1' >
+    <view style="flex:1;">
+    <!-- 塞进去的 -->
+      <view hidden='{{sizeteam==0?true:false}}' >
+        团内成员
       </view>
-
     </view>
-    <!-- <view class='namestyleopen'>个</view> -->
+    <view style="flex:4;">
+    <!-- 塞进去的 -->
+     <view class='wxgrid'>
+    <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgridteam.rows}}" wx:for-index="i" class="wxrow">
+      <view wx:for="{{wxgridteam.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+        <a class="wxclassify1" href="#">
+          <image class="wxclassify-img2" mode="aspectFit" src="{{wxgridteam.data.classifies[i][j].imageurl}}"></image>
+
+        </a>
+      </view>
+    </view>
+
   </view>
-    <view class='divilerlinebottom1'></view>
+    </view>
+  </view>
+
+ 
+  <view class='divilerlinebottom1'></view>
 
   <view hidden='true' class='downloadinfostyle'>
     <text class='downloaddescript'>
@@ -98,74 +104,77 @@
     </view>
     <view hidden='true' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
   </view>
-  
-    <!-- <view id='box' class="{{containclass ==1?'btn_contain':'btn_contain_moveright'}}"> -->
 
-      <view hidden='{{data.IsOver?true:false}}' class='joininstyle'>
-        <form bindsubmit="submit" report-submit='true'>
-          <button bindgetuserinfo='submit1' form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin}}</button>
-        </form>
-        <view hidden='{{data.Type=="team"?false:true}}' class='teamnumstyle'>{{sizeteam}}/5</view>
+  <!-- <view id='box' class="{{containclass ==1?'btn_contain':'btn_contain_moveright'}}"> -->
 
-      </view>
-      <!-- <button id='btn_join' bindtap='btn_join_click' class='btn_joinstyle'>
+  <view hidden='{{data.IsOver?true:false}}' class='joininstyle'>
+    <form bindsubmit="submit" report-submit='true'>
+      <button bindgetuserinfo='submit1' form-type="submit" open-type='getUserInfo' class='btn_joinstyle'> {{IsJoin}}</button>
+    </form>
+    <view hidden='{{data.Type=="team"?false:true}}' class='teamnumstyle'>{{sizeteam}}/5</view>
+
+  </view>
+  <!-- <button id='btn_join' bindtap='btn_join_click' class='btn_joinstyle'>
           参与
         </button> -->
-      <!-- <view hidden='{{data.Condition==001?true:false}}' class='btn_contain1'> -->
-      <view hidden='true' class='btn_contain1'>
+  <!-- <view hidden='{{data.Condition==001?true:false}}' class='btn_contain1'> -->
+  <view hidden='true' class='btn_contain1'>
 
-        <view class="btn_dot"></view>
-        <view class="btn_dot1"></view>
-        <view class="btn_dot2"></view>
-        <view class="btn_dot2"></view>
-        <view class="btn_dot1"></view>
-        <view class="btn_dot"></view>
-        <button class='btn_joinstyle'>组队</button>
-      </view>
-    
-    <view bindtap='joindetail' class='joindetailstyle'>
-      <view>
-        共{{data.JoinCount}}人参加，
-      </view>
+    <view class="btn_dot"></view>
+    <view class="btn_dot1"></view>
+    <view class="btn_dot2"></view>
+    <view class="btn_dot2"></view>
+    <view class="btn_dot1"></view>
+    <view class="btn_dot"></view>
+    <button class='btn_joinstyle'>组队</button>
+  </view>
 
-      <view class='gojoinliststyle1'>
-        查看详情>
-      </view>
-
+  <view bindtap='joindetail' class='joindetailstyle'>
+    <view>
+      共{{data.JoinCount}}人参加，
     </view>
-    <view class='wxgrid'>
-      <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
-        <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
-          <a class="wxclassify1" href="#">
-            <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
 
-          </a>
-        </view>
-      </view>
-
+    <view class='gojoinliststyle1'>
+      查看详情>
     </view>
-    <view hidden='true' class='fromstyle'>
-      <text class='graysmalltextstyle'>
+
+  </view>
+  <view style='flex:1;margin-bottom:100px'>
+  
+  <view class='wxgrid'>
+    <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
+      <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+        <a class="wxclassify1" href="#">
+          <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+
+        </a>
+      </view>
+    </view>
+
+  </view>
+  </view>
+  <view hidden='true' class='fromstyle'>
+    <text class='graysmalltextstyle'>
           ---通过\t 
         </text>
 
-      <text class='graysmallmanetextstyle'>
+    <text class='graysmallmanetextstyle'>
           高级 
         </text>
-      <text class='graysmalltextstyle'>
+    <text class='graysmalltextstyle'>
           发起---
         </text>
 
+  </view>
+  <view class='fromstyle'>
+    <view class='divilerlinebottom2'>
     </view>
-    <view class='fromstyle'>
-      <view class='divilerlinebottom2'>
-      </view>
-    </view>
-    <view hidden='true' class='adbottom'>
-      <image class='imagestyle1' mode='aspectFit' src='../../images/222.png'>
-      </image>
-    </view>
-  
+  </view>
+  <view hidden='true' class='adbottom'>
+    <image class='imagestyle1' mode='aspectFit' src='../../images/222.png'>
+    </image>
+  </view>
+
 
   <!-- <view class='adbottom'>
 <image class='imagestyle' mode='center' src='../../images/222.png'></image>

@@ -34,10 +34,10 @@
     </view> -->
     团内成员
     <view class='wxgridteam'>
-      <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
-        <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+      <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgridteam.rows}}" wx:for-index="i" class="wxrow">
+        <view wx:for="{{wxgridteam.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
           <a class="wxclassify1" href="#">
-            <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+            <image class="wxclassify-img2" mode="aspectFit" src="{{wxgridteam.data.classifies[i][j].imageurl}}"></image>
 
           </a>
         </view>
