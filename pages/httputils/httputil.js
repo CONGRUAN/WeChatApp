@@ -30,7 +30,7 @@ function getactionlist(bodyjson){
 
 
 function commonrequest(url,bodyjson,successed,fault){
-  
+  // var fun = this
   console.log(commonurl + url + JSON.stringify(bodyjson))
   wx.request({
     header: {
@@ -59,11 +59,27 @@ function commonrequest(url,bodyjson,successed,fault){
           })
         }
         if (code == 3000) {
-
-          
-          wx.showToast({
-            title: code + "token过期",
+          wx.request({
+            header: {
+              // 'content-type': 'application/json'
+              'Content-Type': 'json'
+            },
+            url:'https://91dj8.cn/WeChatApp/Token/GetToken',
+            method: 'POST',
+            data: '',
+            success: function (res) {
+              var token = res.data.Data
+              console.log("token:" + token)
+              wx.setStorageSync("token", token)
+            },
+            fail: function (res) {
+              console.log(res)
+            }
           })
+          // fun()
+          // wx.showToast({
+          //   title: code + "token过期",
+          // })
         }
         if (code == 3001) {
           wx.showToast({

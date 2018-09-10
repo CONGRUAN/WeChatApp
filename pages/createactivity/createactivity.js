@@ -349,8 +349,8 @@ Page({
       console.log('prizetime', prizetime)
 
 
-      console.log(begin > prizetime)
-    if(begin>prizetime){
+      console.log(tt.compareDate(begin, prizetime))
+      if (tt.compareDate(begin,prizetime)){
       wx.showToast({
         title: '开奖时间早于当前时间',
       })
@@ -588,6 +588,8 @@ Page({
     arraydays = datsarray
     return datsarray
 
+  },compareDate: function (d1, d2) {
+    return (new Date(d1.replace(/-/g, "\/"))) > (new Date(d2.replace(/-/g, "\/")))
   }
 
 

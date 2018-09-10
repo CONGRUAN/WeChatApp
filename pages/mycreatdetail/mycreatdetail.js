@@ -26,7 +26,7 @@ var ResPonse = {
   isLuck:'很遗憾，这次没有中奖',
   teamnum:0
 }
-var bodyjson
+var bodyjsongetdata
 Page({
 
   /**
@@ -42,7 +42,8 @@ Page({
     teamuserarray: [],
     wxgridteam,
      size: 0,
-     sizeteam:0
+     sizeteam:0,
+     teamId:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -55,19 +56,21 @@ Page({
     console.log('来源，',options.isShare!='')
     if(options.isShare){
       console.log('来源，', '分享')
+      console.log('teamId', options.teamId)
     isShare = true
     }else{
       console.log('来源，', '列表')
       isShare = false
     }
     var itemId = options.Id
+    this.data.teamId = options.teamId
     // var itemId = 'ac89b870-59ff-4417-9618-3cd3aa173e56'
-    bodyjson = {
+    bodyjsongetdata = {
       token: wx.getStorageSync('token'),
       Id: itemId,
       openId: wx.getStorageSync('openId')
     }
-    this.getdata(bodyjson)
+    this.getdata(bodyjsongetdata)
 
     
   },
@@ -127,7 +130,7 @@ Page({
     return {
       title: '惊喜一刻',
       desc: '领福利啦!',
-      path: '/pages/mycreatdetail/mycreatdetail?Id='+this.data.data.Id+'&isShare='+true
+      path: '/pages/mycreatdetail/mycreatdetail?Id='+this.data.data.Id+'&isShare='+true+'&teamId='+this.data.teamId
     }
   },
 
@@ -145,6 +148,9 @@ Page({
       var  str
       if(ResPonse.Data.IsJoin){
         str = res.Data.Type == "personal" ? "待开奖" : "组队"
+        if(res.Data.Type!="personal"){
+          that.data.teamId = res.Data.teamId
+        }
       }else{
         str='参与'
       }
@@ -218,7 +224,15 @@ Page({
       //全屏可点击 默认1500ms 类似android toast
       if (tt.data.data.Type != 'personal') {
         console.log('组团')
-        toast.showToastDefault(tt, '组团')
+       wx.showActionSheet({
+         itemList: ['A', 'B', 'C'],
+         success: function (res) {
+           tt.onShareAppMessage()
+         },
+         fail: function (res) {
+           console.log(res.errMsg)
+         }
+       })
 
         return
       } else {
@@ -240,7 +254,8 @@ Page({
       formId: formid,
       nickname: info.nickName,
       headImgUrl: info.avatarUrl,
-      joinType: jiontype
+      joinType: jiontype,
+      teamId: tt.data.data.TeamId
     }
     // var info = wx.getStorageSync('userinfo')
     if (app.globalData.hasUserInfo) {
@@ -249,6 +264,7 @@ Page({
         ResPonse = res
         console.log(ResPonse.Data)
         toast.showToastDefault(tt, '参与成功')
+        tt.getdata(bodyjsongetdata)
         var str = tt.data.data.Type == "personal" ? "待开奖" : "去组队"
         tt.data.data.IsJoin = true
         tt.setData({

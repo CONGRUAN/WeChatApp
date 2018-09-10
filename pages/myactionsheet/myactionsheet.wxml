@@ -1,0 +1,13 @@
+<button tap="listenerButton">
+    <icon class="icon fa fa-external-link"></icon>分享
+</button>
+ 
+<!--默认action-sheet为隐藏，由button触发-->
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
+   <action-sheet-item>
+         <button open-type="share">分享给好友</button>
+   </action-sheet-item>
+   <action-sheet-item>生成分享卡片</action-sheet-item>
+   <!--自动隐藏action-sheet-->
+   <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
