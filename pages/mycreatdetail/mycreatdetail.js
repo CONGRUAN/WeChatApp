@@ -54,16 +54,18 @@ Page({
     console.log('options', options)
 
     console.log('来源，',options.isShare!='')
+    console.log('teamId', options.teamId)
     if(options.isShare){
       console.log('来源，', '分享')
       console.log('teamId', options.teamId)
+      this.data.teamId = options.teamId
     isShare = true
     }else{
       console.log('来源，', '列表')
       isShare = false
     }
     var itemId = options.Id
-    this.data.teamId = options.teamId
+    
     // var itemId = 'ac89b870-59ff-4417-9618-3cd3aa173e56'
     bodyjsongetdata = {
       token: wx.getStorageSync('token'),
@@ -127,10 +129,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    var that = this
     return {
       title: '惊喜一刻',
       desc: '领福利啦!',
-      path: '/pages/mycreatdetail/mycreatdetail?Id='+this.data.data.Id+'&isShare='+true+'&teamId='+this.data.teamId
+      path: '/pages/mycreatdetail/mycreatdetail?Id=' + this.data.data.Id + '&isShare=' + true + '&teamId=' + that.data.teamId
     }
   },
 
@@ -149,7 +152,7 @@ Page({
       if(ResPonse.Data.IsJoin){
         str = res.Data.Type == "personal" ? "待开奖" : "组队"
         if(res.Data.Type!="personal"){
-          that.data.teamId = res.Data.teamId
+          that.data.teamId = res.Data.TeamId
         }
       }else{
         str='参与'
@@ -198,7 +201,7 @@ Page({
         }
         // console.log()
         
-        wxgridteam.init(temp.length / 5, 5)
+        wxgridteam.init(1, 5)
         // wxgrid.setRowsHeight(150, 1)
 
         wxgridteam.data.add("classifies", temp);
@@ -255,7 +258,7 @@ Page({
       nickname: info.nickName,
       headImgUrl: info.avatarUrl,
       joinType: jiontype,
-      teamId: tt.data.data.TeamId
+      teamId: tt.data.teamId
     }
     // var info = wx.getStorageSync('userinfo')
     if (app.globalData.hasUserInfo) {

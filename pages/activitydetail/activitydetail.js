@@ -265,12 +265,13 @@ Page({
     if (options.isShare) {
       console.log('来源，', '分享')
       console.log('teamId', options.teamId)
+      this.data.teamId = options.teamId
       isShare = true
     } else {
       console.log('来源，', '列表')
       isShare = false
     }
-    this.data.teamId = options.teamId
+    
     var itemId = options.Id
     // var itemId = 'ac89b870-59ff-4417-9618-3cd3aa173e56'
     bodyjsongetdata = {
@@ -333,10 +334,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var tt=  this;
     return {
       title: '惊喜一刻',
       desc: '领福利啦!',
-      path: '/pages/activitydetail/activitydetail?Id=' + this.data.data.Id + '&isShare=' + true + '&teamId=' + this.data.teamId
+      path: '/pages/activitydetail/activitydetail?Id=' + this.data.data.Id + '&isShare=' + true + '&teamId=' + tt.data.teamId
     }
   },
 
@@ -355,7 +357,7 @@ Page({
       if (ResPonse.Data.IsJoin) {
         str = res.Data.Type == "personal" ? "待开奖" : "组队"
         if (res.Data.Type != "personal") {
-          that.data.teamId = res.Data.teamId
+          that.data.teamId = res.Data.TeamId
         }
       } else {
         str = '参与'
@@ -454,7 +456,7 @@ Page({
       nickname: info.nickName,
       headImgUrl: info.avatarUrl,
       joinType: jiontype,
-      teamId: tt.data.data.TeamId
+      teamId: tt.data.teamId
     }
     // var info = wx.getStorageSync('userinfo')
     if (app.globalData.hasUserInfo) {
