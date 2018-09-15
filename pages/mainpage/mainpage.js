@@ -121,6 +121,18 @@ Page({
       })
     }
 
+    var dd = {
+      token:wx.getStorageSync('token')
+    }
+    httputil.commonrequest(app.globalData.getbanner,dd,(res)=>{
+        console.log("banner",res)
+        tt.setData({
+          imgUrls:res.Data
+        })
+    },(res)=>{
+
+    })
+
   },
 
   /**

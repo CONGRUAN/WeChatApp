@@ -1,6 +1,10 @@
+<i-action-sheet visible="{{ visible1 }}" actions="{{ actions1 }}" show-cancel bind:cancel="handleCancel1" bind:click="handleClickItem1" />
 <scroll-view class='socllviewstyle' scroll-y scroll-into-view='id_bottom_action'>
   <!-- toast 提示框 -->
   <include src="../../utils/toast/toast.wxml" />
+
+
+
   <view class='listimageitemcontainer'>
 
     <image class='imagestyle' mode='scaleToFill' src='{{imagepath}}'></image>
@@ -99,10 +103,14 @@
         </a>
       </view>
     </view>
-
+ 
   </view>
+<view >
+
+</view>
 </scroll-view>
+
 <view id='id_bottom_action' class='bottomactionstyle'>
-  <button open-type='share' bindtap='onShareAppMessage' class='buttonactionstyle'>分享一下</button>
+  <button  bindtap='handleOpen1' class='buttonactionstyle'>分享一下</button>
   <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
 </view>

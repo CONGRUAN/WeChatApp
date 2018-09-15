@@ -14,7 +14,9 @@
     "pages/prize/prizelist",
     "pages/common/problem",
     "pages/lucklist/lucklist",
-    "pages/joinlist/joinlist"
+    "pages/joinlist/joinlist",
+          "pages/creatShareImage1/creatShareImage1"
+          
   ],
   "tabBar": {
     "color": "#000000",

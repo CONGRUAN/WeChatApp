@@ -2,5 +2,10 @@
 
 "enablePullDownRefresh": false,
 "navigationBarTitleText": "活动详情",
-"navigationBarTextStyle": "black"
+"navigationBarTextStyle": "black",
+"usingComponents": {
+  "i-action-sheet": "../../dist/action-sheet/index",
+  "i-button": "../../dist/button/index",
+  "i-message": "../../dist/message/index"
+}
 }

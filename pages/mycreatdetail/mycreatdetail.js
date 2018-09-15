@@ -43,7 +43,21 @@ Page({
     wxgridteam,
      size: 0,
      sizeteam:0,
-     teamId:''
+     teamId:'',
+
+    visible1: false,
+    actions1: [
+      {
+        name: '分享好友',
+        openType: 'share'
+      },
+      // {
+      //   name: '分享到朋友圈'
+      // },
+    
+    ],
+
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -130,11 +144,16 @@ Page({
    */
   onShareAppMessage: function() {
     var that = this
+      that.setData({
+          visible1:false
+      })
     return {
       title: '惊喜一刻',
       desc: '领福利啦!',
       path: '/pages/mycreatdetail/mycreatdetail?Id=' + this.data.data.Id + '&isShare=' + true + '&teamId=' + that.data.teamId
     }
+
+
   },
 
 
@@ -152,12 +171,19 @@ Page({
       if(ResPonse.Data.IsJoin){
         str = res.Data.Type == "personal" ? "待开奖" : "组队"
         if(res.Data.Type!="personal"){
-          that.data.teamId = res.Data.TeamId
+          if(isShare){
+
+          }else{
+            that.data.teamId = res.Data.TeamId
+
+          }
         }
       }else{
         str='参与'
       }
-      that.getteamer(res.Data)
+      if(!ResPonse.Data.IsOver){
+        that.getteamer(res.Data)
+      }
       that.setData({
         data: ResPonse.Data,
         IsJoin: str,
@@ -227,15 +253,7 @@ Page({
       //全屏可点击 默认1500ms 类似android toast
       if (tt.data.data.Type != 'personal') {
         console.log('组团')
-       wx.showActionSheet({
-         itemList: ['A', 'B', 'C'],
-         success: function (res) {
-           tt.onShareAppMessage()
-         },
-         fail: function (res) {
-           console.log(res.errMsg)
-         }
-       })
+       tt.handleOpen1()
 
         return
       } else {
@@ -259,6 +277,9 @@ Page({
       headImgUrl: info.avatarUrl,
       joinType: jiontype,
       teamId: tt.data.teamId
+
+
+
     }
     // var info = wx.getStorageSync('userinfo')
     if (app.globalData.hasUserInfo) {
@@ -395,4 +416,33 @@ Page({
     })
 
   }
+  , handleOpen1() {
+    var tt = this
+    console.log('handleOpen1')
+    this.setData({
+      visible1: true
+    });
+  },
+  handleCancel1:function() {
+    this.setData({
+      visible1: false
+    });
+  },
+  handleClickItem1({ detail }) {
+    var tt = this;
+    const index = detail.index + 1;
+    console.log(index)
+    if(index==2){
+      wx.navigateTo({
+        url: '../creatShareImage1/creatShareImage1',
+        success:()=>{
+          console.log("成功")
+      tt.setData({
+        visible1: false
+      })
+        }
+      })
+    }
+    
+  },
 })

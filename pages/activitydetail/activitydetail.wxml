@@ -1,3 +1,4 @@
+<i-action-sheet visible="{{ visible1 }}" actions="{{ actions1 }}" show-cancel bind:cancel="handleCancel1" bind:click="handleClickItem1" />
 <scroll-view scroll-y scroll-into-view='id_bottom_action'>
   <!-- toast 提示框 -->
   <include src="../../utils/toast/toast.wxml" />
@@ -45,30 +46,30 @@
   </rich-text>
   <view class='divilerlinebottom1'></view>
 
-  <view hidden='{{sizeteam==0?true:false}}' class='jumpappstylegray1' >
+  <view hidden='{{sizeteam==0?true:false}}' class='jumpappstylegray1'>
     <view style="flex:1;">
-    <!-- 塞进去的 -->
-      <view hidden='{{sizeteam==0?true:false}}' >
+      <!-- 塞进去的 -->
+      <view hidden='{{sizeteam==0?true:false}}'>
         团内成员
       </view>
     </view>
     <view style="flex:4;">
-    <!-- 塞进去的 -->
-     <view class='wxgrid'>
-    <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgridteam.rows}}" wx:for-index="i" class="wxrow">
-      <view wx:for="{{wxgridteam.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
-        <a class="wxclassify1" href="#">
-          <image class="wxclassify-img2" mode="aspectFit" src="{{wxgridteam.data.classifies[i][j].imageurl}}"></image>
+      <!-- 塞进去的 -->
+      <view class='wxgrid'>
+        <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgridteam.rows}}" wx:for-index="i" class="wxrow">
+          <view wx:for="{{wxgridteam.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+            <a class="wxclassify1" href="#">
+              <image class="wxclassify-img2" mode="aspectFit" src="{{wxgridteam.data.classifies[i][j].imageurl}}"></image>
 
-        </a>
+            </a>
+          </view>
+        </view>
+
       </view>
     </view>
-
-  </view>
-    </view>
   </view>
 
- 
+
   <view class='divilerlinebottom1'></view>
 
   <view hidden='true' class='downloadinfostyle'>
@@ -140,18 +141,18 @@
 
   </view>
   <view style='flex:1;margin-bottom:100px'>
-  
-  <view class='wxgrid'>
-    <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
-      <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
-        <a class="wxclassify1" href="#">
-          <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
 
-        </a>
+    <view class='wxgrid'>
+      <view hidden='{{data.IsOver?true:false}}' wx:for="{{wxgrid.rows}}" wx:for-index="i" class="wxrow">
+        <view wx:for="{{wxgrid.cols}}" wx:for-index="j" class="wxcol" style="width:{{item.width}}%;">
+          <a class="wxclassify1" href="#">
+            <image class="wxclassify-img2" mode="aspectFit" src="{{wxgrid.data.classifies[i][j].imageurl}}"></image>
+
+          </a>
+        </view>
       </view>
-    </view>
 
-  </view>
+    </view>
   </view>
   <view hidden='true' class='fromstyle'>
     <text class='graysmalltextstyle'>
@@ -182,6 +183,6 @@
 
 </scroll-view>
 <view id='id_bottom_action' class='bottomactionstyle'>
-  <button open-type='share' bindtap='onShareAppMessage' class='buttonactionstyle'>分享一下</button>
+  <button bindtap='handleOpen1' class='buttonactionstyle'>分享一下</button>
   <button bindtap='createaction' class='buttonactionstyle1'>发起活动</button>
 </view>

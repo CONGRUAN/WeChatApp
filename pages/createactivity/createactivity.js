@@ -5,12 +5,12 @@ var itemlist = []
 var prizeTypelist = []
 
 var imageBase64 = ''
-var typeindex = 0;
-var connditionIndex = 0;
+// var typeindex = 0;
+// var connditionIndex = 0;
 var prizeName = ''
 var prizeNum = ''
 var prizeMaxPeople = 0
-var prizetime=''
+// var prizetime=''
 var ResPonse = {
   Code: '0000',
   Msg: '',
@@ -37,12 +37,14 @@ Page({
     lottery_flag: 0,
     imagepath: app.globalData.imageurl,
     prizename: '',
-
     prizeamount: 0,
     lottery_time: '',
     lottery_detail_title: '开奖时间',
     multiArray: [],
     multiIndex: [0, 0, 0],
+    typeindex:0,
+    connditionIndex:0
+
   },
 
   /**
@@ -178,7 +180,10 @@ Page({
           tt.setData({
             prize_type: itemlist[res.tapIndex]
           })
-          typeindex = res.tapIndex
+          tt.setData({
+            typeindex: res.tapIndex
+          })
+                              // typeindex = res.tapIndex
         },
         fail: function(res) {
           console.log('fail');
@@ -196,11 +201,13 @@ Page({
           tt.setData({
             lottery_way: prizeTypelist[res.tapIndex]
           })
-          connditionIndex = res.tapIndex
-
+          // connditionIndex = res.tapIndex
+        tt.setData({
+          connditionIndex:res.tapIndex
+        })
           var title = tt.data.lottery_way.Name
           var isinputenable = title.indexOf('人数') == -1 ? true : false
-          console.log(title + connditionIndex+ ":" + isinputenable)
+          console.log(title + tt.data.connditionIndex+ ":" + isinputenable)
           tt.setData({
             lottery_detail_title: title,
             inputdetailenable: isinputenable,
@@ -343,14 +350,17 @@ Page({
       var index0 = indexarray[0]
       var index1 = indexarray[1]
       var index2 = indexarray[2]
-      prizetime = arraydays[index0]+" "+arrayhours[index1]+":"+arrayminutes[index2]
+      // prizetime = arraydays[index0]+" "+arrayhours[index1]+":"+arrayminutes[index2]
+      tt.setData({
+        prizetime: arraydays[index0] + " " + arrayhours[index1] + ":" + arrayminutes[index2]
+      })
       var begin = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
       console.log('begin', begin)
-      console.log('prizetime', prizetime)
+      console.log('prizetime', tt.data.prizetime)
 
 
-      console.log(tt.compareDate(begin, prizetime))
-      if (tt.compareDate(begin,prizetime)){
+      console.log(tt.compareDate(begin, tt.data.prizetime))
+      if (tt.compareDate(begin, tt.data.prizetime)){
       wx.showToast({
         title: '开奖时间早于当前时间',
       })
@@ -409,10 +419,10 @@ Page({
       prizeName: prizeName,
       prizeImgBase64Str: imageBase64,
       prizeNum: prizeNum,
-      type: itemlist[typeindex].Id,
-      condition: prizeTypelist[connditionIndex].Id,
+      type: itemlist[this.data.typeindex].Id,
+      condition: prizeTypelist[this.data.connditionIndex].Id,
       joinUserNum: prizeMaxPeople,
-      startTime: prizetime,
+      startTime: this.data.prizetime,
       formId:formid
 
 
@@ -439,6 +449,10 @@ Page({
         success(){
           prizeName=''
           prizeNum=''
+          tt.setData({
+            typeindex:0,
+            connditionIndex:0
+          })
           console.log('11111111', 'uccess')
         },fail(){
           console.log('11111111', 'fail')

@@ -1,212 +1,3 @@
-// // pages/activitydetail/activitydetail.js
-// const app = getApp()
-// var httputil = require("../../pages/httputils/httputil.js")
-// /**
-//  * toast提示框
-//  */
-// var toast = require('../../utils/toast/toast.js');
-
-// var WXGrid = require('../wxgrid/wxgrid.js')
-
-
-// // var WXGrid = require('../../js/wxgrid.js')
-// var wxgrid = new WXGrid;
-// var bodyjson
-// var isshare = 0
-// var ResPonse = {
-//   Code: '0000',
-//   Msg: '',
-//   Data: null
-// }
-// Page({
-
-  
-
-//   /**
-//    * 页面的初始数据
-//    */
-//   data: {
-//     IsJoin:false,
-//     containclass: 1,
-//     data:null,
-//     wxgrid,
-//     classifies: [],
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面加载
-//    */
-//   onLoad: function (options) {
-//     var itemId = options.Id
-//     if(options.isshare==1){
-//       isshare=1
-//     }
-//     bodyjson = {
-//       token:wx.getStorageSync('token'),
-//       Id:itemId,
-//       openId:wx.getStorageSync('openId')
-//     }
-//    this.getdata(bodyjson)
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面初次渲染完成
-//    */
-//   onReady: function () {
-    
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面显示
-//    */
-//   onShow: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面隐藏
-//    */
-//   onHide: function () {
-  
-//   },
-
-//   /**
-//    * 生命周期函数--监听页面卸载
-//    */
-//   onUnload: function () {
-  
-//   },
-
-//   /**
-//    * 页面相关事件处理函数--监听用户下拉动作
-//    */
-//   onPullDownRefresh: function () {
-  
-//   },
-
-//   /**
-//    * 页面上拉触底事件的处理函数
-//    */
-//   onReachBottom: function () {
-  
-//   },
-
-//   /**
-//    * 用户点击右上角分享
-//    */
-//   onShareAppMessage: function () {
-  
-//   },
-//   onTabItemTap(item){
-//     console.log(item) 
-//      console.log(9999)
-
-//   },
-//   /**
-//    * 发起活动点击事件
-//    */
-//   createaction(e){
-//     console.log(e)
-//     console.log(123)
-//     wx.switchTab({
-//       url: '../createactivity/createactivity',
-//     })
-//   // wx.navigateTo({
-//   //   // url: '../createactivity/createactivity',
-//   //   success: function(res) {},
-//   //   fail: function(res) { console.log(res)},
-//   //   complete: function(res) {},
-//   // })
-//   },
-//   submit1: function (res) {
-//     if (app.globalData.hasUserInfo) {
-//       console.log('submit1存在用户信息')
-//     } else {
-//       console.log('submit1不存在用户信息')
-//       app.getUserInfo(res)
-//       wx.setStorageSync('userinfo', res.detail.rawData)
-//     }
-//   },
-
-//   submit:function(res){
-//     var tt = this
-//     if (tt.data.IsJoin) {
-//       //全屏可点击 默认1500ms 类似android toast
-//       toast.showToastDefault(tt, '你已参与，分享给好友吧')
-//       return
-//     }
-//     var info = wx.getStorageSync('userinfo')
-//     var formid = res.detail.formId
-//     console.log(res.detail.formId);
-//     var jiontype = 'join'
-//     if (tt.data.data.Type == 'team' && !isShare) {
-//       jiontype = 'create'
-//     }
-//     var bodyjson = {
-//       token: wx.getStorageSync('token'),
-//       luckyDrawId: tt.data.data.Id,
-//       openId: wx.getStorageSync('openId'),
-//       formId: formid,
-//       nickname: info.nickName,
-//       headImgUrl: info.avatarUrl,
-//       joinType: jiontype
-//     }
-
-//     // var info = wx.getStorageSync('userinfo')
-//     if (app.globalData.hasUserInfo){
-//       console.log('存在用户信息')
-//       console.log("bodyjson",bodyjson)
-//       httputil.commonrequest(app.globalData.joinactivity,bodyjson,function(res){
-//         ResPonse = res
-//         if(res.Code==8888){
-//             tt.setData({
-//               IsJoin:true
-//             })
-//           toast.showToastDefault(tt, '参与成功')
-//         }else{
-//           toast.showToastDefault(tt, '参与失败:'+res.Code)
-//         }
-//       },function(res){
-//         toast.showToastDefault(tt, '参与失败:' + res)
-//       })
-
-//     }
-
-    
-//   },
-//   getdata:function(bodyjson){
-//     var that =  this
-//     httputil.commonrequest(app.globalData.getactivitydetail,bodyjson,function(res){
-//           ResPonse  = res
-//           var isjoin = res.Data.IsJoin
-//           that.setData({
-//             data:ResPonse.Data,
-//             IsJoin: isjoin
-//           })
-//         console.log(JSON.stringify(ResPonse.Data))
-
-     
-//     },function(res){
-
-//     })
-//   },
-//   joindetail:function(){
-//     // var tt = this
-//     // console.log('========', tt.data.data.Id)
-
-//     // console.log('========', this.data.Id)
-//     wx.navigateTo({
-//       url: '../joinlist/joinlist?Id='+this.data.data.Id
-//     })
-//   }
-// })
-
-
-
-
-
-
-
 // pages/createactivity/createactivity.js
 const app = getApp()
 var httputil = require("../../pages/httputils/httputil.js")
@@ -250,8 +41,20 @@ Page({
     classifies: [],
     size: 0,
     teamuserarray: [],
+    teamId: '',
 
-    sizeteam: 0
+    sizeteam: 0,
+    visible1: false,
+    actions1: [
+      {
+        name: '分享好友',
+        openType: 'share'
+      },
+      // {
+      //   name: '分享到朋友圈'
+      // },
+
+    ],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -367,7 +170,9 @@ Page({
         data: ResPonse.Data,
         IsJoin: str,
       })
-      that.getteamer(res.Data)
+      if(!ResPonse.Data.IsOver){
+        that.getteamer(res.Data)
+      }
 
       console.log(JSON.stringify(ResPonse.Data))
       if (ResPonse.Data.IsOver) {
@@ -434,7 +239,7 @@ Page({
       //全屏可点击 默认1500ms 类似android toast
       if(tt.data.data.Type!='personal'){
         console.log('组团')
-        toast.showToastDefault(tt, '组团')
+        tt.handleOpen1() 
         return
       }else{
         toast.showToastDefault(tt, '你已参与，分享给好友吧')
@@ -594,7 +399,35 @@ Page({
 
     })
 
-  }
+  }, handleOpen1() {
+    var tt = this
+    console.log('handleOpen1')
+    this.setData({
+      visible1: true
+    });
+  },
+  handleCancel1: function () {
+    this.setData({
+      visible1: false
+    });
+  },
+  handleClickItem1({ detail }) {
+    var tt = this;
+    const index = detail.index + 1;
+    console.log(index)
+    if (index == 2) {
+      wx.navigateTo({
+        url: '../creatShareImage1/creatShareImage1',
+        success: () => {
+          console.log("成功")
+          tt.setData({
+            visible1: false
+          })
+        }
+      })
+    }
+
+  },
 })
 
 

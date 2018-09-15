@@ -11,10 +11,10 @@
   </view>
 
 </view>
-<swiper class='imagestyle' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+<swiper class='imagestyleswiper' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
   <block wx:for="{{imgUrls}}" wx:key='item'>
     <swiper-item class="bannrclass">
-      <image src="{{item}}" class="image" />
+      <image  mode='aspectFit' src="{{item}}" class="bannerimage" />
     </swiper-item>
   </block>
 </swiper>
