@@ -305,14 +305,14 @@ Page({
   
   submit: function(res) { 
     console.log('resssssss',res)
-    if (app.globalData.hasUserInfo) {
+    if (''!=wx.getStorageSync('userinfo')) {
       console.log('submit存在用户信息')
       this.luncheraction(res)
 
     } 
   },
   submit1: function (res) {
-    if (app.globalData.hasUserInfo) {
+    if (''!=wx.getStorageSync('userinfo')) {
       console.log('submit1存在用户信息')
     } else {
       console.log('submit1不存在用户信息')

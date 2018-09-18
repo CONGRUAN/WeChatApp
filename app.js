@@ -61,8 +61,17 @@ App({
               this.globalData.userInfo = res.userInfo
               console.log('用户信息', res.userInfo)
               wx.setStorageSync('userinfo', res.userInfo)
+              this.globalData.nickName = res.userInfo.nickName
+              this.globalData.avatarUrl = res.userInfo.avatarUrl
+
+              console.log("11111111app.globalData.nickName", this.globalData.nickName)
+              console.log("11111111app.globalData.avatarUrl", this.globalData.avatarUrl)
+
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
+              var info = wx.getStorageSync('userinfo')
+             
+
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
@@ -74,7 +83,9 @@ App({
             console.log("没有拥有userInfo")
 
           }
-
+          if (this.userInfoReadyCallback) {
+            this.userInfoReadyCallback(res)
+          }
           console.log('没有授权')
 
         }
@@ -148,17 +159,47 @@ App({
     getteamuser:'/CoreRun/GetGroupUser',
     getbanner: '/CoreRun/GetBanners',
     hasUserInfo: wx.getStorageSync('userinfo') == "" ? false : true,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+  nickName:'',
+  avatarUrl:''
 
   },
   //获取用户信息，需要多处调用询问
   getUserInfo: function(e) {
-    console.log(e)
-    console.log('22')
-    wx.setStorageSync('userinfo', e.detail.rawData)
-    console.log('个人信息', e.detail.rawData)
-    this.globalData.userInfo = e.detail.rawData
-    this.globalData.hasUserInfo = true
+    wx.getUserInfo({
+      success: res => {
+        // 可以将 res 发送给后台解码出 unionId
+        this.globalData.userInfo = res.userInfo
+        console.log('用户信息', res.userInfo)
+        wx.setStorageSync('userinfo', res.userInfo)
+        this.globalData.nickName = res.userInfo.nickName
+        this.globalData.avatarUrl = res.userInfo.avatarUrl
+
+        console.log("11111111app.globalData.nickName", this.globalData.nickName)
+        console.log("11111111app.globalData.avatarUrl", this.globalData.avatarUrl)
+
+        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+        // 所以此处加入 callback 以防止这种情况
+        var info = wx.getStorageSync('userinfo')
+
+
+        if (this.userInfoReadyCallback) {
+          this.userInfoReadyCallback(res)
+        }
+      }
+    })
+
+    // console.log(e)
+    // console.log('22')
+    // wx.setStorageSync('userinfo', e.detail.rawData)
+    // console.log('个人信息', e.detail.rawData)
+    // this.globalData.userInfo = e.detail.rawData
+    // this.globalData.hasUserInfo = true
+    // this.globalData.nickName = e.detail.rawData.nickName
+    // this.globalData.avatarUrl = e.detail.rawData.avatarUrl
+    // console.log("11111111app.e.detail.rawData.nickName", e.detail.rawData.nickName)
+    // console.log("11111111app.e.detail.rawData.avatarUr", e.detail.rawData.avatarUrl)
+    console.log("11111111app.globalData.nickName", this.globalData.nickName)
+    console.log("11111111app.globalData.avatarUrl", this.globalData.avatarUrl)
   }
 })

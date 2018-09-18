@@ -200,7 +200,7 @@ Page({
     })
   }, 
   submit1:function(res){
-    if (app.globalData.hasUserInfo) {
+    if (''!=wx.getStorageSync('userinfo')) {
       console.log('submit1存在用户信息')
     } else {
       console.log('submit1不存在用户信息')
@@ -268,13 +268,15 @@ Page({
     if(tt.data.data.Type=='team'&&!isShare){
       jiontype = 'create'
     }
+    console.log("11111111app.globalData.nickName", app.globalData.nickName)
+    console.log("11111111app.globalData.avatarUrl", app.globalData.avatarUrl)
     var bodyjson = {
       token: wx.getStorageSync('token'),
       luckyDrawId: tt.data.data.Id,
       openId: wx.getStorageSync('openId'),
       formId: formid,
-      nickname: info.nickName,
-      headImgUrl: info.avatarUrl,
+      nickname:app.globalData.nickName,
+      headImgUrl: app.globalData.avatarUrl,
       joinType: jiontype,
       teamId: tt.data.teamId
 
@@ -282,7 +284,7 @@ Page({
 
     }
     // var info = wx.getStorageSync('userinfo')
-    if (app.globalData.hasUserInfo) {
+    if (''!=wx.getStorageSync('userinfo')) {
       console.log('存在用户信息')
       httputil.commonrequest(app.globalData.joinactivity, bodyjson, function (res) {
         ResPonse = res
