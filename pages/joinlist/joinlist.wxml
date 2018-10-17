@@ -45,5 +45,5 @@
       </view>
     </view>
   </view>
-  <view class='jionnumtextclass' bindtap='loadmore'>{{loadmore}}></view>
+  <view  hidden='{{TotalPage>index?false:true}}' class='jionnumtextclass' bindtap='loadmore'>{{loadmore}}></view>
 </view>

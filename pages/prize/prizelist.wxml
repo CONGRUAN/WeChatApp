@@ -20,7 +20,7 @@
         <text style='margin-left:20rpx'>数量：{{item.PrizeNum}}</text>
       </view>
     </view>
-    <view hidden='{{arraygoing.length>0?false:true}}' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
+    <view hidden='{{TotalPage>indexgoing?false:true}}' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
   </view>
 
   <view hidden='{{showgoing}}'>
@@ -36,7 +36,7 @@
         <text style='margin-left:20rpx'>数量：{{item.PrizeNum}}</text>
       </view>
     </view>
-    <view hidden='{{arrayfinish.length0?false:true}}' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
+    <view hidden='{{TotalPagefinish>indexfinish?false:true}}' class='jionnumtextclass' bindtap='loadmore'>查看更多></view>
   </view>
   <view>
 

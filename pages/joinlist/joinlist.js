@@ -9,7 +9,7 @@ var wxgrid = new WXGrid;
 var img = "http://pic.qqtn.com/up/2016-9/20169281936395677.png";
 var classifies = new Array()
 var id;
-var index =1;
+
 
 var ResPonse = {
   Code: '0000',
@@ -20,14 +20,16 @@ var ResPonse = {
 Page({
   data: {
     classifiesdata:[],
+    index:1,
     wxgrid,
     size: classifies.length,
+    TotalPage:0,
     loadmore:'查看更多>'
   },
 
   onUnload:function(){
     // classifies.length = 0;
-    index=1
+    this.data.index=1
   },
 
   onLoad: function (option) {
@@ -36,10 +38,13 @@ Page({
     this.getdata(false)
   },
   onShow:function(){
-   
+   console.log('========'+this.data.TotalPage)
   },
   loadmore: function () {
-    index++
+  
+    this.setData({
+      index:this.data.index+1
+    })
     this.getdata(true)
     this.setData({
       loadmore:'加载中...'
@@ -51,12 +56,12 @@ Page({
     var bodyjson={
       token:wx.getStorageSync('token'),
       openId:wx.getStorageSync('openId'),
-      index:index,
+      index:_this.data.index,
       id:id
     }
     httputil.commonrequest(app.globalData.getjoinUserHeadImg, bodyjson, function (res) {
       ResPonse = res
-
+      
       var temp = {
         imageurl: img
       }
@@ -65,8 +70,11 @@ Page({
           imageurl: ResPonse.Data[i].HeadImgUrl
         }
         templist.push(temp)
-        
-    
+       
+        _this.setData({
+          TotalPage: ResPonse.Data[0].TotalPage 
+        })
+        // _this.setData.TotalPage = 2//ResPonse.Data[0].TotalPage+1
       }
 
       // classifies.push(ResPonse.Data)

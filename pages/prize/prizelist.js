@@ -27,7 +27,11 @@ Page({
     going: 'going',
     finish: 'finish',
     showgoing: true,
-    isLuck: false
+    isLuck: false,
+    TotalPage: 0,
+    TotalPagefinish: 0,
+
+
   },
 
   /**
@@ -126,6 +130,11 @@ Page({
         temp = that.data.arraygoing
         for (var i = 0; i < res.Data.length; i++) {
           temp.push(res.Data[i])
+          if (that.data.indexgoing == 1&&i==0) {
+            that.setData({
+              TotalPage: res.Data[0].TotalPage
+            })
+          }
         }
 
         that.setData({
@@ -135,7 +144,16 @@ Page({
         temp = that.data.arrayfinish
         for (var i = 0; i < res.Data.length; i++) {
           temp.push(res.Data[i])
+          if (that.data.indexfinish==1){
+            if (that.data.indexfinish == 1 && i == 0){
+           that.setData({
+             TotalPagefinish: res.Data[0].TotalPage
+           })
+         }
         }
+        }
+        console.log("TotalPagefinish:",that.data.TotalPagefinish)
+        console.log("TotalPagefinish:", temp)
 
         that.setData({
           arrayfinish: temp
@@ -163,16 +181,22 @@ Page({
   },
   loadmore: function() {
     if ('0' == this.data.flag) {
-      console.log('indexgoing', this.data.indexgoing)
-      this.data.indexgoing++
+      // console.log('indexgoing', this.data.indexgoing)
+      // this.data.indexgoing++
       // indexgoing++
-      console.log('indexgoing', this.data.indexgoing)
-
+      // console.log('indexgoing', this.data.indexgoing)
+      var tempindex = this.data.indexgoing+1
+      this.setData({
+        indexgoing: tempindex
+      })
       this.getlist()
     } else {
-      console.log('indexfinish', this.data.indexfinish)
-      this.data.indexfinish++
-      console.log('indexfinish', this.data.indexfinish)
+      // console.log('indexfinish', this.data.indexfinish)
+      // this.data.indexfinish++
+      this.setData({
+        indexfinish: this.data.indexfinish + 1
+      })
+      // console.log('indexfinish', this.data.indexfinish)
       this.getlist()
     }
 

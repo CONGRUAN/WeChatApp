@@ -4,7 +4,7 @@ var httputil = require("../../pages/httputils/httputil.js")
 var itemlist = []
 var prizeTypelist = []
 
-var imageBase64 = ''
+
 // var typeindex = 0;
 // var connditionIndex = 0;
 var prizeName = ''
@@ -27,8 +27,8 @@ Page({
    */
 
   data: {
-    remindname:'',
-    remindNum:'',
+    remindname: '',
+    remindNum: '',
     inputdetailenable: true,
     hasUserInfo: false,
     canIUse: app.globalData.canIUse,
@@ -42,9 +42,9 @@ Page({
     lottery_detail_title: '开奖时间',
     multiArray: [],
     multiIndex: [0, 0, 0],
-    typeindex:0,
-    connditionIndex:0
-
+    typeindex: 0,
+    connditionIndex: 0,
+    imageBase64: ''
   },
 
   /**
@@ -81,16 +81,18 @@ Page({
 
     // })
     temp = app.globalData.imageurl
-    console.log('tempppp',temp)
+    console.log('tempppp', temp)
 
 
     wx.request({
       url: app.globalData.imageurl,
       method: 'GET',
       responseType: 'arraybuffer',
-      success: function (res) {
+      success: function(res) {
         var base64 = 'data:image/jpeg;base64,' + wx.arrayBufferToBase64(res.data);
-        imageBase64 = base64
+        that.setData({
+          imageBase64: base64
+        })
         console.log(base64)
         // tt.setData({
         //   imagepath: base64
@@ -143,8 +145,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-  
-    
+
+
 
   },
 
@@ -183,7 +185,7 @@ Page({
           tt.setData({
             typeindex: res.tapIndex
           })
-                              // typeindex = res.tapIndex
+          // typeindex = res.tapIndex
         },
         fail: function(res) {
           console.log('fail');
@@ -202,12 +204,12 @@ Page({
             lottery_way: prizeTypelist[res.tapIndex]
           })
           // connditionIndex = res.tapIndex
-        tt.setData({
-          connditionIndex:res.tapIndex
-        })
+          tt.setData({
+            connditionIndex: res.tapIndex
+          })
           var title = tt.data.lottery_way.Name
           var isinputenable = title.indexOf('人数') == -1 ? true : false
-          console.log(title + tt.data.connditionIndex+ ":" + isinputenable)
+          console.log(title + tt.data.connditionIndex + ":" + isinputenable)
           tt.setData({
             lottery_detail_title: title,
             inputdetailenable: isinputenable,
@@ -231,7 +233,7 @@ Page({
   changeimage: function() {
 
     wx.navigateTo({
-      url: '../cutInside/cutInside?src=' +'' ,//res.tempFilePaths[0]
+      url: '../cutInside/cutInside?src=' + '', //res.tempFilePaths[0]
       // url: '../chooseimage/chooseimage?image=' + res.tempFilePaths[0]
 
     })
@@ -246,7 +248,7 @@ Page({
     //         //console.log(res.width);
     //         //console.log(res.height);
     //         console.log('选择图片成功')
-          
+
     //       },fail:function(res){
     //     console.log('选择图片失败')
     //       }
@@ -302,17 +304,17 @@ Page({
 
 
   },
-  
-  submit: function(res) { 
-    console.log('resssssss',res)
-    if (''!=wx.getStorageSync('userinfo')) {
+
+  submit: function(res) {
+    console.log('resssssss', res)
+    if ('' != wx.getStorageSync('userinfo')) {
       console.log('submit存在用户信息')
       this.luncheraction(res)
 
-    } 
+    }
   },
-  submit1: function (res) {
-    if (''!=wx.getStorageSync('userinfo')) {
+  submit1: function(res) {
+    if ('' != wx.getStorageSync('userinfo')) {
       console.log('submit1存在用户信息')
     } else {
       console.log('submit1不存在用户信息')
@@ -325,26 +327,26 @@ Page({
     var flag = tt.data.inputdetailenable
     var indexarray = tt.data.multiIndex
     var formid = res.detail.formId
-    console.log('is',flag)
-      if(prizeName==''){
-        wx.showToast({
-          title: '请输入奖品名称',
-        })
-        return
-      }
-    if (prizeNum <=0) {
+    console.log('is', flag)
+    if (prizeName == '') {
+      wx.showToast({
+        title: '请输入奖品名称',
+      })
+      return
+    }
+    if (prizeNum <= 0) {
       wx.showToast({
         title: '奖品数量至少1',
       })
       return
     }
-    if (flag){
-     
-       var data = new Date()
+    if (flag) {
+
+      var data = new Date()
       const year = data.getFullYear()
       const month = data.getMonth() + 1
       var day = data.getDate()
-       var hour = data.getHours()
+      var hour = data.getHours()
       var minute = data.getMinutes()
       // var day = data.getDay()
       var index0 = indexarray[0]
@@ -360,12 +362,12 @@ Page({
 
 
       console.log(tt.compareDate(begin, tt.data.prizetime))
-      if (tt.compareDate(begin, tt.data.prizetime)){
-      wx.showToast({
-        title: '开奖时间早于当前时间',
-      })
-      return
-    }
+      if (tt.compareDate(begin, tt.data.prizetime)) {
+        wx.showToast({
+          title: '开奖时间早于当前时间',
+        })
+        return
+      }
 
       // if(hour>= index1&&index0==0){
       //     if(hour==index1){
@@ -387,20 +389,20 @@ Page({
       //       })
       //       return
       //     }
-       
+
       // }
-     
-    }else{
-      console.log('prizeMaxPeople',prizeMaxPeople)
-      if(prizeMaxPeople<=0){
+
+    } else {
+      console.log('prizeMaxPeople', prizeMaxPeople)
+      if (prizeMaxPeople <= 0) {
         wx.showToast({
           title: '请输入参与人数',
         })
         return
       }
     }
-  
-  
+
+
     wx.showLoading({
       title: '请稍候',
       mask: true,
@@ -409,7 +411,7 @@ Page({
       complete: function(res) {},
     })
 
-      
+
 
 
     var bodyjson = {
@@ -417,13 +419,13 @@ Page({
       launcher: 'client',
       openId: wx.getStorageSync('openId'),
       prizeName: prizeName,
-      prizeImgBase64Str: imageBase64,
+      prizeImgBase64Str: this.data.imageBase64,
       prizeNum: prizeNum,
       type: itemlist[this.data.typeindex].Id,
       condition: prizeTypelist[this.data.connditionIndex].Id,
       joinUserNum: prizeMaxPeople,
       startTime: this.data.prizetime,
-      formId:formid
+      formId: formid
 
 
     }
@@ -437,7 +439,7 @@ Page({
       // 
 
       if (ResPonse.Code == 8888) {
-        console.log('id:',id)
+        console.log('id:', id)
         wx.showToast({
           title: '发起成功',
           icon: 'success',
@@ -445,40 +447,43 @@ Page({
         })
         wx.hideLoading()
         wx.navigateTo({
-        url: '../mycreatdetail/mycreatdetail?Id='+id,
-        success(){
-          prizeName=''
-          prizeNum=''
-          tt.setData({
-            typeindex:0,
-            connditionIndex:0
-          })
-          console.log('11111111', 'uccess')
-        },fail(){
-          console.log('11111111', 'fail')
-        },complete(){
+          url: '../mycreatdetail/mycreatdetail?Id=' + id,
+          success() {
+            prizeName = ''
+            prizeNum = ''
+            tt.setData({
+              typeindex: 0,
+              connditionIndex: 0,
+              imageBase64: ''
+            })
+            console.log('11111111', 'uccess')
+          },
+          fail() {
+            console.log('11111111', 'fail')
+          },
+          complete() {
 
-         
-          // var tt = this
-          tt.initMultiArray(7)
-          var arrays = [arraydays, arrayhours, arrayminutes]
-          tt.setData({
-            multiArray: arrays
-          })
-          tt.getLottery_way(1)
-          tt.getLottery_way(0)
-          app.globalData.imageurl = '/images/222.png'
-          tt.setData({
-            remindname:'',
-            remindNum:'',
-            // imageurl: '/images/222.png'
 
-          })
+            // var tt = this
+            tt.initMultiArray(7)
+            var arrays = [arraydays, arrayhours, arrayminutes]
+            tt.setData({
+              multiArray: arrays
+            })
+            tt.getLottery_way(1)
+            tt.getLottery_way(0)
+            app.globalData.imageurl = '/images/222.png'
+            tt.setData({
+              remindname: '',
+              remindNum: '',
+              // imageurl: '/images/222.png'
 
-          console.log('11111111', 'complete')
-        }
-      })
-     
+            })
+
+            console.log('11111111', 'complete')
+          }
+        })
+
       } else {
         wx.showToast({
           title: '发起失败',
@@ -523,17 +528,17 @@ Page({
   prizeNumInput: function(e) {
     prizeNum = e.detail.value
   },
-  JoinNumInput: function (e) {
+  JoinNumInput: function(e) {
     var temp = e.detail.value
-    console.log('temp===',temp)
+    console.log('temp===', temp)
     console.log('temp=type', typeof temp)
     console.log(typeof temp == 'string')
-   if(typeof temp == 'string'){
-     prizeMaxPeople = temp
-   }
-   
+    if (typeof temp == 'string') {
+      prizeMaxPeople = temp
+    }
+
   },
-   
+
   bindMultiPickerColumnChange: function(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     var data = {
@@ -572,12 +577,12 @@ Page({
     arraydays = tt.getweektime(7)
     arrayhours = new Array()
     for (var x = 0; x < 24; x++) {
-      if(x<=9){
-        arrayhours[x] = '0'+x
-      }else{
+      if (x <= 9) {
+        arrayhours[x] = '0' + x
+      } else {
         arrayhours[x] = x
       }
-      
+
     }
     arrayminutes = new Array()
     for (var x = 0; x < 60; x++) {
@@ -594,15 +599,16 @@ Page({
     var now = new Date()
     for (var i = 0; i < days; i++) {
       var date = new Date(now.getTime() + i * 24 * 3600 * 1000);
-      datsarray[i] = date.getFullYear() +"-"+(date.getMonth() + 1) + "-" + date.getDate()
+      datsarray[i] = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
       //  + " 周" + (date.getDay() == 0 ? '日':
       // date.getDay())
-      console.log(date.getFullYear()+date.getMonth() + 1 + "月" + date.getDate() + "日" + " 周" + date.getDay())
+      console.log(date.getFullYear() + date.getMonth() + 1 + "月" + date.getDate() + "日" + " 周" + date.getDay())
     }
     arraydays = datsarray
     return datsarray
 
-  },compareDate: function (d1, d2) {
+  },
+  compareDate: function(d1, d2) {
     return (new Date(d1.replace(/-/g, "\/"))) > (new Date(d2.replace(/-/g, "\/")))
   }
 

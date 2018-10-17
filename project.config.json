@@ -33,14 +33,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "活动",
-					"pathName": "pages/activitydetail/activitydetail"
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }
